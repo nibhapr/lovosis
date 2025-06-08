@@ -1,0 +1,108 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+const canonicalUrl = new URL('/returnpolicy', Astro.site).toString();
+const structuredData ={
+    
+     
+      "@context": "https://schema.org",
+      "@type": "OnlineStore",
+      "name": "",
+      "url": "https://lovosis.com",
+      "sameAs": [ "https://www.facebook.com/lovosis",
+        "https://www.linkedin.com/company/lovosis",
+        "https://twitter.com/lovosis",],
+      "logo": "https://lovosis.com/pictures/logo.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        telephone: "+971552929644",
+        contactType: "Sales",
+        areaServed: "IN",
+        availableLanguage: "English",
+        email: "sales@lovosis.com",
+      },
+     
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": ["TN", "NG","MU","PL","KZ","TZ","TR"],
+        "returnPolicyCountry": "AE",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 7,
+        "returnMethod": "https://schema.org/ReturnByMail",
+        "returnFees": "https://schema.org/FreeReturn",
+        "refundType": "https://schema.org/FullRefund"
+      }
+    }
+    
+    
+---
+
+<MainLayout sd={structuredData} title="Return Policy | Lovosis Technology L.L.C" description="We are a leading bulk quantity exporter of security surveillance equipment based in the United Arab Emirates, specializing in wholesale distribution of top-tier CCTV and security camera systems."canonical={canonicalUrl}>
+
+  <div class="max-w-4xl mx-auto p-12 border-2 m-12" >
+    <h1 class="text-3xl font-bold text-gray-900 dark:text-white  mb-6">Return Policy | Lovosis Technology L.L.C</h1>
+    
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold text-gray-800 mb-2 dark:text-white">Return Window</h2>
+      <p class="text-gray-700 dark:text-white">
+        We offer a <span class="font-semibold dark:text-white">7-day return policy</span> for our security system products. You may request a return within 7 days of receiving your item.
+      </p>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold text-gray-800 mb-2 dark:text-white">Return Eligibility</h2>
+      <ul class="list-disc list-inside text-gray-700 space-y-1 dark:text-white">
+        <li>Items must be unused, uninstalled, and in original condition</li>
+        <li>Products must include all original accessories and packaging</li>
+        <li>Proof of purchase is required</li>
+        <li>Custom-configured systems are non-returnable</li>
+      </ul>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold text-gray-800 mb-2 dark:text-white">How to Start a Return</h2>
+      <p class="text-gray-700 dark:text-white">
+        To initiate a return, email us at <a href="mailto:sales@lovosis.com" class="text-blue-600 hover:underline">sales@lovosis.com</a> with your order number, reason for return, and any supporting photos.
+        We will issue a Return Authorization Number (RAN) and provide return instructions.
+      </p>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold text-gray-800 mb-2 dark:text-white">Non-Returnable Items</h2>
+      <ul class="list-disc list-inside text-gray-700 space-y-1 dark:text-white">
+        <li>Installed or used products</li>
+        <li>Items missing parts or packaging</li>
+        <li>Customized kits or software licenses</li>
+        <li>Clearance or promotional items</li>
+      </ul>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold text-gray-800 mb-2 dark:text-white">Damaged or Defective Items</h2>
+      <p class="text-gray-700 dark:text-white">
+        If your item is damaged or defective, report it within 48 hours of delivery. Include photos or videos, and we will arrange a replacement or refund.
+      </p>
+    </section>
+
+     <section class="mb-8">
+      <h2 class="text-xl font-semibold text-gray-800 mb-2 dark:text-white">International Returns</h2>
+      <p class="text-gray-700 dark:text-white">
+        International customers are responsible for return shipping and duties unless the return is due to our error. Mark packages as “Returned Goods” to avoid customs delays.
+      </p>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold text-gray-800 mb-2 dark:text-white">Refunds</h2>
+      <p class="text-gray-700 dark:text-white">
+        Approved returns are refunded to the original payment method within 10–15 business days. Contact us if your refund hasn't been processed after 15 days.
+      </p>
+    </section>
+
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold text-gray-800 mb-2 dark:text-white">Contact Us</h2>
+      <p class="text-gray-700 dark:text-white">
+        📧 <a href="mailto:sales@lovosis.com" class="text-blue-600 hover:underline">sales@lovosis.com</a><br />
+        📞+971 50 916 2488
+      </p>
+    </section>
+  </div>
+</MainLayout>
