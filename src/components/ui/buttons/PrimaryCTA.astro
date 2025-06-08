@@ -1,0 +1,41 @@
+---
+import Icon from "@components/ui/icons/Icon.astro";
+// Destructure the properties from Astro.props
+const { title, url, noArrow } = Astro.props;
+// Define TypeScript interface for the properties
+interface Props {
+  title?: string;
+  url?: string;
+  noArrow?: boolean;
+}
+// Define CSS classes for styling the button
+const baseClasses =
+  "group relative inline-flex items-center justify-center gap-x-2 transform overflow-hidden rounded-lg px-6 py-3 text-sm font-bold text-white ring-zinc-500 transition-all duration-300 focus-visible:ring outline-none";
+
+const borderClasses = "border-2 border-transparent hover:border-blue-600";
+
+const bgColorClasses =
+  "bg-blue-600 hover:bg-white text-white hover:text-blue-600 hover:shadow-xl active:scale-95 dark:focus:outline-none";
+
+const beforeEffect =
+  "before:absolute before:left-0 before:top-0 before:-z-10 before:h-full before:w-full before:origin-left before:scale-x-0 before:bg-white before:transition-transform before:duration-300 hover:before:scale-x-100";
+
+const disableClasses = "disabled:pointer-events-none disabled:opacity-50";
+
+const fontSizeClasses = "2xl:text-base";
+
+const ringClasses = "dark:ring-zinc-200";
+
+---
+
+<!-- Link styled as a button, with dynamic title, URL, and optional arrow -->
+<!-- Link styled as a button, with dynamic title, URL, and optional arrow -->
+<a
+  class={`${baseClasses} ${borderClasses} ${bgColorClasses} ${disableClasses} ${fontSizeClasses} ${ringClasses} ${beforeEffect}`}
+  href={url}
+>
+  {title}
+  <!-- Display the arrow based on the 'noArrow' property -->
+  {noArrow ? null : <Icon name="arrowRight" />}
+</a>
+

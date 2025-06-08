@@ -1,0 +1,168 @@
+---
+import TabNav from "@components/ui/blocks/TabNav.astro";
+import TabContent from "@components/ui/blocks/TabContent.astro";
+import Icon from "@components/ui/icons/Icon.astro";
+
+const { title, tabs } = Astro.props;
+
+interface Tab {
+  heading: string;
+  content: string;
+  svg: string;
+  src: any;
+  alt: string;
+  first?: boolean;
+  second?: boolean;
+}
+
+interface Props {
+  title?: string;
+  tabs: Tab[];
+}
+---
+
+<style>
+  .fadeInLeft {
+    animation: fadeInLeftAnimation;
+    animation-timeline: view();
+  }
+
+  @keyframes fadeInLeftAnimation {
+    from {
+      opacity: 0;
+      transform: translateX(calc(-5vw - 2rem));
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .fadeInRight {
+    animation: fadeInRightAnimation;
+    animation-timeline: view();
+  }
+
+  @keyframes fadeInRightAnimation {
+    from {
+      opacity: 0.8;
+      transform: translateX(calc(4vw + 1rem));
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Tablet Responsive Fixes */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .tablet-stack {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 0 !important;
+    }
+    
+    .tablet-order-1 {
+      order: 1 !important;
+      width: 100% !important;
+      margin-top: 0 !important;
+      padding: 0 1rem !important;
+    }
+    
+    .tablet-order-2 {
+      order: 2 !important;
+      width: 100% !important;
+      margin-top: 2rem !important;
+      padding: 0 1rem !important;
+    }
+
+    .fadeInRight nav {
+      grid-template-columns: repeat(2, 1fr) !important;
+      gap: 1rem !important;
+    }
+
+    .tablet-full-width {
+      width: 100% !important;
+      max-width: 100% !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+
+    .relative.p-4 {
+      padding: 1rem !important;
+    }
+
+    .absolute.grid {
+      display: none !important;
+    }
+
+    .mx-auto.w-full {
+      padding-left: 0.5rem !important;
+      padding-right: 0.5rem !important;
+    }
+
+    .lg\\:col-span-6 {
+      grid-column: span 12 !important;
+    }
+  }
+</style>
+
+<section class="mx-auto w-full px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
+  <div class="mx-auto mb-8 md:mb-12 w-full text-center sm:max-w-2xl">
+    <h2 class="text-balance text-4xl sm:text-5xl md:text-6xl lg:text-7xl fadeInLeft font-bold leading-tight text-neutral-800 dark:text-neutral-200">
+      Our 
+    </h2>
+    <h2 class="text-balance text-3xl sm:text-4xl md:text-5xl fadeInLeft font-bold leading-tight text-neutral-800 dark:text-neutral-200">
+      Solution
+    </h2>
+  </div>
+
+  <div class="relative p-4 sm:p-6 md:p-8 lg:p-16">
+    <div class="relative z-10 flex flex-col lg:grid lg:grid-cols-12 lg:items-center lg:gap-8 xl:gap-16 tablet-stack">
+      <div class="mb-10 lg:order-2 lg:col-span-6 lg:mb-0 tablet-order-2">
+        <h2 class="text-xl sm:text-2xl font-bold text-neutral-800 dark:text-neutral-200 lg:text-3xl">
+          <Fragment set:html={title} />
+        </h2>
+       
+        <nav class="mt-5 grid gap-3 md:mt-8 fadeInRight" aria-label="Tabs" role="tablist">
+          {tabs.map((tab, index) => (
+            <TabNav
+              id={`tabs-with-card-item-${index + 1}`}
+              dataTab={`#tabs-with-card-${index + 1}`}
+              aria={`tabs-with-card-${index + 1}`}
+              heading={tab.heading}
+              content={tab.content}
+              first={tab.first}
+            >
+              <Icon name={tab.svg} />
+            </TabNav>
+          ))}
+        </nav>
+      </div>
+
+      <div class="lg:col-span-6 lg:col-start-1 tablet-order-1 tablet-full-width">
+        <div class="relative mx-auto max-w-full">
+          {tabs.map((tab, index) => (
+            <TabContent
+              id={`tabs-with-card-${index + 1}`}
+              aria={`tabs-with-card-item-${index + 1}`}
+              src={tab.src}
+              alt={tab.alt}
+              first={tab.first}
+              second={tab.second}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <div class="absolute inset-0 grid h-full w-full grid-cols-12">
+      <div class="col-span-full h-5/6 w-full rounded-xl bg-neutral-100 dark:bg-white/[.075] sm:h-3/4 lg:col-span-7 lg:col-start-6 lg:h-full">
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import "@preline/tabs/index.js";
+</script>

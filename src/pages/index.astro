@@ -1,0 +1,288 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+import HeroSection from "@components/sections/landing/HeroSection.astro";
+import AboutSection from "@/components/sections/landing/About.astro";
+import HeroSectionAlt from "@components/sections/landing/HeroSectionAlt.astro";
+import ClientsSection from "@components/sections/landing/ClientsSection.astro";
+import FeaturesGeneral from "@components/sections/features/FeaturesGeneral.astro";
+import FeaturesNavs from "@components/sections/features/FeaturesNavs.astro";
+import FAQ from "@components/sections/FAQ.astro";
+import heroImage from "@images/hero-image.avif";
+import faqs from "@data/faqs.json";
+import featureImage from "@images/features-image.avif";
+import solution1 from "@images/surveillance.webp";
+import solution2 from "@images/seo.webp";
+import solution3 from "@images/it.webp";
+import { SITE } from "@data/constants";
+const pageTitle: string = `About | ${SITE.Title + " - " + ", United Arab Emirates"}`;
+const description =
+  "Looking for wholesale prices on UNV, Hikvision, or Dahua security products? We offer top-rated surveillance equipment for businesses and resellers in Dubai, UAE.";
+const avatarSrcs: Array<string> = [
+  "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80",
+  "https://images.unsplash.com/photo-1531927557220-a9e23c1e4794?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80",
+  "https://images.unsplash.com/photo-1541101767792-f9b2b1c4f127?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&&auto=format&fit=facearea&facepad=3&w=300&h=300&q=80",
+  "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80",
+];
+const NAME = "Lovosis Technology L.L.C U.A.E";
+const URL = "https://lovosis.com";
+const IMAGE = "https://lovosis.com/pictures/lovosis.jpg";
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://lovosis.com/#organization",
+      name: NAME,
+      url: SITE.baseURL,
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://lovosis.com/#website",
+      url: SITE.baseURL,
+      name: NAME,
+      description: description,
+      publisher: { "@id": "https://lovosis.com/#organization" },
+      inLanguage: "en-US",
+    },
+    {
+      "@type": "ImageObject",
+      "@id": IMAGE,
+      url: IMAGE,
+      width: "200",
+      height: "200",
+      inLanguage: "en-US",
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://lovosis.com/#breadcrumb",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          item: { "@id": "https://lovosis.com", name: "Home" },
+        },
+      ],
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://lovosis.com/#webpage",
+      url: URL,
+      name: NAME,
+      datePublished: "2024-02-05T11:26:39+00:00",
+      dateModified: "2025-01-26T19:17:19+00:00",
+      about: { "@id": "https://lovosis.com/#organization" },
+      isPartOf: { "@id": "https://lovosis.com/#website" },
+      primaryImageOfPage: { "@id": IMAGE },
+      inLanguage: "en-US",
+    },
+    {
+      "@type": "Person",
+      "@id": "https://lovosis.com/author",
+      name: "Gafoor T.C",
+      url: "https://lovosis.com/author",
+      image: {
+        "@type": "ImageObject",
+        "@id": "https://lovosis.com/pictures/team/profile%20Gafoor.jpg",
+        url: "https://lovosis.com/pictures/team/profile%20Gafoor.jpg",
+        caption: "Gafoor T.C",
+        inLanguage: "en-US",
+      },
+      sameAs: ["https://www.instagram.com/lovosis_technology"],
+      worksFor: { "@id": "https://lovosis.com/#organization" },
+    },
+    {
+      "@type": "FAQPage",
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "What is Lovosis Technology?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Lovosis Technology is a leading distributor and wholesaler of high-quality security and surveillance products in Dubai, UAE. We provide cutting-edge solutions for businesses, resellers, and home security needs. Our range includes surveillance cameras, network video recorders (NVRs), and accessories from industry-leading brands.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "What brands do you offer?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "We are proud to offer products from the following trusted brands:\n- Dahua Technologies: As a Diamond Partner of Dahua Technologies, we offer an extensive range of Dahua’s innovative surveillance solutions, including cameras, recorders, and accessories.\n- UNV (Uniview): As the official UNV partner in Dubai, we provide high-performance surveillance equipment for businesses and homes.\n- Hikvision: We are the best wholesaler of Hikvision products, known for their superior video surveillance technology.\n- Uniarch: Uniarch is our exclusive in-house brand. We offer a wide range of affordable yet reliable surveillance products under the Uniarch name.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Why should I choose Lovosis Technology?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "**Exclusive Partnerships**: As a Diamond Partner with Dahua Technologies and the official UNV partner in Dubai, we offer top-tier products and services that meet the highest standards in the security industry.\n- **Competitive Pricing**: We are committed to providing the best wholesale prices on high-quality security equipment.\n- **Trusted Expertise**: With years of experience in the industry, we offer expert advice and support to ensure you get the right solutions for your needs.\n- **Uniarch Brand**: Our exclusive Uniarch brand delivers exceptional value, offering high-quality security products at affordable prices.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "What types of security products do you offer?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "We offer a wide variety of security products, including:\n- **IP Cameras**: High-definition and advanced security cameras from Dahua, UNV, Hikvision, and Uniarch.\n- **Network Video Recorders (NVRs)**: For centralized video management and storage.\n- **Accessories**: Power supplies, cables, mounts, and more to complement your security setup.\n- **Complete Surveillance Systems**: Pre-configured surveillance kits for home or business use.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "What is Dahua’s Diamond Partner status?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "As a Diamond Partner of Dahua Technologies, Lovosis Technology has been recognized for its excellence in selling and servicing Dahua products. This partnership allows us to offer exclusive access to the latest Dahua technologies, enhanced support, and preferential pricing.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "What does it mean to be an official UNV partner in Dubai?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Being an official UNV partner means that Lovosis Technology is authorized to distribute and sell UNV products in Dubai and the UAE. We provide full access to UNV’s top-of-the-line surveillance solutions, ensuring our customers get the most reliable and advanced security systems available",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Do you offer Hikvision products at wholesale prices?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Yes, at Lovosis Technology, we are proud to be one of the best wholesalers of Hikvision products in Dubai. We offer competitive wholesale prices for all types of Hikvision security equipment, including cameras, recorders, and accessories. Whether you are a business, reseller, or distributor, we can provide you with the best deals available in the market.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Do you offer warranty on your products?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Yes, all products purchased from Lovosis Technology come with a manufacturer’s warranty, depending on the brand and model. For more details, please check the warranty information specific to the product you are purchasing or contact our customer support team for assistance.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "How do I become a reseller or distributor?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "If you are interested in becoming a reseller or distributor of Lovosis Technology products, including Dahua, UNV, Hikvision, or Uniarch, please reach out to us via our contact page. We offer competitive pricing and support to help you succeed in your business.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Do you offer international shipping?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Yes, we offer international shipping on most of our products. Please contact us for shipping details and any applicable shipping fees based on your location.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "What is the return policy?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Our return policy allows you to return products within a specified period (typically 14-30 days), provided they are unused, in their original packaging, and meet other conditions as outlined in our terms and conditions. For detailed return instructions, please refer to our Return & Refund Policy.",
+          },
+        },
+      ],
+    },
+  ],
+};
+---
+
+<MainLayout title={pageTitle} sd={structuredData} description={description}>
+  <HeroSection
+    title=`Total Surveillance & IT Solution Provider <span
+        class="text-blue-600 dark:text-blue-600">In Dubai</span>`
+    subTitle="Your trusted partner for comprehensive IT and surveillance solutions. Enhancing security and efficiency across Dubai."
+    primaryBtn="Start Exploring"
+    primaryBtnURL="/about"
+    secondaryBtn="Contact Sales Team"
+    secondaryBtnURL="/contact"
+    withReview={true}
+    avatars={avatarSrcs}
+    rating=`<span class="font-bold">4.8</span> / 5`
+    starCount={4}
+    reviews=`From Over <span class="font-bold">12.8k</span> Reviews`
+    src={heroImage}
+    alt="Stack of ScrewFast product boxes containing assorted hardware tools"
+  />
+  <ClientsSection
+    title="Trusted by Leading Brands"
+    subTitle="Partners with industry leaders, delivering excellence and innovation in our services."
+  />
+  <AboutSection
+    Abouttitle=`Know About <span
+    class="text-blue-600 dark:text-teal-600">lovosis</span>`
+    AboutsubTitle="At Lovosis, we specialize in cutting-edge surveillance and IT solutions, positioned as a leading provider in Dubai. Our expertise focuses on delivering robust security and technological efficiency to our clients. While we offer custom fabrication, our core strength lies in comprehensive surveillance systems designed to meet diverse and dynamic needs. Trust Lovosis to enhance and secure your digital landscape with precision and innovation."
+    AboutprimaryBtn="Learn More"
+    AboutprimaryBtnURL="/about"
+    statistics={[
+      {
+        count: "7k+",
+        description:
+          "As Dubai's leading provider of advanced surveillance and IT solutions, we serve over 7k+ customers.",
+      },
+      {
+        count: "35%",
+        description:
+          "Lovosis solutions have significantly boosted project efficiency, revolutionizing industry standards.",
+      },
+      {
+        count: "15.3%",
+        description:
+          "Our advanced technology and efficient strategies have reduced maintenance costs for long-term clients",
+      },
+      {
+        count: "2x",
+        description:
+          "Experience assembly at twice Speed up assembly with our advanced fastening solutions.",
+      },
+    ]}
+  />
+
+  <FeaturesGeneral
+    title="Meeting Industry Demands"
+    subTitle="Lovosis, a leading custom fabrication and surveillance solution provider in Dubai, partners with top brands like Hikvision, Dahua, EWIND, Western Digital, and Toshiba. We offer cutting-edge security systems featuring advanced technology for optimal protection and monitoring. Trust Lovosis for innovative and reliable surveillance solutions tailored to your needs."
+    src={featureImage}
+    alt="Lovosis Brands"
+  />
+
+  <FeaturesNavs
+    title=`<span class="text-blue-600 dark:text-teal-600">Lovosis</span>'s offerings solution to perfectly suit your Needs.`
+    tabs={[
+      {
+        heading: "Surveillance Solution",
+        content:
+          "Our surveillance solutions at Lovosis with Wise-ISP 5th Gen Night Vision technology, ensuring real-time security monitoring and data protection tailored to meet the specific needs of your business",
+        svg: "cctv",
+        src: solution1,
+        alt: "solution-1",
+        first: true,
+      },
+      {
+        heading: "Google SEO & Digital Marketing",
+        content:
+          "At Lovosis Technology L.L.C, we specialize in driving real, measurable growth for your business through expert Google SEO and Digital Marketing strategies. Our goal is to help you achieve higher search engine rankings, increase organic traffic, and convert visitors into loyal customers.",
+        svg: "google",
+        src: solution2,
+        alt: "solution-2",
+        second: true,
+      },
+      {
+        heading: "IT Solution",
+        content:
+          "At Lovosis, we provide innovative IT solutions that optimize performance and security, tailored to meet the unique needs of your business stays ahead in a fast-paced digital world.",
+        svg: "dashboard",
+        src: solution3,
+        alt: "solution-3",
+      },
+    ]}
+  />
+
+  <HeroSectionAlt
+    title=`Let's Build <span class="text-blue-600 dark:text-teal-600">Together</span>`
+    subTitle="We're here to help you with anything you need."
+  />
+  <FAQ
+    title=`Frequently<br /><span class="text-blue-600 dark:text-teal-600">asked questions</span>`
+    faqs={faqs}
+  />
+</MainLayout>

@@ -1,0 +1,661 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+import { SITE } from "@data/constants";
+import lovosis from "../../assets/img/lovosis.jpg";
+import { Image } from "astro:assets";
+
+const pageTitle: string =
+  "About Lovosis Technology – Leading Security System Supplier in the Middle East,U.A.E";
+const description: string =
+  "Lovosis Technology is a highly experienced security system supplier and exporter, providing top-tier UNV, Hikvision, and Dahua solutions across the Middle East. Trusted for quality and reliability, we deliver advanced security systems tailored to your needs";
+const NAME = "Lovosis Technology";
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+
+const {
+  title = ["Why Choose Lovosis?"],
+  subTitle = [
+    "Expert custom fabrication and surveillance solutions tailored to your unique security and technological needs.",
+  ],
+  benefits = [
+    "Unparalleled Expertise in Surveillance Technology",
+    "Satisfied Customers and High-quality Solutions",
+    "Tailored IT Solutions & Custom Fabrication Solution",
+    "Advanced Fastening Technology for Quick Installation",
+    "Dedicated Support and Maintenance Services",
+  ],
+} = Astro.props;
+
+interface Props {
+  title: string;
+  subTitle?: string;
+  benefits?: Array<string>;
+}
+const abtitle: string = "About us";
+const absubTitle: string =
+  "Discover Lovosis, Dubai's authorized supplier of customized fabrication and surveillance solutions";
+const {
+  Abouttitle = [
+    `About <span class="text-blue-600 dark:text-teal-600">lovosis</span>`,
+  ],
+  AboutsubTitle = "At Lovosis, we specialize in cutting-edge surveillance and IT solutions, positioned as a leading provider in Dubai. Our expertise focuses on delivering robust security and technological efficiency to our clients. While we offer custom fabrication, our core strength lies in comprehensive surveillance systems designed to meet diverse and dynamic needs. we are proud to serve over 7k+ customers as Dubai's premier provider of advanced surveillance and IT solutions. Additionally, we speed up assembly with our advanced fastening solutions, ensuring that our installations are completed at twice the usual speed, providing efficiency alongside security. Trust Lovosis to enhance and secure your digital landscape with precision and innovation.",
+} = Astro.props;
+
+interface Props {
+  Abouttitle: string;
+  AboutsubTitle?: string;
+  AboutprimaryBtn?: string;
+  AboutprimaryBtnURL?: string;
+}
+const ListItemMarker: string = `<svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mt-0.5 h-6 w-6 text-blue-600 dark:text-teal-600 flex-none"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>`;
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    // Original slug1 Organization (unchanged)
+    {
+      "@type": "Organization",
+      "@id": "https://lovosis.com/#organization",
+      name: "Lovosis Technology",
+      url: "https://lovosis.com/",
+      logo: "https://lovosis.com/pictures/lovosis.jpg",
+      sameAs: [
+        "https://www.facebook.com/lovosis",
+        "https://www.linkedin.com/company/lovosis",
+        "https://twitter.com/lovosis",
+      ],
+    },
+
+    // Original slug1 WebSite with added potentialAction
+    {
+      "@type": "WebSite",
+      "@id": "https://lovosis.com/#website",
+      url: "https://lovosis.com/",
+      name: "Lovosis Technology",
+      publisher: { "@id": "https://lovosis.com/#organization" },
+      inLanguage: "en-US",
+      // Added from slug2
+     
+    },
+
+    // Original slug1 ImageObject (unchanged)
+    {
+      "@type": "ImageObject",
+      "@id": "https://lovosis.com/pictures/lovosis.jpg",
+      url: "https://lovosis.com/pictures/lovosis.jpg",
+      width: 200,
+      height: 200,
+      inLanguage: "en-US",
+    },
+
+    // Original slug1 BreadcrumbList (unchanged)
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://lovosis.com/#breadcrumb",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          item: {
+            "@id": "https://lovosis.com/",
+            name: "Home",
+          },
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          item: {
+            "@id": "https://lovosis.com/about",
+            name: "About Us",
+          },
+        },
+      ],
+    },
+
+    // Original slug1 WebPage with added description and breadcrumb
+    {
+      "@type": "WebPage",
+      "@id": "https://lovosis.com/about/#webpage",
+      url: "https://lovosis.com/about",
+      name: "About Lovosis Technology",
+      datePublished: "2025-02-05T11:26:39+00:00",
+      dateModified: "2025-12-12T19:17:19+00:00",
+      about: { "@id": "https://lovosis.com/#organization" },
+      isPartOf: { "@id": "https://lovosis.com/#website" },
+      primaryImageOfPage: { "@id": "https://lovosis.com/pictures/lovosis.jpg" },
+      inLanguage: "en-US",
+      // Added from slug2
+      description: "Learn about Lovosis Technology's expertise in security systems and solutions",
+      breadcrumb: { "@id": "https://lovosis.com/#breadcrumb" }
+    },
+
+    // Added AboutPage from slug2
+    {
+      "@type": "AboutPage",
+      "@id": "https://lovosis.com/about/#aboutpage",
+      url: "https://lovosis.com/about",
+      name: "About Lovosis Technology - Security Solutions Provider",
+      description: "Professional security system solutions provider in UAE and Middle East",
+      isPartOf: { "@id": "https://lovosis.com/about/#webpage" },
+      inLanguage: "en-US"
+    },
+
+    // Original slug1 Person with added jobTitle
+    {
+      "@type": "Person",
+      "@id": "https://lovosis.com/about/#person",
+      name: "Gafoor T.C",
+      url: "https://lovosis.com/about",
+      // Added from slug2
+      jobTitle: "CEO & Founder",
+      image: {
+        "@type": "ImageObject",
+        "@id": "https://lovosis.com/pictures/team/profile%20Gafoor.jpg",
+        url: "https://lovosis.com/pictures/team/profile%20Gafoor.jpg",
+        caption: "Gafoor TC",
+        inLanguage: "en-US",
+      },
+    
+      worksFor: { "@id": "https://lovosis.com/#organization" },
+    },
+
+    // Added ItemList from slug2
+    {
+      "@type": "ItemList",
+      itemListElement: [{
+        "@type": "ListItem",
+        position: 1,
+        item: {
+          "@type": "Person",
+          name: "Gafoor T.C",
+          jobTitle: "CEO & Founder",
+          image: "https://lovosis.com/pictures/team/profile%20Gafoor.jpg",
+          worksFor: { "@id": "https://lovosis.com/#organization" }
+        }
+      }]
+    },
+
+    // Original slug1 Article (unchanged)
+    {
+      "@type": "Article",
+      headline: "About Lovosis Technology - Leading Security System Supplier",
+      keywords: "security systems, UNV, Hikvision, Dahua, Dubai, UAE, Middle East",
+      datePublished: "2024-02-05T11:26:39+00:00",
+      dateModified: "2025-12-12T19:17:19+00:00",
+      author: {
+        "@id": "https://lovosis.com/about/#person",
+        name: "Johns Abraham",
+      },
+      publisher: { "@id": "https://lovosis.com/#organization" },
+      description: "Lovosis Technology is a trusted supplier and exporter of UNV, Hikvision, and Dahua security systems across the Middle East. Learn more about our expertise and solutions.",
+      name: "About Lovosis Technology",
+      "@id": "https://lovosis.com/about/#richSnippet",
+      isPartOf: { "@id": "https://lovosis.com/about/#webpage" },
+      image: { "@id": "https://lovosis.com/pictures/lovosis.jpg" },
+      inLanguage: "en-US",
+      mainEntityOfPage: { "@id": "https://lovosis.com/about/#webpage" },
+    },
+  ],
+};
+const metaTags = [
+  // Primary Meta Tags
+  { 
+    name: "title", 
+    content: pageTitle 
+  },
+  {
+    name: "description",
+    content: `${description} Explore our 7,000+ successful installations and Dubai Police-approved solutions.`, },
+  {
+    name: "keywords",
+    content: "About Lovosis, Security Company UAE, Dubai CCTV Experts, Hikvision Partner Dubai, Dahua Installers UAE, UNV Thermal Solutions, Security System Exporters, Middle East Surveillance, Dubai Police Approved CCTV"
+  },
+
+
+  { 
+    property: "og:type", 
+    content: "profile" 
+  },
+  { 
+    property: "og:image:alt", 
+    content: "Lovosis Technology Team and Security Solutions Showcase"
+  },
+  { 
+    name: "twitter:image:alt", 
+    content: "Lovosis Leadership Team and Security System Installations"
+  },
+
+  { 
+    name: "business:contact_data:locality", 
+    content: "Dubai" 
+  },
+  { 
+    name: "business:contact_data:country_name", 
+    content: "United Arab Emirates" 
+  },
+  { 
+    name: "business:contact_data:website", 
+    content: "https://lovosis.com/" 
+  },
+  { 
+    name: "og:profile:username", 
+    content: "Gafoor T.C" 
+  },
+  { 
+    name: "og:profile:role", 
+    content: "CEO & Founder" 
+  },
+  { 
+    name: "og:profile:gender", 
+    content: "male" 
+  }
+];
+---
+
+<style>
+  .autoRotate {
+    animation: autoRotateAnimation;
+    animation-timeline: view();
+  }
+  @keyframes autoRotateAnimation {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .autoShow {
+    animation: autoShowAnimation both;
+    animation-timeline: view(70% 5%);
+  }
+
+  @keyframes autoShowAnimation {
+    from {
+      opacity: 0;
+      transform: translateY(200px) scale(0.3);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  .fadeInRight {
+    animation: fadeInRightAnimation;
+    animation-timeline: view();
+  }
+
+  @keyframes fadeInRightAnimation {
+    from {
+      opacity: 0;
+      transform: translateX(100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+</style>
+
+<MainLayout title={pageTitle} sd={structuredData} description={description} metaTags={metaTags} canonical={canonicalUrl} >
+  <section
+    class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full"
+  >
+    <div
+      class="mb-20 rounded-2xl bg-gray-100 p-5 text-center dark:bg-neutral-500 md:p-12"
+    >
+      <h1
+        class="animate-fade-in-left text-balance text-3xl font-bold tracking-tight text-neutral-800 dark:text-neutral-100 md:text-6xl md:leading-tight"
+      >
+        {abtitle}
+      </h1>
+      <p class="mt-1 text-pretty text-neutral-600 dark:text-neutral-200">
+        {absubTitle}
+      </p>
+    </div>
+
+    <div
+      class="mx-auto mb-24 grid gap-4 px-4 sm:px-6 md:mb-14 md:grid-cols-2 md:items-center md:gap-8 lg:px-8 2xl:max-w-full"
+    >
+      <div>
+        <div class="autoShow">
+          <div
+            class="h-5/2 col-span-full w-full rounded-xl bg-neutral-100 pb-12 pt-8 dark:bg-white/[.075] sm:h-3/4 md:pt-5 lg:col-span-7 lg:col-start-6 lg:h-full"
+          >
+            <h2
+              class="block text-balance px-5 text-3xl font-bold tracking-tight text-neutral-800 dark:text-neutral-200 sm:text-4xl lg:text-6xl lg:leading-tight"
+            >
+              <Fragment set:html={Abouttitle} />
+            </h2>
+            {
+              AboutsubTitle && (
+                <p class="mt-5 w-11/12 text-pretty px-5 text-base leading-relaxed text-neutral-700 dark:text-neutral-400">
+                  {AboutsubTitle}
+                </p>
+              )
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- About Image Section -->
+      <div
+        class="fadeInRight flex w-full items-center justify-center rounded-2xl p-5 md:items-center"
+      >
+        <div class="lg:col-span-3 lg:col-end-10 lg:mt-0">
+          <div class="space-y-6 sm:space-y-8">
+            <img
+              src="/pictures/banner2.png"
+              alt="hero-image"
+              class="h-auto w-full rounded-xl"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grid -->
+    <div
+      class="pb-16 md:pt-10 lg:grid lg:grid-cols-12 lg:items-center lg:gap-16"
+    >
+      <div class="lg:col-span-6">
+        <div class="relative flex h-full w-full items-center justify-center">
+          <div
+            class="profileCard_container relative border-spacing-4 rounded-full border-2 border-dashed border-blue-600 p-9 md:p-12"
+          >
+            <button
+              class="profile_item absolute -top-[26px] left-[25px] cursor-pointer rounded-full border border-teal-600 bg-cover p-[2px] transition-all duration-500 hover:scale-150 active:scale-95"
+            >
+              <span
+                class="z-[2] block h-[70px] w-[70px] rounded-full bg-white p-1 transition-all duration-500"
+              >
+                <img
+                  src="/pictures/Brand Logo/hikvision.png"
+                  alt="hero-image"
+                  class="mt-5 h-auto w-full"
+                />
+              </span>
+            </button>
+
+            <button
+              class="profile_item absolute right-[16px] top-2 cursor-pointer rounded-full border border-teal-600 bg-cover p-[2px] transition-all duration-500 hover:scale-150 active:scale-95"
+            >
+              <span
+                class="z-[2] block h-[70px] w-[70px] rounded-full bg-white p-1 transition-all duration-500"
+              >
+                <img
+                  src="/pictures/Brand Logo/dahua.png"
+                  alt="hero-image"
+                  class="mt-5 h-auto w-full"
+                />
+              </span>
+            </button>
+
+            <button
+              class="profile_item absolute -left-9 top-32 cursor-pointer rounded-full border border-teal-600 bg-cover p-[2px] transition-all duration-500 hover:scale-150 active:scale-95"
+            >
+              <span
+                class="z-[2] block h-[70px] w-[70px] rounded-full bg-white p-1 transition-all duration-500"
+              >
+                <img
+                  src="/pictures/Brand Logo/ewind.png"
+                  alt="hero-image"
+                  class="mt-5 h-auto w-full"
+                />
+              </span>
+            </button>
+
+            <button
+              class="profile_item absolute -right-5 top-44 cursor-pointer rounded-full border border-teal-600 bg-cover p-[2px] transition-all duration-500 hover:scale-150 active:scale-95"
+            >
+              <span
+                class="z-[2] block h-[70px] w-[70px] rounded-full bg-white p-1 transition-all duration-500"
+              >
+                <img
+                  src="/pictures/Brand Logo/western dark.png"
+                  alt="hero-image"
+                  class="mt-5 h-auto w-full"
+                />
+              </span>
+            </button>
+
+            <button
+              class="profile_item absolute -bottom-8 left-20 cursor-pointer rounded-full border border-teal-600 bg-cover p-[2px] transition-all duration-500 hover:scale-150 active:scale-95"
+            >
+              <span
+                class="z-[2] block h-[70px] w-[70px] rounded-full bg-white p-1 transition-all duration-500"
+              >
+                <img
+                  src="/pictures/Brand Logo/Toshiba.png"
+                  alt="hero-image"
+                  class="mt-5 h-auto w-full"
+                />
+              </span>
+            </button>
+
+            <button
+              class="profile_item autoShow z-0 h-[200px] w-[200px] cursor-pointer rounded-full border-2 p-1 transition-all duration-500 hover:border-blue-600"
+            >
+              <div
+                class="flex h-full w-full items-center justify-center rounded-full object-cover p-2 transition-all duration-500 hover:scale-95 active:scale-95"
+              >
+                <img
+                  src="/pictures/logo.png"
+                  alt="hero-image"
+                  class="noRotate h-auto w-full object-cover"
+                />
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-20 p-6 sm:mt-10 md:mt-0 md:p-1 lg:col-span-5 lg:mt-0">
+        <div class="space-y-6 sm:space-y-8">
+          <div class="space-y-2 md:space-y-4">
+            <h2
+              class="text-balance text-3xl font-bold text-neutral-800 dark:text-neutral-200 lg:text-4xl"
+            >
+              {title}
+            </h2>
+            {
+              subTitle && (
+                <p class="text-pretty text-neutral-600 dark:text-neutral-400">
+                  {subTitle}
+                </p>
+              )
+            }
+          </div>
+          {
+            benefits && (
+              <ul class="space-y-2 sm:space-y-4">
+                {benefits.map((item) => (
+                  <li class="flex space-x-3">
+                    <Fragment set:html={ListItemMarker} />
+                    <span class="text-pretty text-base font-medium text-neutral-600 dark:text-neutral-400">
+                      {item}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            )
+          }
+        </div>
+      </div>
+    </div>
+
+   
+    <style>
+      .team-img-container {
+        aspect-ratio: 3/4;
+        overflow: hidden;
+      }
+      .team-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+      @media (max-width: 768px) {
+        .team-img-container {
+          aspect-ratio: 1/1;
+        }
+      }
+    </style>
+    
+    <div class="mx-auto px-4 py-16 sm:max-w-xl md:max-w-full md:px-24 lg:max-w-screen-xl lg:px-8 lg:py-20">
+      <div class="mb-10 max-w-xl sm:text-center md:mx-auto md:mb-12 lg:max-w-2xl">
+        <div>
+          <p class="bg-teal-accent-400 mb-4 inline-block rounded-full px-3 py-px text-xs font-semibold uppercase tracking-wider text-blue-600 dark:text-teal-600">
+            Core Team
+          </p>
+        </div>
+        <h2 class="mb-6 max-w-lg font-sans text-3xl font-bold leading-none tracking-tight text-teal-600 dark:text-blue-600 sm:text-4xl md:mx-auto">
+          <span class="relative inline-block">
+            <svg viewBox="0 0 52 24" fill="currentColor" class="text-blue-gray-100 absolute left-0 top-0 z-0 -ml-20 -mt-8 hidden w-32 sm:block lg:-ml-28 lg:-mt-10 lg:w-32">
+              <defs>
+                <pattern id="1d4040f3-9f3e-4ac7-b117-7d4009658ced" x="0" y="0" width=".135" height=".30">
+                  <circle cx="1" cy="1" r=".7"></circle>
+                </pattern>
+              </defs>
+              <rect fill="url(#1d4040f3-9f3e-4ac7-b117-7d4009658ced)" width="52" height="24"></rect>
+            </svg>
+            <span class="relative">Explore</span>
+          </span>
+          our talented team of professionals
+        </h2>
+      </div>
+    
+      <!-- CEO Section -->
+      <div class="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8 lg:py-6">
+        <div class="flex justify-center">
+          <div class="w-full sm:w-2/3 md:w-1/2 lg:w-2/5 xl:w-1/3">
+            <div class="relative transform overflow-hidden rounded shadow-lg transition duration-300 hover:shadow-2xl lg:hover:-translate-y-2">
+              <div class="team-img-container">
+                <img class="team-img h-10" src="/pictures/team/profile Gafoor.jpg" alt="CEO and Founder" />
+              </div>
+              <div class="absolute inset-0 flex flex-col justify-center bg-black bg-opacity-75 px-5 py-4 text-center opacity-0 transition-opacity duration-300 hover:opacity-100">
+                <p class="mb-1 text-lg font-bold text-gray-100">Mr.Abdul Gafoor</p>
+                <p class="mb-4 text-xs text-gray-100">CEO and Founder</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <!-- Team Row 1 -->
+      <div class="scroll-container mx-auto max-w-[85rem] px-4 py-4 sm:px-6 lg:px-8 lg:py-6 2xl:max-w-full">
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
+          <!-- Team Member 1 -->
+          <div class="relative transform overflow-hidden rounded shadow-lg transition duration-300 hover:shadow-2xl lg:hover:-translate-y-2">
+            <div class="team-img-container">
+              <img class="team-img" src="/pictures/team/6.jpg" alt="Person" />
+            </div>
+            <div class="absolute inset-0 flex flex-col justify-center bg-black bg-opacity-75 px-5 py-4 text-center opacity-0 transition-opacity duration-300 hover:opacity-100">
+              <p class="mb-1 text-lg font-bold text-gray-100">Mishal Abdul Gafoor</p>
+              <p class="mb-4 text-xs text-gray-100">Account Sales Manager</p>
+            </div>
+          </div>
+          
+          <!-- Team Member 2 -->
+          <div class="relative transform overflow-hidden rounded shadow-lg transition duration-300 hover:shadow-2xl lg:hover:-translate-y-2">
+            <div class="team-img-container">
+              <img class="team-img" src="/pictures/team/1.jpg" alt="Person" />
+            </div>
+            <div class="absolute inset-0 flex flex-col justify-center bg-black bg-opacity-75 px-5 py-4 text-center opacity-0 transition-opacity duration-300 hover:opacity-100">
+              <p class="mb-1 text-lg font-bold text-gray-100">Muhammed Saleem</p>
+              <p class="mb-4 text-xs text-gray-100">Sales Assistant</p>
+            </div>
+          </div>
+          
+          <!-- Team Member 3 -->
+          <div class="relative transform overflow-hidden rounded shadow-lg transition duration-300 hover:shadow-2xl lg:hover:-translate-y-2">
+            <div class="team-img-container">
+              <img class="team-img" src="/pictures/team/8.jpg" alt="Person" />
+            </div>
+            <div class="absolute inset-0 flex flex-col justify-center bg-black bg-opacity-75 px-5 py-4 text-center opacity-0 transition-opacity duration-300 hover:opacity-100">
+              <p class="mb-1 text-lg font-bold text-gray-100">Althiya Titus</p>
+              <p class="mb-4 text-xs text-gray-100">HR & Admin Manager</p>
+            </div>
+          </div>
+          
+          <!-- Team Member 4 -->
+          <div class="relative transform overflow-hidden rounded shadow-lg transition duration-300 hover:shadow-2xl lg:hover:-translate-y-2">
+            <div class="team-img-container">
+              <img class="team-img" src="/pictures/team/7.jpg" alt="Person" />
+            </div>
+            <div class="absolute inset-0 flex flex-col justify-center bg-black bg-opacity-75 px-5 py-4 text-center opacity-0 transition-opacity duration-300 hover:opacity-100">
+              <p class="mb-1 text-lg font-bold text-gray-100">Antu Mathews</p>
+              <p class="mb-4 text-xs text-gray-100">Account sales manager</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+     <div class="scroll-container mx-auto max-w-4xl px-4 py-4 sm:px-6 lg:px-8 lg:py-6">
+  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
+    
+    <!-- Team Member 5 -->
+    <div class="relative overflow-hidden rounded shadow-lg transition duration-300 hover:shadow-xl lg:hover:-translate-y-2"> <!-- Only on lg screens -->
+      <div class="team-img-container">
+        <img class="team-img h-32 sm:h-40 md:h-48 object-cover w-full" src="/pictures/team/2.jpg" alt="Shaik Nihaal" />
+      </div>
+      <div class="absolute inset-0 flex flex-col justify-center bg-black bg-opacity-75 px-3 py-2 text-center opacity-0 transition-opacity duration-300 hover:opacity-100">
+        <p class="mb-1 text-base font-semibold text-gray-100">Shaik Nihaal</p>
+        <p class="text-[0.7rem] text-gray-300">Chief Sales Manager</p>
+      </div>
+    </div>
+
+    <!-- Team Member 6 -->
+    <div class="relative overflow-hidden rounded shadow-lg transition duration-300 hover:shadow-xl lg:hover:-translate-y-2"> <!-- Only on lg screens -->
+      <div class="team-img-container">
+        <img class="team-img h-32 sm:h-40 md:h-48 object-cover w-full" src="/pictures/team/3.jpg" alt="Rincy Antu" />
+      </div>
+      <div class="absolute inset-0 flex flex-col justify-center bg-black bg-opacity-75 px-3 py-2 text-center opacity-0 transition-opacity duration-300 hover:opacity-100">
+        <p class="mb-1 text-base font-semibold text-gray-100">Rincy Antu</p>
+        <p class="text-[0.7rem] text-gray-300">Office Admin</p>
+      </div>
+    </div>
+
+    <!-- Team Member 7 -->
+    <div class="relative overflow-hidden rounded shadow-lg transition duration-300 hover:shadow-xl lg:hover:-translate-y-2 md:col-span-2 md:mx-auto md:w-1/2 lg:col-span-1 lg:mx-0 lg:w-auto"> <!-- Only on lg screens -->
+      <div class="team-img-container">
+        <img class="team-img h-32 sm:h-40 md:h-48 object-cover w-full" src="/pictures/team/5.jpg" alt="Suhail" />
+      </div>
+      <div class="absolute inset-0 flex flex-col justify-center bg-black bg-opacity-75 px-3 py-2 text-center opacity-0 transition-opacity duration-300 hover:opacity-100">
+        <p class="mb-1 text-base font-semibold text-gray-100">Suhail</p>
+        <p class="text-[0.7rem] text-gray-300">Purchase Assistant</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<style>
+.team-img-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.team-img {
+  width: 100%;
+  transition: transform 0.3s ease;
+}
+
+@media (min-width: 640px) {
+  .team-img {
+    min-height: 160px;
+  }
+}
+
+@media (min-width: 768px) {
+  .team-img {
+    min-height: 192px;
+  }
+}
+</style>
+    </div>
+ 
+  </section>
+</MainLayout>

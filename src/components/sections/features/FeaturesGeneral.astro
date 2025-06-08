@@ -1,0 +1,241 @@
+---
+import { Image } from "astro:assets";
+import IconBlock from "@components/ui/blocks/IconBlock.astro";
+import Icon from "@components/ui/icons/Icon.astro";
+import PP from "@components/sections/features/overlay.astro";
+
+interface Feature {
+  heading: string;
+  content: string;
+  svg: string;
+}
+
+interface Props {
+  title?: string;
+  subTitle?: string;
+  features?: Feature[];
+  src?: any;
+  alt?: string;
+}
+
+const { title, subTitle } = Astro.props;
+---
+
+<section
+  class="mx-auto max-w-[85rem] px-4 py-4 sm:px-6 lg:px-8 lg:py-6 2xl:max-w-full"
+>
+<div class="mx-auto mb-12 w-full space-y-1 text-center hidden md:block">
+  <h2 class="autoBLur fade-in-up text-balance text-5xl font-bold leading-tight text-neutral-800 dark:text-neutral-200 md:text-8xl">
+    Meet
+  </h2>
+  <h2 class="autoBLur fade-in-up text-balance text-5xl font-bold leading-tight text-neutral-800 dark:text-neutral-200 md:text-8xl">
+    Our
+  </h2>
+  <h2 class="autoBLur fade-in-up text-balance text-5xl font-bold leading-tight text-neutral-800 dark:text-neutral-200 md:text-8xl">
+    Brands
+  </h2>
+</div>
+<div class="mx-auto mb-12 w-full space-y-1 text-center md:hidden">
+  <h2 class="autoBLur fade-in-up text-balance text-5xl font-bold leading-tight text-neutral-800 dark:text-neutral-200">
+    Meet
+  </h2>
+  <h2 class="autoBLur fade-in-up text-balance text-5xl font-bold leading-tight text-neutral-800 dark:text-neutral-200">
+    Our
+  </h2>
+  <h2 class="autoBLur fade-in-up text-balance text-5xl font-bold leading-tight text-neutral-800 dark:text-neutral-200">
+    Brands
+  </h2>
+</div>
+
+<div class="mt-5 grid gap-8 lg:mt-16 lg:grid-cols-2 lg:gap-6">
+  <div class="w-full lg:col-span-1">
+    <h2 class="text-balance text-2xl font-bold text-neutral-800 dark:text-neutral-200 md:text-3xl">
+      {title}
+    </h2>
+
+    {subTitle && (
+      <p class="mt-2 text-pretty text-neutral-600 dark:text-neutral-400 md:mt-4">
+        {subTitle}
+      </p>
+    )}
+  </div>
+
+  <div class="lg:col-span-1">
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <!-- Dahua Card -->
+      <div class="relative flex h-[10em] w-full items-center justify-center rounded-[1.5em] border-[1px] border-neutral-700 bg-white p-[1.5em] dark:bg-neutral-600">
+        <div class="group absolute bottom-0 left-1/2 flex h-[2em] w-[2em] -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden rounded-[1.5em] border-[1px] bg-teal-600 backdrop-blur-[3px] duration-[500ms] hover:h-[10em] hover:w-[14em] hover:rounded-[1.5em] dark:bg-blue-600 md:top-8">
+          <svg class="h-[1em] w-[1em] duration-300 group-hover:opacity-0" viewBox="0 0 48 48" fill="none" height="28" width="28" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#a)">
+              <path clip-rule="evenodd" d="M21.6 36h4.8V21.6h-4.8V36ZM24 0C10.8 0 0 10.8 0 24s10.8 24 24 24 24-10.8 24-24S37.2 0 24 0Zm0 43.2C13.44 43.2 4.8 34.56 4.8 24 4.8 13.44 13.44 4.8 24 4.8c10.56 0 19.2 8.64 19.2 19.2 0 10.56-8.64 19.2-19.2 19.2Zm-2.4-26.4h4.8V12h-4.8v4.8Z" fill-rule="evenodd" fill="#fff"></path>
+            </g>
+            <defs>
+              <clipPath id="a">
+                <path d="M0 0h48v48H0z" fill="#fff"></path>
+              </clipPath>
+            </defs>
+          </svg>
+          <div class="items-left font-poppins absolute left-0 top-0 flex h-auto w-full translate-y-[20%] flex-col justify-center p-3 text-neutral-100 group-hover:translate-y-0 dark:text-neutral-100">
+            <div class="items-left flex flex-col justify-center">
+              <p class="text-[0.9em] font-light">
+                As a leading wholesale dealer of Dahua products, we offer an
+                extensive range of high-quality security and surveillance
+                solutions.
+              </p>
+            </div>
+          </div>
+        </div>
+       <a href="/alhua">
+  <img
+    src="/pictures/Dahua logo.png"
+    alt="Dahua logo - light mode"
+    class="h-auto w-full bg-cover dark:hidden"
+    title="Learn more about Dahua technology"
+  />
+  <img
+    src="/pictures/Brand Logo/dahuanightmode.png"
+    alt="Dahua logo - dark mode"
+    class="h-auto w-full bg-cover hidden dark:block"
+    title="Learn more about Dahua technology"
+  />
+</a>
+      </div>
+
+      <!-- Hikvision Card -->
+      <div class="relative flex h-[10em] w-full items-center justify-center rounded-[1.5em] border-[1px] border-neutral-700 bg-white p-[1.5em] dark:bg-neutral-600">
+        <div class="group absolute bottom-0 left-1/2 flex h-[2em] w-[2em] -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden rounded-[1.5em] border-[1px] bg-teal-600 backdrop-blur-[3px] duration-[500ms] hover:h-[10em] hover:w-[14em] hover:rounded-[1.5em] dark:bg-blue-600 md:top-8">
+          <svg class="h-[1em] w-[1em] duration-300 group-hover:opacity-0" viewBox="0 0 48 48" fill="none" height="28" width="28" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#a)">
+              <path clip-rule="evenodd" d="M21.6 36h4.8V21.6h-4.8V36ZM24 0C10.8 0 0 10.8 0 24s10.8 24 24 24 24-10.8 24-24S37.2 0 24 0Zm0 43.2C13.44 43.2 4.8 34.56 4.8 24 4.8 13.44 13.44 4.8 24 4.8c10.56 0 19.2 8.64 19.2 19.2 0 10.56-8.64 19.2-19.2 19.2Zm-2.4-26.4h4.8V12h-4.8v4.8Z" fill-rule="evenodd" fill="#fff"></path>
+            </g>
+            <defs>
+              <clipPath id="a">
+                <path d="M0 0h48v48H0z" fill="#fff"></path>
+              </clipPath>
+            </defs>
+          </svg>
+          <div class="items-left font-poppins absolute left-0 top-0 flex h-auto w-full translate-y-[20%] flex-col justify-center p-3 text-neutral-100 group-hover:translate-y-0 dark:text-neutral-100">
+            <div class="items-left flex flex-col justify-center">
+              <p class="text-[0.9em] font-light">
+                As the top wholesale seller of Hikvision products in Dubai, we
+                offer the best prices and a vast selection of surveillance
+                solutions from the world's leading security cameras.
+              </p>
+            </div>
+          </div>
+        </div>
+        <a href="/hikvision">
+          <img
+            src="/pictures/Hikvision logo.png"
+            alt="hero-image"
+            class="h-auto w-full bg-cover"
+            title="Learn more about Hikvision"
+          />
+        </a>
+      </div>
+
+      <!-- Uniarch Card -->
+      <div class="relative flex h-[10em] w-full items-center justify-center rounded-[1.5em] border-[1px] border-neutral-700 bg-white p-[1.5em] dark:bg-neutral-600">
+        <div class="group absolute bottom-0 left-1/2 flex h-[2em] w-[2em] -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden rounded-[1.5em] border-[1px] bg-teal-600 backdrop-blur-[3px] duration-[500ms] hover:h-[10em] hover:w-[14em] hover:rounded-[1.5em] dark:bg-blue-600 md:top-8">
+          <svg class="h-[1em] w-[1em] duration-300 group-hover:opacity-0" viewBox="0 0 48 48" fill="none" height="28" width="28" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#a)">
+              <path clip-rule="evenodd" d="M21.6 36h4.8V21.6h-4.8V36ZM24 0C10.8 0 0 10.8 0 24s10.8 24 24 24 24-10.8 24-24S37.2 0 24 0Zm0 43.2C13.44 43.2 4.8 34.56 4.8 24 4.8 13.44 13.44 4.8 24 4.8c10.56 0 19.2 8.64 19.2 19.2 0 10.56-8.64 19.2-19.2 19.2Zm-2.4-26.4h4.8V12h-4.8v4.8Z" fill-rule="evenodd" fill="#fff"></path>
+            </g>
+            <defs>
+              <clipPath id="a">
+                <path d="M0 0h48v48H0z" fill="#fff"></path>
+              </clipPath>
+            </defs>
+          </svg>
+          <div class="items-left font-poppins absolute left-0 top-0 flex h-auto w-full translate-y-[20%] flex-col justify-center p-3 text-neutral-100 group-hover:translate-y-0 dark:text-neutral-100">
+            <div class="items-left flex flex-col justify-center">
+              <p class="text-[0.9em] font-light">
+                As an established dealer in Dubai, we are proud to offer
+                Uniarch comprehensive range of surveillance solutions.
+                Specializing in innovative, cost-effective security products
+              </p>
+            </div>
+          </div>
+        </div>
+        <a href="/uniarch">
+          <img
+            src="/pictures/uniarch1.png"
+            alt="hero-image"
+            class="h-auto w-full bg-cover text-end"
+            title="Learn more about Uniarch"
+          />
+        </a>
+      </div>
+
+      <!-- Uniview Card -->
+      <div class="relative flex h-[10em] w-full items-center justify-center rounded-[1.5em] border-[1px] border-neutral-700 bg-white p-[1.5em] dark:bg-neutral-600">
+        <div class="group absolute bottom-0 left-1/2 flex h-[2em] w-[2em] -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden rounded-[1.5em] border-[1px] bg-teal-600 backdrop-blur-[3px] duration-[500ms] hover:h-[10em] hover:w-[14em] hover:rounded-[1.5em] dark:bg-blue-600 md:top-8">
+          <svg class="h-[1em] w-[1em] duration-300 group-hover:opacity-0" viewBox="0 0 48 48" fill="none" height="28" width="28" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#a)">
+              <path clip-rule="evenodd" d="M21.6 36h4.8V21.6h-4.8V36ZM24 0C10.8 0 0 10.8 0 24s10.8 24 24 24 24-10.8 24-24S37.2 0 24 0Zm0 43.2C13.44 43.2 4.8 34.56 4.8 24 4.8 13.44 13.44 4.8 24 4.8c10.56 0 19.2 8.64 19.2 19.2 0 10.56-8.64 19.2-19.2 19.2Zm-2.4-26.4h4.8V12h-4.8v4.8Z" fill-rule="evenodd" fill="#fff"></path>
+            </g>
+            <defs>
+              <clipPath id="a">
+                <path d="M0 0h48v48H0z" fill="#fff"></path>
+              </clipPath>
+            </defs>
+          </svg>
+          <div class="items-left font-poppins absolute left-0 top-0 flex h-auto w-full translate-y-[20%] flex-col justify-center p-3 text-neutral-100 group-hover:translate-y-0 dark:text-neutral-100">
+            <div class="items-left flex flex-col justify-center">
+              <p class="text-[0.9em] font-light">
+                We are an authorized distributor of UNV (Uniview), one of the
+                top global manufacturers of video surveillance solutions. As
+                an official distributor, we offer a wide selection of UNV
+                products
+              </p>
+            </div>
+          </div>
+        </div>
+        <a href="/uniview">
+          <img
+            src="/pictures/brandunv.png"
+            alt="hero-image"
+            class="h-auto w-full bg-cover"
+            title="Learn more about Uniview Technology"
+          />
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <style>
+    .autoBLur {
+      animation: autoBLurAnimation linear both;
+      animation-timeline: view();
+    }
+    @keyframes autoBLurAnimation {
+      0% {
+        filter: blur(40px);
+      }
+      45%,
+      55% {
+        filter: blur(0px);
+      }
+      100% {
+        filter: blur(40px);
+      }
+    }
+
+    .autoShow {
+      animation: autoShowAnimation both;
+      animation-timeline: view(70% 5%);
+    }
+
+    @keyframes autoShowAnimation {
+      from {
+        opacity: 0;
+        transform: translateY(200px) scale(0.3);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+  </style>
+</section>

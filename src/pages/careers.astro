@@ -1,0 +1,501 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+import { SITE } from "@data/constants";
+import { Picture } from "astro:assets";
+import { ParseStatus } from "astro:schema";
+
+const canonicalUrl = new URL("/careers", Astro.site).toString();
+
+const baseClasses =
+  "group relative inline-flex items-center justify-center gap-x-2 transform overflow-hidden rounded-lg px-6 py-3 text-sm font-bold text-white ring-zinc-500 transition-all duration-300 focus-visible:ring outline-none";
+
+const borderClasses = "border-2 border-transparent hover:border-blue-600";
+
+const bgColorClasses =
+  "bg-blue-600 hover:bg-white text-white hover:text-blue-600 hover:shadow-xl active:scale-95 dark:focus:outline-none";
+
+const beforeEffect =
+  "before:absolute before:left-0 before:top-0 before:-z-10 before:h-full before:w-full before:origin-left before:scale-x-0 before:bg-white before:transition-transform before:duration-300 hover:before:scale-x-100";
+
+const disableClasses = "disabled:pointer-events-none disabled:opacity-50";
+
+const fontSizeClasses = "2xl:text-base";
+
+const ringClasses = "dark:ring-zinc-200";
+
+const pageTitle: string = `Careers | ${SITE.Title + " - " + "Join Our Team at Lovosis Technology"}`;
+const description =
+  "Join Lovosis Technology, the leading security system distributor in Dubai & the Middle East. We're hiring IT staff for our Bangalore office. Apply now!";
+const careers = [
+  {
+    title: "Digital Marketing",
+    datePosetd: "2025-02-09",
+    descriptions:
+      "Lovosis Technology is hiring a Digital Marketing expert for our Bangalore office. Join us to shape our online presence in the Middle East and beyond!",
+    validThrough: "2025-03-09T23:59:59",
+    type: "Full-time",
+    location: "Bangalore, India",
+    department: "Marketing",
+    skills: ["SEO", "Email Marketing", "Social Media", "Content Marketing"],
+    qualifications:
+      "Bachelor's or Master's degree in Marketing, Communications, or a related field",
+    email: "info@lovosis.in",
+  },
+  {
+    title: "Frontend Developer",
+    datePosetd: "2025-02-09",
+    descriptions:
+      "We’re looking for a Frontend Developer to join Lovosis Technology in Bangalore. Work on cutting-edge projects and help build amazing user experiences!",
+    validThrough: "2025-03-09T23:59:59",
+    type: "Full-time",
+    location: "Bangalore, India",
+    department: "Engineering",
+    skills: ["React.js", "Next.js", "Astro", "UI/UX", "Git", "Tailwind CSS"],
+    qualifications:
+      "Bachelor's or Master's degree in Computer Science or related field with 0-2 years of experience",
+    email: "info@lovosis.in",
+  },
+  {
+    title: "Backend Developer",
+    datePosetd: "2025-02-09",
+    descriptions:
+      "Lovosis Technology is hiring a Backend Developer for our Bangalore office. Help us build robust, scalable systems that power top security solutions!",
+    validThrough: "2025-03-09T23:59:59",
+    type: "Full-time",
+    location: "Bangalore, India",
+    department: "Engineering",
+    skills: ["Node.js", "Express.js", "REST API", "SQL/MongoDB", "Git"],
+    qualifications:
+      "Bachelor's or Master's degree in Computer Science or related field with 1-2 years of experience",
+    email: "info@lovosis.in",
+  },
+];
+
+const benefits = [
+  {
+    title: "Flexible Working",
+    description:
+      "Enjoy the freedom to work remotely with flexible hours that suit your lifestyle",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+    </svg>`,
+    bgColor: "from-orange-500 to-indigo-600",
+  },
+  {
+    title: "Health & Wellness",
+    description:
+      "Comprehensive medical coverage for you and your family, plus mental health support",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+    </svg>`,
+    bgColor: "from-orange-500 to-indigo-600",
+  },
+  {
+    title: "Growth & Development",
+    description:
+      "Dedicated budget for learning, certifications, and professional advancement",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5" />
+    </svg>`,
+    bgColor: "from-orange-500 to-indigo-600",
+  },
+  {
+    title: "Team Building",
+    description:
+      "Regular team events, retreats, and collaborative activities to foster connections",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+    </svg>`,
+    bgColor: "from-orange-500 to-indigo-600",
+  },
+];
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": careers.map((p) => {
+    return {
+      "@type": "JobPosting",
+      title: p.title,
+      description: p.descriptions,
+      identifier: {
+        "@type": "PropertyValue",
+        name: "Lovosis Technology LLC",
+        value: 1021,
+      },
+      datePosted: p.datePosetd,
+      validThrough: p.validThrough,
+      employmentType: p.type,
+
+      jobLocation: {
+        "@type": "Place",
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: "Street Address",
+          addressLocality: p.location,
+          addressRegion: "Karnataka",
+          postalCode: "560090",
+          addressCountry: "IN",
+        },
+      },
+      hiringOrganization: {
+        "@type": "Organization",
+        name: "Lovosis Technology LLC",
+        sameAs: "https://www.lovosis.com",
+        logo: "https://lovosis.come.com/pictures/logo.png",
+        url: "https://www.lovosis.com",
+
+        contactPoint: {
+          "@type": "ContactPoint",
+          telephone: "+971509162488",
+          contactType: "Recruitment",
+          areaServed: "IN",
+          availableLanguage: "English",
+        },
+      },
+      qualifications: p.qualifications,
+      skills: p.skills,
+    };
+  }),
+};
+const metaTags = [
+  // Basic SEO
+  {
+    name: "title",
+    content: "Careers at Lovosis Technology - Job Opportunities",
+  },
+  {
+    name: "description",
+    content:
+      "Explore career opportunities at Lovosis Technology LLC. Find job postings for various positions in the tech industry with competitive benefits.",
+  },
+  {
+    name: "keywords",
+    content:
+      "Tech Careers, IT Jobs, Software Engineering Positions, Lovosis Careers, Technology Jobs, Bengaluru Opportunities, Karnataka IT Jobs",
+  },
+  {
+    name: "robots",
+    content: "index, follow",
+  },
+
+  // Geo Tags (Note: Currently mixing UAE contact with IN location - verify preferred targeting)
+  {
+    name: "geo.region",
+    content: "IN-KA", // Karnataka, India (from your jobLocation)
+  },
+  {
+    name: "geo.placename",
+    content: "Bengaluru", // Match your jobLocation addressLocality
+  },
+  {
+    name: "geo.position",
+    content: "12.971599;77.594566", // Bengaluru coordinates
+  },
+  {
+    name: "ICBM",
+    content: "12.971599, 77.594566",
+  },
+
+  // Contact Information
+  {
+    name: "contact",
+    content: "info@lovosis.com",
+  },
+  {
+    name: "telephone",
+    content: "+971509162488",
+  },
+
+  // Organization Info
+  {
+    name: "author",
+    content: "Lovosis Technology LLC",
+  },
+  {
+    name: "publisher",
+    content: "Lovosis Technology LLC",
+  },
+
+  // Recommended additional tags
+  {
+    property: "og:type",
+    content: "website",
+  },
+  {
+    property: "og:image",
+    content: "https://lovosis.com/pictures/logo.png",
+  },
+];
+---
+<MainLayout title={pageTitle} sd={structuredData} description={description}>
+  <style is:global>
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  
+    .animate-fade-in-up {
+      animation: fadeInUp 1.5s ease-out forwards;
+    }
+  
+    @keyframes fadeInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+  
+    .animate-fade-in-left {
+      animation: fadeInLeft 1.5s ease-out forwards;
+    }
+
+    @keyframes fadeInRight {
+      from {
+        opacity: 0;
+        transform: translateX(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .animate-fade-in-right {
+      animation: fadeInRight 1.5s ease-out forwards;
+    }
+
+    @keyframes scaleIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .animate-scale-in {
+      animation: scaleIn 1s ease-out forwards;
+    }
+
+    /* Scroll animation classes */
+    .scroll-animate {
+      opacity: 0;
+      transition: all 0.8s ease-out;
+    }
+
+    .scroll-animate.animate {
+      opacity: 1;
+      transform: translateY(0) !important;
+    }
+
+    .scroll-slide-up {
+      transform: translateY(50px);
+    }
+
+    .scroll-slide-left {
+      transform: translateX(-50px);
+    }
+
+    .scroll-slide-right {
+      transform: translateX(50px);
+    }
+
+    .scroll-scale-in {
+      transform: scale(0.95);
+    }
+
+    .scroll-rotate-in {
+      transform: rotate(-5deg) scale(0.95);
+    }
+
+    .delay-100 {
+      transition-delay: 100ms;
+    }
+
+    .delay-200 {
+      transition-delay: 200ms;
+    }
+
+    .delay-300 {
+      transition-delay: 300ms;
+    }
+
+    .delay-400 {
+      transition-delay: 400ms;
+    }
+
+    .delay-500 {
+      transition-delay: 500ms;
+    }
+  </style>
+
+<script>
+  // Intersection Observer for scroll animations
+  document.addEventListener('DOMContentLoaded', () => {
+    const animateOnScroll = (entries: any[], observer: { unobserve: (arg0: any) => void; }) => {
+      entries.forEach((entry: { isIntersecting: any; target: { classList: { add: (arg0: string) => void; }; }; }) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate');
+          observer.unobserve(entry.target);
+        }
+      });
+    };
+
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver(animateOnScroll, observerOptions);
+
+    document.querySelectorAll('.scroll-animate').forEach(el => {
+      observer.observe(el);
+    });
+  });
+</script>
+
+  <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
+    <!-- Hero Section -->
+    <div class="mb-20 rounded-2xl bg-gray-100 dark:bg-neutral-500 p-5 text-center md:p-16
+">
+      <h1 class="animate-fade-in-left text-balance text-3xl font-bold tracking-tight dark:text-white md:text-6xl md:leading-tight">
+        Join Our Team
+      </h1>
+      <p class="mx-auto mt-4 max-w-2xl animate-fade-in-up text-xltext-neutral-600 dark:text-neutral-200 animation-delay-300 ">
+        Be part of something extraordinary. Help us shape the future of
+        technology in Dubai and beyond.
+      </p>
+    </div>
+
+    <!-- Current Openings -->
+    <div class="mt-20">
+      <h2 class="mb-12 scroll-animate scroll-slide-up text-center text-3xl font-bold dark:text-white">
+        Current Opportunities
+      </h2>
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 lg:gap-8">
+        {careers.map((job, index) => (
+          <div 
+            class="scroll-animate scroll-slide-up relative rounded-xl bg-white p-4 shadow-lg transition-all duration-300 ease-in-out 
+                    transform hover:scale-[1.02] hover:shadow-xl hover:z-10 
+                    dark:bg-neutral-800 dark:hover:shadow-neutral-700/30
+                    sm:p-6"
+            style={`transition-delay: ${index * 100}ms`}
+          >
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-white sm:text-xl">
+              {job.title}
+            </h3>
+            
+            <div class="mt-2 flex flex-col gap-1 text-gray-600 dark:text-gray-300 sm:flex-row sm:items-center sm:gap-2">
+              <span class="text-sm sm:text-base">{job.type}</span>
+              <span class="hidden sm:inline">•</span>
+              <span class="text-sm sm:text-base">{job.location}</span>
+            </div>
+      
+            <div class="mt-4 flex flex-wrap gap-2">
+              {job.skills.map((skill) => (
+                <span class="bg-blue-100 text-blue-800 dark:bg-blue-900 
+                           rounded-full px-2.5 py-0.5 text-xs sm:px-3 sm:py-1 sm:text-sm 
+                           dark:text-white/90 transition-colors">
+                  {skill}
+                </span>
+              ))}
+            </div>
+      
+            <div class="mt-4">
+              <h4 class="text-base font-medium text-gray-700 dark:text-gray-300 sm:text-sm">
+                Qualifications:
+              </h4>
+              <p class="mt-1 text-sm text-gray-600 line-clamp-3 dark:text-gray-400">
+                {job.qualifications}
+              </p>
+            </div>
+      
+            <a
+              class={`${baseClasses} ${borderClasses} ${bgColorClasses} ${disableClasses} 
+                     ${fontSizeClasses} ${ringClasses} ${beforeEffect}
+                     mt-6 block h-9 w-full rounded-lg 
+                     bg-gradient-to-r from-orange-500 to-indigo-600 
+                     text-center text-sm text-white transition-colors`}
+              href={`mailto:${job.email}?subject=Job Application - ${job.title}`}
+            >
+              <span class="font-sans text-sm font-normal">Apply Now</span>
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Benefits Section -->
+    <div class="relative mt-32">
+      <div class="absolute inset-0 -z-10 bg-gradient-to-b from-gray-50/50 to-white dark:from-neutral-900/50 dark:to-neutral-900" />
+      <div class="container mx-auto px-4">
+        <div class="mx-auto mb-16 max-w-2xl text-center">
+          <h2 class="mb-4 scroll-animate scroll-slide-up text-4xl font-bold text-black dark:text-white delay-100">
+            Why Join Lovosis?
+          </h2>
+          <p class="scroll-animate scroll-slide-up text-gray-600 dark:text-gray-400 delay-200">
+            We offer more than just a job - we provide a career with growth
+            opportunities and fantastic benefits
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+          {benefits.map((benefit, index) => (
+            <div 
+              class="scroll-animate scroll-scale-in group relative mb-10 overflow-hidden rounded-xl bg-white p-8 shadow-md transition-all duration-300 hover:shadow-lg dark:bg-neutral-800"
+              style={`transition-delay: ${index * 100 + 200}ms`}
+            >
+              <div
+                class={`absolute left-0 top-0 h-full w-2 ${benefit.bgColor} rounded-l-xl bg-gradient-to-b`}
+              />
+              <div class="relative">
+                <div class="dark:text-blue-400 mb-6 text-blue-600 transition-transform duration-300 group-hover:scale-110">
+                  <Fragment set:html={benefit.icon} />
+                </div>
+                <h3 class="mb-3 text-xl font-bold text-gray-900 dark:text-white">
+                  {benefit.title}
+                </h3>
+                <p class="text-gray-600 dark:text-gray-300">
+                  {benefit.description}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    
+    
+
+    <!-- Call to Action -->
+    <div class="mt-32 text-center scroll-animate scroll-scale-in delay-300">
+      <h2 class="mb-6 inline-block text-4xl font-bold text-black dark:text-white md:text-5xl">
+        Don't see a role that fits?
+      </h2>
+      <p class="mx-auto mb-12 max-w-2xl text-lg text-gray-600 dark:text-gray-300 md:text-xl">
+        We're always looking for talented individuals who are passionate about
+        technology and innovation. Share your story with us, and let's explore
+        how we can grow together.
+      </p>
+      <a
+        class={`${baseClasses} ${borderClasses} ${bgColorClasses} ${disableClasses} ${fontSizeClasses} ${ringClasses} ${beforeEffect} scroll-animate scroll-slide-up `}
+        href="mailto:sales@lovosis.com?subject=Job Application - Resume Submission"
+      >
+        Send Your Resume
+      </a>
+    </div>
+  </section>
+</MainLayout>

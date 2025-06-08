@@ -1,0 +1,299 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+import { SITE } from "@data/constants";
+import PrimaryCTA from "@components/ui/buttons/PrimaryCTA.astro";
+
+
+const pageTitle: string = `ewind | ${SITE.Title+ " - " + "Custom Fabrication & Surveillance Solution Provider In Dubai, United Arab Emirates"}`;
+
+interface Props {
+  title: string;
+  subTitle?: string;
+  benefits?: Array<string>;
+}
+
+const abtitle: string = "ewind";
+const absubTitle: string ="Discover Lovosis, Dubai's authorized supplier of top-quality Surveillance & IT Solution."
+const structuredData={
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://lovosis.com/ewind",
+    "url": "https://lovosis.com/ewind",
+    "name": "ewind | Lovosis",
+    "description": "Discover Lovosis, Dubai's authorized supplier of top-quality Surveillance & IT Solution. Learn about our commitment to excellence in the UAE construction industry.",
+    "isPartOf": {
+      "@type": "WebSite",
+      "url": "https://lovosis.com",
+      "name": "Lovosis",
+      "description": "Custom Fabrication & Surveillance Solution Provider In Dubai, United Arab Emirates."
+    },
+    "inLanguage": "en-US"
+  }
+---
+
+<style>
+  .autoRotate{
+    animation: autoRotateAnimation;
+    animation-timeline: view();
+  }
+  @keyframes autoRotateAnimation{
+      from{
+          transform: rotate(0deg);
+      }
+      to{
+          transform: rotate(360deg);
+      }
+  }  
+
+  .autoShow{
+    animation: autoShowAnimation both;
+    animation-timeline: view(70% 5%);
+
+    }
+
+    @keyframes autoShowAnimation{
+    from{
+        opacity: 0;
+        transform: translateY(200px) scale(0.3);
+    }to{
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    }
+
+    .fadeInRight {
+    animation: fadeInRightAnimation;
+    animation-timeline: view();
+    }
+
+    @keyframes fadeInRightAnimation {
+        from {
+            opacity: 0;
+            transform: translateX(100px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    .fadeInUp {
+    animation: fadeInUpAnimation;
+    animation-timeline: view();
+    }
+
+    @keyframes fadeInUpAnimation {
+        from {
+            opacity: 0;
+            transform: translateX(100px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    .fadeInUps {
+    animation: fadeInUpsAnimation;
+    animation-timeline: view();
+    }
+
+    @keyframes fadeInUpsAnimation {
+        from {
+            opacity: 0;
+            transform: translateY(100px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+
+</style>
+
+
+<MainLayout title={pageTitle} sd={structuredData}
+ 
+>
+
+
+
+<section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
+
+ 
+    <div class="grid lg:grid-cols-2 justify-items-center gap-5">
+    <div class="flex flex-col justify-center">
+        <img src="/pictures/Brand Profile/4.jpg" alt="billboard image" class="rounded-lg" />
+    </div>
+
+    <div class="order-1 lg:order-2 fadeInRight">
+        <h2 class="text-3xl font-semibold text-gray-900 dark:text-gray-200">Ewind Technology wholesale distributor </h2>
+        <p class="text-md mt-4 dark:text-gray-300">Shenzhen Ewind Technology Co., Ltd, established in 2017, is a leading manufacturer in China’s intelligent network telecommunications industry. EWIND Technology boasts a professional R&D team and an efficient production department, dedicated to delivering exceptional service. Our mission is to offer top-quality products and comprehensive network solutions to partners and customers globally. Our diverse customer base includes small businesses, large corporations, government entities, dealers, retailers, and integrator partners.</p>
+        <div class="mt-8 grid w-full sm:inline-flex">
+            <PrimaryCTA title="Contact Us" url=# />
+        </div>
+    </div>
+  </div>
+ 
+
+
+  <div class="text-center mt-32 rounded-2xl mb-5">
+    <h2 class="text-balance animate-fade-in-left text-2xl md:text-4xl md:leading-tight font-bold tracking-tight text-neutral-800 dark:text-neutral-100">
+    Ewind Solutions
+    </h2>
+  </div>
+
+
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 lg:py-1 fadeInUp">
+    <div class="flex flex-wrap -mx-4 gap-3 md:gap-0">
+        <div class="w-full px-2 ">
+            <div class="bg-white dark:bg-neutral-600 rounded-lg shadow-xl p-6">
+                <div class="card__content grid grid-cols-1 md:grid-cols-2 gap-1 p-5 rounded-lg text-left relative">
+                    <div>
+                      <h2 class="text-2xl font-light dark:text-neutral-200">Smart City</h2>
+                        <p class="text-base font-light leading-normal dark:text-neutral-300">
+                            A smart city harnesses diverse information technologies to enhance resource efficiency, optimize urban management, and elevate citizen quality of life. EWIND's smart city solutions have been implemented in over 10,000+ projects worldwide, encompassing initiatives such as safe cities, electronic policing, and smart parking systems.
+                        </p>
+                    </div>
+                    <figure class="overflow-hidden">
+                      <img src="/pictures/ewindsolution1.webp" alt="Image description" class="w-full h-full object-contain" />
+                    </figure>
+                  </div>
+            </div>
+        </div>
+        
+        <div class="w-full mt-5 px-2 fadeInUp">
+            <div class="bg-white dark:bg-neutral-600 rounded-lg shadow-xl p-6">
+                <div class="card__content grid grid-cols-1 md:grid-cols-2 gap-1 p-5 rounded-lg text-left relative">
+                    <div>
+                        <h2 class="text-2xl font-light dark:text-neutral-200">Railway</h2>
+                          <p class="text-base font-light leading-normal dark:text-neutral-300">
+                            EWIND provides customized solutions for both rail transit and traditional railway sectors, leveraging tailored approaches to suit diverse environments. Our solutions have been successfully deployed in over 200 rail transit projects and more than 200+ traditional railway projects worldwide.
+                          </p>
+                    </div>
+                    <figure class="overflow-hidden">
+                      <img src="/pictures/ewindsolution2.webp" alt="Image description" class="w-full h-full object-contain" />
+                    </figure>
+                  </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <div class="mx-auto max-w-7xl px-4 mt-3 sm:px-6 lg:px-8 lg:py-1 fadeInUp">
+    <div class="flex flex-wrap -mx-4 gap-3 md:gap-0">
+        <div class="w-full mt-5 px-2">
+            <div class="bg-white dark:bg-neutral-600 rounded-lg shadow-xl p-6">
+                <div class="card__content grid grid-cols-1 md:grid-cols-2 gap-1 p-5 rounded-lg text-left relative">
+                    <div>
+                      <h2 class="text-2xl font-light dark:text-neutral-200">Machine Building</h2>
+                        <p class="text-base font-light leading-normal dark:text-neutral-300">
+                            Leveraging digitalization and intelligence as key transformation goals in Machine Building, EWIND assists customers in streamlining their entire business processes—from design and technology to manufacturing and product service—facilitating lean production with reduced labor and enhanced intelligence levels.
+                        </p>
+                    </div>
+                    <figure class="overflow-hidden">
+                      <img src="/pictures/ewindsolution3.webp" alt="Image description" class="w-full h-full object-contain" />
+                    </figure>
+                  </div>
+            </div>
+        </div>
+        
+        <div class="w-full mt-5 px-2 fadeInUp">
+            <div class="bg-white dark:bg-neutral-600 rounded-lg shadow-xl p-6">
+                <div class="card__content grid grid-cols-1 md:grid-cols-2 gap-1 p-5 rounded-lg text-left relative">
+                    <div>
+                        <h2 class="text-2xl font-light dark:text-neutral-200">Renewable Energy</h2>
+                          <p class="text-base font-light leading-normal dark:text-neutral-300">
+                            EWIND's intelligent monitoring solution facilitates remote power station control through data acquisition and environmental monitoring. It ensures seamless data transmission to monitoring centers, optimizing power conversion efficiency to the fullest extent.
+                          </p>
+                    </div>
+                    <figure class="overflow-hidden">
+                      <img src="/pictures/ewindsolution4.webp" alt="Image description" class="w-full h-full object-contain" />
+                    </figure>
+                  </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+
+
+
+
+
+<div class="text-center mt-32 rounded-2xl mb-5 fadeInUps">
+  <h2 class="text-balance animate-fade-in-left text-2xl md:text-4xl md:leading-tight font-bold tracking-tight text-neutral-800 dark:text-neutral-100">
+  Contact for More Details
+  </h2>
+  
+</div>
+
+
+    <div class="text-center bg-gray-100 dark:bg-neutral-500 p-5 md:p-12 rounded-2xl mb-20">
+      
+
+      <div class="bg-gray-100 py-5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:text-center">
+                <p class=" max-w-2xl text-xl text-gray-500 lg:mx-auto">
+                  Get in touch with us for any inquiries, collaborations, or support. We're here to assist and answer your questions!
+                </p>
+            </div>
+    
+            <div class="mt-10">
+                <dl class="items-center justify-center space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
+                   
+    
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                                <!-- Heroicon name: phone -->
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+                                </svg>
+    
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <p class="mt-2 text-base text-gray-500">
+                                +971 50 967 6511
+                            </p>
+                        </div>
+                    </div>
+    
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                                <!-- Heroicon name: mail -->
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                                </svg>
+    
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                          <p class="mt-2 text-base text-gray-500">
+                            sales@lovosis.com
+                            </p>
+                        </div>
+                    </div>
+    
+                    
+                </dl>
+            </div>
+        </div>
+    </div>
+
+
+    </div>
+
+
+
+</section>
+
+</MainLayout>

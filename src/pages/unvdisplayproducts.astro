@@ -1,0 +1,1074 @@
+---
+import { getCollection } from "astro:content";
+import MainLayout from "@/layouts/MainLayout.astro";
+import PrimaryCTA from "@/components/ui/buttons/PrimaryCTA.astro";
+import { unvData } from "@/data/camera";
+
+interface Card {
+  id: number;
+  title: string;
+  desc: string;
+  img: string;
+  alt: string;
+  author: string;
+  reviewBody: string;
+  ratingValue: number;
+  slug: string;
+  features?: string[];
+  publishedTime: string;
+}
+
+const content = await getCollection("unvdisplay");
+const cards: Card[] = content.map((item) => ({
+  id: item.data.id,
+  title: item.data.title,
+  desc: item.data.desc,
+  img: item.data.img.src,
+  alt: item.data.alt,
+  author: item.data.author,
+  reviewBody: item.data.reviewBody,
+  ratingValue: item.data.ratingValue,
+  slug: item.slug,
+  features: item.data.features,
+  publishedTime: item.data.publishedTime,
+}));
+
+const description =
+  "Find the best touch screen board for teaching price! Lovosis Technology LLC, Dubai, offers UNV Smart Interactive Panels & LCD video walls. Transform your classroom today!";
+
+const canonicalUrl = new URL("/unidisplayproducts", Astro.site).toString();
+const pageTitle = "UNV Display Product Collection | Lovosis Technology";
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      name: "Lovosis Technology L.L.C",
+      url: "https://lovosis.com",
+      logo: "https://lovosis.come.com/pictures/logo.png",
+      description: description,
+      sameAs: [
+        "https://www.facebook.com/p/LOVOSIS-TECHNOLOGY-100083060600975/",
+        "https://www.instagram.com/_lovosis_group_of_companies_/reels/",
+      ],
+      email: "sales@lovosis.com",
+      telephone: "+971509162488",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress:
+          "Satellite Market Naif Deira,Baghlaf Building Showroom No.5",
+        addressLocality: "Dubai",
+        addressCountry: "AE",
+        addressRegion: "Dubai,United Arab Emirates",
+        postalCode: "123421",
+      },
+    },
+    {
+      "@type": "WebPage",
+      name: "Unv Interactive panel | Lovosis Technology",
+      url: "https://lovosis.com/unvdisplayproducts",
+      description: description,
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://lovosis.com/#breadcrumb",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          item: {
+            "@id": "https://lovosis.com",
+            name: "Home",
+          },
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          item: {
+            "@id": "https://lovosis.com/unvdisplayproducts",
+            name: "Unv Display",
+          },
+        },
+      ],
+    },
+    // First Product List (UNV Displays)
+
+    // Second Product List (Another Category)
+    {
+      "@type": "ItemList",
+      itemListElement: cards.map((product, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@type": "Product",
+          name: product.title,
+          description: product.desc,
+          image: new URL(product.img, Astro.site).toString(),
+
+          url: new URL(`/unvdisplay/${product.slug}`, Astro.site).toString(),
+          offers: {
+            "@type": "Offer",
+            priceCurrency: "AED",
+            price: "0.00",
+            availability: "https://schema.org/InStock",
+            itemCondition: "https://schema.org/NewCondition",
+          },
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: product.ratingValue.toString() || "4.5",
+            reviewCount: "10",
+          },
+          brand: {
+            "@type": "Brand",
+            name: "UNV Display",
+          },
+        },
+      })),
+    },
+  ],
+};
+---
+
+<MainLayout
+  title={pageTitle}
+  sd={structuredData}
+  description={description}
+  canonical={canonicalUrl}
+>
+  <!-- Enhanced Banner Section -->
+  <section class="relative h-[500px] w-full overflow-hidden">
+    <div class="parallax-bg absolute inset-0"></div>
+    <div class="floating-particles absolute inset-0"></div>
+    <div
+      class="relative z-10 flex h-full items-center justify-center bg-black bg-opacity-40"
+    >
+      <div class="mx-auto max-w-4xl px-4 text-center text-white">
+        <h1 class="banner-title mb-6 text-4xl font-bold opacity-0 md:text-6xl">
+          UNV Display Security Solutions
+        </h1>
+        <p class="banner-subtitle text-xl opacity-0 md:text-2xl">
+          Discover our range of high-quality Imou security cameras and
+          surveillance systems designed to protect your home and business with
+          cutting-edge technology.
+        </p>
+        <div class="banner-cta mt-8 opacity-0">
+          <button
+            class="pulse-btn hover:bg-blue-700 rounded-full bg-blue-600 px-8 py-4 font-semibold text-white transition-all duration-300"
+          >
+            Explore Products
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Enhanced Overview Section -->
+  <section
+    class="overview-section to-blue-50 dark:to-blue-900 relative overflow-hidden bg-gradient-to-br from-gray-50 via-white py-20 dark:from-gray-900 dark:via-gray-800"
+  >
+    <div class="bg-grid-pattern absolute inset-0 opacity-5"></div>
+    <div class="relative mx-auto max-w-7xl px-4">
+      <div class="text-center">
+        <div class="fade-in-up mb-4">
+          <span
+            class="bbg-blue-100 text-blue-800 dark:bg-blue-900 rounded-full px-4 py-2 text-sm font-semibold dark:text-white"
+          >
+            DIGITAL DISPLAY SOLUTIONS
+          </span>
+        </div>
+        <h2
+          class="fade-in-up mb-8 text-4xl font-bold text-gray-900 dark:text-white md:text-5xl"
+        >
+          Why Choose UNV Display?
+        </h2>
+        <p
+          class="fade-in-up mx-auto mb-16 max-w-3xl text-lg text-gray-600 dark:text-gray-300"
+        >
+          UNV Display specializes in innovative digital display solutions,
+          offering cutting-edge technology for commercial, retail, and public
+          space applications.
+        </p>
+      </div>
+
+      <!-- Animated Features Grid -->
+      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div
+          class="feature-card group cursor-pointer rounded-2xl bg-white p-8 shadow-lg transition-all duration-500 hover:shadow-2xl dark:bg-gray-800"
+        >
+          <div
+            class="bg-blue-100 group-hover:bg-blue-200 dark:bg-blue-900 mb-6 flex h-16 w-16 items-center justify-center rounded-full transition-all duration-300 group-hover:scale-110"
+          >
+            <svg
+              class="dark:text-blue-400 h-8 w-8 text-blue-600"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"
+              ></path>
+            </svg>
+          </div>
+          <h3 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
+            LED Display Technology
+          </h3>
+          <p class="text-gray-600 dark:text-gray-300">
+            High-brightness, energy-efficient LED displays with superior image
+            quality for indoor and outdoor applications.
+          </p>
+        </div>
+
+        <div
+          class="feature-card group cursor-pointer rounded-2xl bg-white p-8 shadow-lg transition-all duration-500 hover:shadow-2xl dark:bg-gray-800"
+        >
+          <div
+            class="bg-green-100 group-hover:bg-green-200 dark:bg-green-900 mb-6 flex h-16 w-16 items-center justify-center rounded-full transition-all duration-300 group-hover:scale-110"
+          >
+            <svg
+              class="text-green-600 dark:text-green-400 h-8 w-8"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 5a1 1 0 011-1h14a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V5z"
+              ></path>
+            </svg>
+          </div>
+          <h3 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
+            Touch Screen Solutions
+          </h3>
+          <p class="text-gray-600 dark:text-gray-300">
+            Interactive touch displays with multi-touch capabilities for
+            engaging customer experiences.
+          </p>
+        </div>
+
+        <div
+          class="feature-card group cursor-pointer rounded-2xl bg-white p-8 shadow-lg transition-all duration-500 hover:shadow-2xl dark:bg-gray-800"
+        >
+          <div
+            class="bg-purple-100 group-hover:bg-purple-200 dark:bg-purple-900 mb-6 flex h-16 w-16 items-center justify-center rounded-full transition-all duration-300 group-hover:scale-110"
+          >
+            <svg
+              class="text-purple-600 dark:text-purple-400 h-8 w-8"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+              ></path>
+            </svg>
+          </div>
+          <h3 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
+            Digital Signage
+          </h3>
+          <p class="text-gray-600 dark:text-gray-300">
+            Dynamic content management systems for effective advertising and
+            information display.
+          </p>
+        </div>
+
+        <div
+          class="feature-card group cursor-pointer rounded-2xl bg-white p-8 shadow-lg transition-all duration-500 hover:shadow-2xl dark:bg-gray-800"
+        >
+          <div
+            class="dark:bg-orange-900 mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-orange-100 transition-all duration-300 group-hover:scale-110 group-hover:bg-orange-200"
+          >
+            <svg
+              class="h-8 w-8 text-orange-600 dark:text-orange-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+          </div>
+          <h3 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
+            High Performance
+          </h3>
+          <p class="text-gray-600 dark:text-gray-300">
+            Ultra-HD resolution displays with wide viewing angles and excellent
+            color reproduction.
+          </p>
+        </div>
+
+        <div
+          class="feature-card group cursor-pointer rounded-2xl bg-white p-8 shadow-lg transition-all duration-500 hover:shadow-2xl dark:bg-gray-800"
+        >
+          <div
+            class="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-red-100 transition-all duration-300 group-hover:scale-110 group-hover:bg-red-200 dark:bg-red-900"
+          >
+            <svg
+              class="h-8 w-8 text-red-600 dark:text-red-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+              ></path>
+            </svg>
+          </div>
+          <h3 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
+            Secure Systems
+          </h3>
+          <p class="text-gray-600 dark:text-gray-300">
+            Robust display solutions with built-in security features for
+            protected content delivery.
+          </p>
+        </div>
+
+        <div
+          class="feature-card group cursor-pointer rounded-2xl bg-white p-8 shadow-lg transition-all duration-500 hover:shadow-2xl dark:bg-gray-800"
+        >
+          <div
+            class="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-indigo-100 transition-all duration-300 group-hover:scale-110 group-hover:bg-indigo-200 dark:bg-indigo-900"
+          >
+            <svg
+              class="h-8 w-8 text-indigo-600 dark:text-indigo-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+            </svg>
+          </div>
+          <h3 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
+            Custom Solutions
+          </h3>
+          <p class="text-gray-600 dark:text-gray-300">
+            Tailored display configurations to meet specific business
+            requirements and space constraints.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Enhanced Products Section -->
+  <section class="products-section bg-white py-20 dark:bg-gray-900">
+    <div class="mx-auto max-w-[1400px] px-4">
+      <div class="text-center">
+        <div class="fade-in-up mb-4">
+          <span
+            class="rounded-full bg-blue-600 px-4 py-2 text-sm font-semibold text-white
+"
+          >
+            OUR PRODUCTS
+          </span>
+        </div>
+        <h2
+          class="fade-in-up mb-6 text-4xl font-bold text-gray-900 dark:text-white md:text-5xl"
+        >
+          UNV Display Product Collection
+        </h2>
+        <p
+          class="fade-in-up mx-auto mb-12 max-w-2xl text-lg text-gray-600 dark:text-gray-300"
+        >
+          Experience UNV's cutting-edge display technology - from crystal-clear
+          LED video walls to ultra-responsive touch panels - each
+          precision-engineered to transform spaces with stunning visuals and
+          unmatched reliability for mission-critical applications.
+        </p>
+      </div>
+
+      <!-- Enhanced Products Grid -->
+      <!-- Enhanced Filter and Grid Section -->
+      <section class="mx-auto max-w-[1400px] px-4 pt-8">
+        <div class="mx-auto mb-12 max-w-2xl">
+          <div class="relative">
+            <input
+              type="text"
+              id="search"
+              class="focus:border-blue-500 focus:ring-blue-500 w-full rounded-lg border border-gray-300 px-4 py-3 pl-12 text-base shadow-sm transition-all duration-300 focus:shadow-lg focus:outline-none focus:ring-1"
+              placeholder="Search UNV DIsplay Products..."
+            />
+            <svg
+              class="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400 transition-colors duration-300"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </div>
+          <!-- Category Filter -->
+          <div class="mt-6 flex flex-wrap gap-3" id="category-filter">
+            <button
+              class="category-btn active hover:bg-blue-700 transform rounded-lg bg-blue-600 px-4 py-2 font-semibold text-white transition-all duration-300 hover:scale-105 active:scale-95"
+              data-category="all">All</button
+            >
+            <!-- Category buttons will be injected here -->
+          </div>
+        </div>
+
+        <section class="scroll-animate mx-auto max-w-[1400px] px-4 pb-8">
+          <div
+            class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4"
+            id="products-grid"
+          >
+            {
+              cards.map((card) => (
+                <div
+                  class="product-card translate-y-10 transform overflow-hidden rounded-lg bg-white opacity-0 shadow-lg transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-xl dark:bg-neutral-500"
+                  data-desc={card.desc}
+                  data-categories={
+                    card.desc.match(/\b\d+MP\b/gi)?.join(",") || ""
+                  }
+                >
+                  <div class="flex items-center justify-center p-4 transition-transform duration-300 hover:scale-105">
+                    <img
+                      src={card.img}
+                      alt={card.alt}
+                      class="product-image h-48 w-auto object-contain transition-all duration-300"
+                    />
+                  </div>
+                  <div class="flex flex-col items-center p-6">
+                    <h3 class="text-center text-xl font-semibold transition-colors duration-300 dark:text-white">
+                      {card.title}
+                    </h3>
+                    <p class="mb-4 mt-3 text-center text-gray-600 transition-colors duration-300 dark:text-gray-300">
+                      {card.desc}
+                    </p>
+                    <a href={`/unvdisplay/${card.slug}`} class="read-more-btn">
+                      Read More
+                    </a>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+          <p
+            id="no-results"
+            class="mx-4 my-6 hidden rounded-lg bg-gray-50 py-8 text-center text-xl font-medium text-gray-600 opacity-0 shadow-inner transition-all duration-500"
+          >
+            <span class="mb-2 block animate-bounce text-3xl">🔍</span>
+            No matching results found
+          </p>
+        </section>
+      </section>
+    </div>
+  </section>
+
+  <style>
+    .read-more-btn {
+      @apply relative transform overflow-hidden rounded-lg border-2 border-transparent bg-blue-600 px-6 py-3 font-bold text-white transition-all duration-300;
+    }
+    .read-more-btn:hover {
+      @apply -translate-y-1 border-blue-600 bg-white text-blue-600 shadow-xl;
+    }
+    .read-more-btn:active {
+      @apply scale-95;
+    }
+    .read-more-btn::before {
+      @apply absolute left-0 top-0 -z-10 h-full w-full origin-left scale-x-0 bg-white transition-transform duration-300;
+      content: "";
+    }
+    .read-more-btn:hover::before {
+      @apply scale-x-100;
+    }
+  </style>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Extract unique categories from product data
+      const cards = Array.from(document.querySelectorAll(".product-card"));
+      const categorySet = new Set();
+
+      // Get all unique MP categories from products
+      cards.forEach((card) => {
+        const categories =
+          card.getAttribute("data-categories")?.split(",") || [];
+        categories.forEach((cat) => {
+          if (cat) categorySet.add(cat.toUpperCase());
+        });
+      });
+
+      // Convert to array and sort numerically
+      const categories = Array.from(categorySet);
+      categories.sort((a, b) => {
+        const numA = parseInt(a as string);
+        const numB = parseInt(b as string);
+        return numA - numB;
+      });
+
+      // Add category buttons to filter container
+      const filterContainer = document.getElementById("category-filter");
+      if (filterContainer) {
+        categories.forEach((cat) => {
+          const btn = document.createElement("button");
+          btn.className =
+            "category-btn px-4 py-2 rounded-lg bg-blue-50 text-blue-700 font-semibold transition-all duration-300 hover:bg-blue-200 transform hover:scale-105 active:scale-95";
+          btn.textContent = cat as string;
+          btn.setAttribute("data-category", cat as string);
+          filterContainer.appendChild(btn);
+        });
+      }
+
+      // Filter products function
+      function filterProducts() {
+        const searchInput = document.getElementById("search");
+        const searchTerm = searchInput
+          ? (searchInput as HTMLInputElement).value.toLowerCase()
+          : "";
+
+        // Get active category
+        const activeBtn = filterContainer?.querySelector(
+          ".category-btn.active"
+        );
+        const selectedCategory =
+          activeBtn?.getAttribute("data-category") || "all";
+
+        let hasVisible = false;
+
+        // First, fade out all cards
+        cards.forEach((card) => {
+          card.classList.add("fade-out");
+        });
+
+        // After fade out animation, update visibility
+        setTimeout(() => {
+          cards.forEach((card, index) => {
+            const title =
+              card.querySelector("h3")?.textContent?.toLowerCase() || "";
+            const desc = card.getAttribute("data-desc")?.toLowerCase() || "";
+            const cardCategories =
+              card.getAttribute("data-categories")?.toLowerCase() || "";
+
+            // Check if matches category
+            const matchesCategory =
+              selectedCategory === "all" ||
+              cardCategories.includes(selectedCategory.toLowerCase());
+
+            // Check if matches search term
+            const matchesSearch =
+              title.includes(searchTerm) || desc.includes(searchTerm);
+
+            if (matchesCategory && matchesSearch) {
+              card.classList.remove("hidden", "fade-out");
+              // Staggered fade in animation
+              setTimeout(() => {
+                card.classList.add("fade-in");
+              }, index * 50);
+              hasVisible = true;
+            } else {
+              card.classList.add("hidden");
+              card.classList.remove("fade-in");
+            }
+          });
+
+          // Show/hide no results message
+          const noResultsElem = document.getElementById("no-results");
+          if (noResultsElem) {
+            if (!hasVisible) {
+              noResultsElem.classList.remove("hidden");
+              setTimeout(() => {
+                noResultsElem.style.opacity = "1";
+              }, 50);
+            } else {
+              noResultsElem.style.opacity = "0";
+              setTimeout(() => {
+                noResultsElem.classList.add("hidden");
+              }, 500);
+            }
+          }
+        }, 150);
+      }
+
+      // Category button click handler
+      if (filterContainer) {
+        filterContainer.addEventListener("click", function (e) {
+          const target = e.target;
+          if ((target as Element).classList.contains("category-btn")) {
+            // Remove active class from all buttons
+            filterContainer.querySelectorAll(".category-btn").forEach((btn) => {
+              btn.classList.remove("active", "bg-blue-600", "text-white");
+              btn.classList.add("bg-blue-50", "text-blue-700");
+            });
+
+            // Add active class to clicked button
+            (target as Element).classList.add(
+              "active",
+              "bg-blue-600",
+              "text-white"
+            );
+            (target as Element).classList.remove("bg-blue-50", "text-blue-700");
+
+            filterProducts();
+          }
+        });
+      }
+
+      // Search input handler with debounce
+      const searchElem = document.getElementById("search");
+      let searchTimeout: ReturnType<typeof setTimeout> | undefined;
+
+      if (searchElem) {
+        searchElem.addEventListener("input", function () {
+          clearTimeout(searchTimeout);
+          searchTimeout = setTimeout(filterProducts, 300);
+        });
+      }
+
+      // Initial animation for cards
+      setTimeout(() => {
+        cards.forEach((card, index) => {
+          setTimeout(() => {
+            card.classList.remove("opacity-0", "translate-y-10");
+            card.classList.add("fade-in");
+          }, 100 * index);
+        });
+      }, 100);
+    });
+  </script>
+</MainLayout>
+
+<!-- Enhanced Contact Section -->
+
+<style>
+  /* Enhanced Banner Styles */
+  .parallax-bg {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)),
+      url("/pictures/Banner/UNV Display lap view 2 (1).jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    animation: parallaxMove 20s ease-in-out infinite;
+  }
+
+  @keyframes parallaxMove {
+    0%,
+    100% {
+      transform: scale(1) rotate(0deg);
+    }
+    50% {
+      transform: scale(1.05) rotate(0.5deg);
+    }
+  }
+
+  .floating-particles {
+    background-image: radial-gradient(2px 2px at 20px 30px, #fff, transparent),
+      radial-gradient(
+        2px 2px at 40px 70px,
+        rgba(255, 255, 255, 0.8),
+        transparent
+      ),
+      radial-gradient(
+        1px 1px at 90px 40px,
+        rgba(255, 255, 255, 0.6),
+        transparent
+      ),
+      radial-gradient(
+        1px 1px at 130px 80px,
+        rgba(255, 255, 255, 0.4),
+        transparent
+      );
+    background-repeat: repeat;
+    background-size: 200px 100px;
+    animation: particlesFloat 15s linear infinite;
+  }
+
+  @keyframes particlesFloat {
+    0% {
+      transform: translateY(0px);
+    }
+    100% {
+      transform: translateY(-200px);
+    }
+  }
+
+  /* Banner Text Animations */
+  .banner-title {
+    animation: slideInUp 1s ease-out 0.5s forwards;
+  }
+
+  .banner-subtitle {
+    animation: slideInUp 1s ease-out 0.8s forwards;
+  }
+
+  .banner-cta {
+    animation: slideInUp 1s ease-out 1.1s forwards;
+  }
+
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Pulse Button */
+  .pulse-btn {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pulse-btn::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition:
+      width 0.6s,
+      height 0.6s;
+  }
+
+  .pulse-btn:hover::before {
+    width: 300px;
+    height: 300px;
+  }
+
+  /* Grid Pattern */
+  .bg-grid-pattern {
+    background-image: linear-gradient(
+        rgba(255, 255, 255, 0.1) 1px,
+        transparent 1px
+      ),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+
+  /* Fade In Up Animation */
+  .fade-in-up {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Feature Cards */
+  .feature-card {
+    transform: translateY(20px);
+    opacity: 0;
+    animation: cardSlideIn 0.8s ease-out forwards;
+  }
+
+  .feature-card:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+  .feature-card:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  .feature-card:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+  .feature-card:nth-child(4) {
+    animation-delay: 0.4s;
+  }
+  .feature-card:nth-child(5) {
+    animation-delay: 0.5s;
+  }
+  .feature-card:nth-child(6) {
+    animation-delay: 0.6s;
+  }
+
+  @keyframes cardSlideIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Enhanced Search */
+  .search-container:focus-within .search-highlight {
+    opacity: 0.1;
+  }
+
+  .search-container:focus-within .search-icon {
+    color: #3b82f6;
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  /* Product Cards */
+  .product-card {
+    transform: translateY(50px) scale(0.9);
+    animation: productSlideIn 0.8s ease-out forwards;
+  }
+
+  @keyframes productSlideIn {
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  .product-card:hover .product-image {
+    transform: scale(1.1) rotate(2deg);
+  }
+
+  .product-overlay {
+    background: linear-gradient(
+      135deg,
+      rgba(59, 130, 246, 0.8),
+      rgba(147, 51, 234, 0.8)
+    );
+  }
+
+  /* Contact Cards Hover Effects */
+  .contact-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    transition: left 0.5s;
+  }
+
+  .contact-card:hover::before {
+    left: 100%;
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    .parallax-bg {
+      background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)),
+        url("/pictures/Banner/UNV Display Mobile view 1.jpg");
+      background-attachment: scroll;
+    }
+
+    .banner-title {
+      font-size: 2.5rem;
+    }
+
+    .feature-card {
+      animation-delay: 0s !important;
+    }
+  }
+
+  /* Loading States */
+  .loading {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .loading::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.4),
+      transparent
+    );
+    animation: shimmer 1.5s infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      left: -100%;
+    }
+    100% {
+      left: 100%;
+    }
+  }
+
+  /* Smooth Scroll Behavior */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(45deg, #2563eb, #7c3aed);
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Enhanced Intersection Observer for scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px",
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in-view");
+
+          // Animate feature cards
+          if (entry.target.classList.contains("overview-section")) {
+            const featureCards = entry.target.querySelectorAll(".feature-card");
+            featureCards.forEach((card, index) => {
+              setTimeout(() => {
+                (card as HTMLElement).style.opacity = "1";
+                (card as HTMLElement).style.transform = "translateY(0)";
+              }, 100 * index);
+            });
+          }
+
+          // Animate product cards
+          if (entry.target.classList.contains("products-section")) {
+            const productCards = entry.target.querySelectorAll(".product-card");
+            productCards.forEach((card, index) => {
+              setTimeout(() => {
+                (card as HTMLElement).style.opacity = "1";
+                (card as HTMLElement).style.transform =
+                  "translateY(0) scale(1)";
+              }, 50 * index);
+            });
+          }
+
+          // Animate fade-in-up elements
+          const fadeElements = entry.target.querySelectorAll(".fade-in-up");
+          fadeElements.forEach((el, index) => {
+            setTimeout(() => {
+              (el as HTMLElement).style.opacity = "1";
+              (el as HTMLElement).style.transform = "translateY(0)";
+            }, 100 * index);
+          });
+        }
+      });
+    }, observerOptions);
+
+    // Observe sections
+    document
+      .querySelectorAll(
+        ".overview-section, .products-section, .contact-section"
+      )
+      .forEach((section) => {
+        observer.observe(section);
+      });
+
+    // Smooth scroll for banner CTA
+    document
+      .querySelector(".banner-cta button")
+      ?.addEventListener("click", () => {
+        document.querySelector(".products-section")?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      });
+
+    // Parallax effect for banner
+    let ticking = false;
+
+    function updateParallax() {
+      const scrolled = window.pageYOffset;
+      const parallax = document.querySelector(".parallax-bg");
+      if (parallax) {
+        const speed = scrolled * 0.5;
+        (parallax as HTMLElement).style.transform = `translateY(${speed}px)`;
+      }
+      ticking = false;
+    }
+
+    function requestTick() {
+      if (!ticking) {
+        requestAnimationFrame(updateParallax);
+        ticking = true;
+      }
+    }
+
+    window.addEventListener("scroll", requestTick);
+
+    // Add dynamic background to contact section
+    const contactSection = document.querySelector(".contact-section");
+    if (contactSection) {
+      const createFloatingElement = () => {
+        const element = document.createElement("div");
+        element.style.cssText = `
+            position: absolute;
+            width: ${Math.random() * 100 + 50}px;
+            height: ${Math.random() * 100 + 50}px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.1), transparent);
+            border-radius: 50%;
+            left: ${Math.random() * 100}%;
+            top: ${Math.random() * 100}%;
+            animation: float ${Math.random() * 10 + 10}s infinite ease-in-out;
+            pointer-events: none;
+          `;
+        contactSection.appendChild(element);
+
+        setTimeout(() => {
+          element.remove();
+        }, 20000);
+      };
+
+      // Create floating elements periodically
+      setInterval(createFloatingElement, 3000);
+
+      // Create initial elements
+      for (let i = 0; i < 5; i++) {
+        setTimeout(createFloatingElement, i * 1000);
+      }
+    }
+
+    // Add CSS for floating animation
+    const style = document.createElement("style");
+    style.textContent = `
+        @keyframes float {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          33% { transform: translateY(-30px) rotate(120deg); }
+          66% { transform: translateY(15px) rotate(240deg); }
+        }
+      `;
+    document.head.appendChild(style);
+  });
+</script>

@@ -1,0 +1,67 @@
+---
+const { eventEntry } = Astro.props;
+import type { CollectionEntry } from "astro:content";
+interface Props {
+  eventEntry: CollectionEntry<"event">;
+}
+---
+
+<div class="cont">
+  <a
+    href={`/event/${eventEntry.slug}/`}
+    class="block overflow-hidden rounded-lg bg-gray-800 shadow-md transition-shadow duration-300 hover:shadow-xl dark:bg-neutral-500"
+  >
+    <img
+      src={eventEntry.data.eventImage.src}
+      alt={eventEntry.data.eventImageAlt}
+      class="h-48 w-full object-cover"
+    />
+    <div class="p-6">
+      <h2 class="mb-2 text-2xl font-semibold text-white">
+        {eventEntry.data.name}
+      </h2>
+      <div class="mb-2 flex items-center text-gray-300">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="mr-2 h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+          ></path>
+        </svg>
+        <span>
+          {eventEntry.data.startDate} at {eventEntry.data.readTime}
+        </span>
+      </div>
+      <div class="mb-4 flex items-center text-gray-300">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="mr-2 h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+          ></path>
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+        </svg>
+        <span>{eventEntry.data.location}</span>
+      </div>
+      <p class="mb-4 text-gray-300">{eventEntry.data.description}</p>
+    </div>
+  </a>
+</div>

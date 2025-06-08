@@ -1,0 +1,80 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+import { authorName, authorBio, authorImage, socialLinks } from '../data/author'; 
+
+const pageTitle = `${authorName} - Author Profile`;
+const descriptions = "Lovosis Technology is a leading CCTV expert in Dubai, providing high-quality surveillance systems to ensure safety and security for homes and businesses";
+const imageUrl = authorImage || '/path/to/default-image.jpg';
+
+const structuredData ={
+    
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Abdul Gafoor",
+  "url": "https://lovosis.com/author",
+  "image": "https://lovosis.com/pictures/team/profile Gafoor.jpg",
+  "sameAs": [
+    "https://www.instagram.com/_lovosis_group_of_companies_/reels",
+    "https://www.facebook.com/p/Digital-Link-Technology-LLC-100087290161175/",
+    "https://www.linkedin.com/company/digital-link-technology"
+  ],
+  "jobTitle": "Author",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "lovosis technology"
+  },
+ 
+  "description": descriptions,
+  "mainEntityOfPage": "https://lovosis.com"
+}
+
+        
+        
+---
+
+
+ 
+    
+    
+
+     
+  
+     
+ 
+  <MainLayout title={pageTitle} sd={structuredData} description={descriptions} >
+    <main class="max-w-4xl mx-auto p-6">
+      <!-- Author Profile Section -->
+      <section class="bg-white shadow-lg rounded-lg overflow-hidden m-8">
+        <div class="p-6 flex items-center">
+          <img
+            src={imageUrl}
+            alt={`Photo of ${authorName}`}
+            class="w-24 h-24 rounded-full object-cover mr-6"
+          />
+          <div>
+            <h1 class="text-3xl mb-4 font-bold">{authorName}</h1>
+            <p class="text-lg text-gray-600">{authorBio}</p>
+          </div>
+        </div>
+
+        <!-- Social Links -->
+        <div class="p-6 border-t border-gray-200">
+          <h2 class="text-xl font-semibold mb-4">Connect with {authorName}</h2>
+          <div class="flex space-x-4">
+            {socialLinks.map((link) => (
+              <a
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-blue-500 hover:text-blue-700"
+              >
+                {link.platform}
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    </main>
+    </MainLayout>
+ 
+

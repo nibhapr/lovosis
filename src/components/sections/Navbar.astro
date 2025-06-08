@@ -1,0 +1,291 @@
+---
+import ThemeIcon from "@components/ThemeIcon.astro";
+import MegaMenuLink from "@components/ui/links/MegaMenuLink.astro";
+import MegaMenuProducts from "../ui/links/MegaMenuProducts.astro";
+import Authentication from "./Authentication.astro";
+import LanguagePicker from "@components/ui/LanguagePicker.astro";
+
+// Get the current URL path to determine active page
+const { pathname } = Astro.url;
+---
+
+<header
+  class="sticky inset-x-0 top-4 z-50 flex w-full flex-wrap text-sm lg:flex-nowrap lg:justify-start"
+>
+  <nav
+    class="relative mx-2 w-full rounded-[36px] border border-yellow-100/40 bg-white px-4 py-3 shadow-2xl backdrop-blur-md dark:border-neutral-700/40 dark:bg-neutral-800/80 dark:backdrop-blur-md lg:flex lg:items-center lg:justify-between lg:px-6 lg:py-3 xl:px-8 xl:mx-auto"
+    aria-label="Global"
+  >
+    <div class="flex items-center justify-between">
+      <a href="/" aria-label="Brand">
+        <img src="/pictures/logo.png" alt="Logo" class="w-38 mr-2 h-12" />
+      </a>
+    
+      <div class="ml-auto mr-5 lg:hidden">
+        <button
+          type="button"
+          class="hs-collapse-toggle flex h-8 w-8 items-center justify-center rounded-full text-sm font-bold text-neutral-600 transition duration-300 hover:bg-neutral-200 disabled:pointer-events-none disabled:opacity-50 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:focus:outline-none"
+          data-hs-collapse="#navbar-collapse-with-animation"
+          aria-controls="navbar-collapse-with-animation"
+          aria-label="Toggle navigation"
+        >
+          <svg
+            class="h-[1.25rem] w-[1.25rem] flex-shrink-0 hs-collapse-open:hidden"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="3" x2="21" y1="6" y2="6"></line>
+            <line x1="3" x2="21" y1="12" y2="12"></line>
+            <line x1="3" x2="21" y1="18" y2="18"></line>
+          </svg>
+          <svg
+            class="hidden h-[1.25rem] w-[1.25rem] flex-shrink-0 hs-collapse-open:block"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M18 6 6 18"></path>
+            <path d="m6 6 12 12"></path>
+          </svg>
+        </button>
+      </div>
+    
+      <span class="inline-block lg:hidden">
+        <ThemeIcon />
+      </span>
+    </div>
+   
+    <div
+      id="navbar-collapse-with-animation"
+      class="hs-collapse hidden grow basis-full overflow-hidden transition-all duration-300 lg:block"
+    >
+      <div
+        class="mt-5 flex flex-col gap-x-0 gap-y-4 lg:mt-0 lg:flex-row lg:items-center lg:justify-center lg:gap-x-4 lg:gap-y-0 lg:ps-7 xl:gap-x-7"
+      >
+        <div
+          class="mt-4 flex flex-col space-y-2 lg:ml-auto lg:mt-0 lg:flex-row lg:items-center lg:justify-center lg:space-x-4 lg:space-y-0 xl:space-x-7"
+        >
+          <a
+            href="/"
+            class={`font-semibold ${pathname === '/' ? 'text-blue-600' : 'text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-600'}`}
+            title="Welcome to Lovosis Technology"
+          >
+            Home
+          </a>
+          <a
+            href="/event"
+            class={`font-semibold ${pathname.startsWith('/event') ? 'text-blue-600' : 'text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-600'}`}
+            title="Learn more about upcoming events"
+          >
+            Events
+          </a>
+          
+          <MegaMenuProducts class="lg:relative" />
+          <MegaMenuLink class="lg:relative" />
+
+          <a
+            href="/about"
+            class={`font-semibold ${pathname.startsWith('/about') ? 'text-blue-600' : 'text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-600'}`}
+            title="Learn more about Lovosis Technology and our services"
+          >
+            About
+          </a>
+          <a
+            href="/contact"
+            class={`font-semibold ${pathname.startsWith('/contact') ? 'text-blue-600' : 'text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-600'}`}
+            title="Contact us for any enquiry"
+          >
+            Contact
+          </a>
+          <a
+            href="/support/lovosis"
+            class={`font-semibold ${pathname.startsWith('/support') ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-600'}`}
+            title="Visit our RMA center"
+          >
+            Support
+          </a>
+        </div>
+        <div class="mx-4 hidden h-6 w-px bg-gray-300 dark:bg-gray-700 lg:block"></div>
+
+        <div class="mb-3 mt-4 flex space-x-3 lg:mb-0 lg:mt-0">
+          <a
+            href="https://wa.me/+971552929644"
+            class="text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-blue-600"
+          >
+            <svg
+              width="24"
+              height="24"
+              fill="currentColor"
+              class="h-6 w-6"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M12.001 2c5.523 0 10 4.477 10 10s-4.477 10-10 10a9.95 9.95 0 0 1-5.03-1.355L2.005 22l1.352-4.968A9.95 9.95 0 0 1 2.001 12c0-5.523 4.477-10 10-10M8.593 7.3l-.2.008a1 1 0 0 0-.372.1a1.3 1.3 0 0 0-.294.228c-.12.113-.188.211-.261.306A2.73 2.73 0 0 0 6.9 9.62c.002.49.13.967.33 1.413c.409.902 1.082 1.857 1.97 2.742c.214.213.424.427.65.626a9.45 9.45 0 0 0 3.84 2.046l.568.087c.185.01.37-.004.556-.013a2 2 0 0 0 .833-.231a5 5 0 0 0 .383-.22q.001.002.125-.09c.135-.1.218-.171.33-.288q.126-.13.21-.302c.078-.163.156-.474.188-.733c.024-.198.017-.306.014-.373c-.004-.107-.093-.218-.19-.265l-.582-.261s-.87-.379-1.402-.621a.5.5 0 0 0-.176-.041a.48.48 0 0 0-.378.127c-.005-.002-.072.055-.795.931a.35.35 0 0 1-.368.13a1.4 1.4 0 0 1-.191-.066c-.124-.052-.167-.072-.252-.108a6 6 0 0 1-1.575-1.003c-.126-.11-.243-.23-.363-.346a6.3 6.3 0 0 1-1.02-1.268l-.059-.095a1 1 0 0 1-.102-.205c-.038-.147.061-.265.061-.265s.243-.266.356-.41c.11-.14.203-.276.263-.373c.118-.19.155-.385.093-.536q-.42-1.026-.868-2.041c-.059-.134-.234-.23-.393-.249q-.081-.01-.162-.016a3 3 0 0 0-.403.004z"
+              ></path>
+            </svg>
+          </a>
+          <a
+            href="tel:+971509676511"
+            class="text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-blue-600"
+          >
+            <svg
+              width="24"
+              height="24"
+              fill="currentColor"
+              class="h-6 w-6"
+              viewBox="0 0 256 256"
+            >
+              <path
+                d="M144.27 45.93a8 8 0 0 1 9.8-5.66a86.22 86.22 0 0 1 61.66 61.66a8 8 0 0 1-5.66 9.8a8.2 8.2 0 0 1-2.07.27a8 8 0 0 1-7.73-5.93a70.35 70.35 0 0 0-50.33-50.34a8 8 0 0 1-5.67-9.8m-2.33 41.8c13.79 3.68 22.65 12.55 26.33 26.34A8 8 0 0 0 176 120a8.2 8.2 0 0 0 2.07-.27a8 8 0 0 0 5.66-9.8c-5.12-19.16-18.5-32.54-37.66-37.66a8 8 0 1 0-4.13 15.46m72.43 78.73l-47.11-21.11l-.13-.06a16 16 0 0 0-15.17 1.4a8 8 0 0 0-.75.56L126.87 168c-15.42-7.49-31.34-23.29-38.83-38.51l20.78-24.71c.2-.25.39-.5.57-.77a16 16 0 0 0 1.32-15.06v-.12L89.54 41.64a16 16 0 0 0-16.62-9.52A56.26 56.26 0 0 0 24 88c0 79.4 64.6 144 144 144a56.26 56.26 0 0 0 55.88-48.92a16 16 0 0 0-9.51-16.62"
+              ></path>
+            </svg>
+          </a>
+          <a
+            href="mailto:sales@lovosis.com"
+            class="text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-blue-600"
+          >
+            <svg
+              width="24"
+              height="24"
+              fill="currentColor"
+              class="h-6 w-6"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M4 3a2 2 0 0 0-2 2v.201l6 3.231l6-3.23V5a2 2 0 0 0-2-2zm10 3.337L8.237 9.44a.5.5 0 0 1-.474 0L2 6.337V11a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2z"
+              ></path>
+            </svg>
+          </a>
+        </div>
+        <div class="mx-4 hidden h-6 w-px bg-gray-300 dark:bg-gray-700 lg:block"></div>
+      
+        <span class="hidden lg:inline-block">
+          <ThemeIcon />
+        </span>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script is:inline>
+  // Theme script remains the same
+  const HSThemeAppearance = {
+    init() {
+      const defaultTheme = "default";
+      let theme = localStorage.getItem("hs_theme") || defaultTheme;
+
+      if (document.querySelector("html").classList.contains("dark")) return;
+      this.setAppearance(theme);
+    },
+    _resetStylesOnLoad() {
+      const $resetStyles = document.createElement("style");
+      $resetStyles.innerText = `*{transition: unset !important;}`;
+      $resetStyles.setAttribute("data-hs-appearance-onload-styles", "");
+      document.head.appendChild($resetStyles);
+      return $resetStyles;
+    },
+    setAppearance(theme, saveInStore = true, dispatchEvent = true) {
+      const $resetStylesEl = this._resetStylesOnLoad();
+
+      if (saveInStore) {
+        localStorage.setItem("hs_theme", theme);
+      }
+
+      if (theme === "auto") {
+        theme = window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "default";
+      }
+
+      document.querySelector("html").classList.remove("dark");
+      document.querySelector("html").classList.remove("default");
+      document.querySelector("html").classList.remove("auto");
+
+      document
+        .querySelector("html")
+        .classList.add(this.getOriginalAppearance());
+
+      setTimeout(() => {
+        $resetStylesEl.remove();
+      });
+
+      if (dispatchEvent) {
+        window.dispatchEvent(
+          new CustomEvent("on-hs-appearance-change", { detail: theme })
+        );
+      }
+    },
+    getAppearance() {
+      let theme = this.getOriginalAppearance();
+      if (theme === "auto") {
+        theme = window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "default";
+      }
+      return theme;
+    },
+    getOriginalAppearance() {
+      const defaultTheme = "default";
+      return localStorage.getItem("hs_theme") || defaultTheme;
+    },
+  };
+  HSThemeAppearance.init();
+
+  window
+    .matchMedia("(prefers-color-scheme: dark)")
+    .addEventListener("change", () => {
+      if (HSThemeAppearance.getOriginalAppearance() === "auto") {
+        HSThemeAppearance.setAppearance("auto", false);
+      }
+    });
+
+  window.addEventListener("load", () => {
+    const $clickableThemes = document.querySelectorAll(
+      "[data-hs-theme-click-value]"
+    );
+    const $switchableThemes = document.querySelectorAll(
+      "[data-hs-theme-switch]"
+    );
+
+    $clickableThemes.forEach(($item) => {
+      $item.addEventListener("click", () =>
+        HSThemeAppearance.setAppearance(
+          $item.getAttribute("data-hs-theme-click-value"),
+          true,
+          $item
+        )
+      );
+    });
+
+    $switchableThemes.forEach(($item) => {
+      $item.addEventListener("change", (e) => {
+        HSThemeAppearance.setAppearance(e.target.checked ? "dark" : "default");
+      });
+
+      $item.checked = HSThemeAppearance.getAppearance() === "dark";
+    });
+
+    window.addEventListener("on-hs-appearance-change", (e) => {
+      $switchableThemes.forEach(($item) => {
+        $item.checked = e.detail === "dark";
+      });
+    });
+  });
+</script>
+
+<script>
+  import "@preline/collapse/index.js";
+  import "@preline/overlay/index.js";
+  import "@preline/dropdown/index.js";
+</script>

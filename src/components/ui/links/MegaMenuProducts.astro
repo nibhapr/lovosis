@@ -1,0 +1,427 @@
+---
+import { Image } from "astro:assets";
+import Icon from "../icons/Icon.astro";
+
+// Get the current URL path to determine active page
+const { pathname } = Astro.url;
+const brandPaths = ['/uniview', '/alhua', '/imou', '/hikvision', '/westerdigital', '/toshiba', '/seagate', '/uniarch', '/unvdisplay','/unvdisplayproducts','/unvproducts','/westerndigitalproducts','/toshibaproducts','/seagateproducts','/dahuaproducts','/imouproducts','/hikvisionproducts','/uniarchproducts'];
+const isBrandsActive = brandPaths.some(path => pathname.startsWith(path));
+---
+
+<div class="hs-dropdown [--adaptive:none] [--strategy:static] md:[--strategy:absolute] md:[--trigger:hover]">
+  <button
+    type="button"
+    class={`flex w-full items-center font-semibold ${isBrandsActive ? 'text-blue-600' : 'text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-600'}`}
+  >
+    <a href="/#"> Brands </a>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+      class="ms-2 size-4 flex-shrink-0"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="m19.5 8.25-7.5 7.5-7.5-7.5"
+      ></path>
+    </svg>
+  </button>
+
+
+  <div
+    class="hs-dropdown-menu start-0 top-full z-10 hidden w-full min-w-60 rounded-2xl bg-neutral-50 py-2 opacity-0 transition-[opacity,margin] duration-300 ease-in-out before:absolute before:-top-5 before:start-0 before:h-5 before:w-full hs-dropdown-open:opacity-100 dark:divide-neutral-700 dark:bg-neutral-800 md:top-16 md:p-4 md:shadow-2xl md:duration-300"
+  >
+    <!-- PC Version (hidden on mobile) -->
+    <div class="hidden items-center gap-4 md:grid md:grid-cols-1 lg:grid-cols-1">
+      <div class="mx-1 grid grid-cols-3 gap-2 md:mx-0 md:flex md:flex-wrap md:gap-3">
+        <!-- UNIVIEW -->
+        <a
+          class={`group flex flex-col items-center gap-x-5 rounded-lg border border-blue-600 p-2 ${pathname === '/uniview' ? 'bg-blue-50 text-blue-600 dark:bg-neutral-700' : 'hover:bg-neutral-100 dark:text-neutral-200 dark:hover:bg-neutral-500/10'} md:p-4`}
+          title="UNV authorized distributor in U.A.E"
+          href="/uniview"
+          onmouseover="hoverDetails('/pictures/Brand Logo/unv21.jpg', 'solution2')"
+        >
+          <img
+            src="/pictures/Brand Logo/unv21.jpg"
+            alt="UNIVIEW"
+            class="h-6 w-20 md:w-32"
+          />
+          <p class={`mt-1 inline-flex items-center gap-x-1 text-sm font-medium ${pathname === '/uniview' ? 'text-blue-600' : 'text-blue-600 decoration-2 hover:underline dark:text-teal-600'} md:mt-3`}>
+            Learn more
+            <Icon name="arrowRight" />
+          </p>
+        </a>
+
+        <!-- DAHUA -->
+        <a
+          class={`group flex flex-col items-center gap-x-5 rounded-lg border border-blue-600 p-2 ${pathname === '/alhua' ? 'bg-blue-50 text-blue-600 dark:bg-neutral-700' : 'hover:bg-neutral-100 dark:text-neutral-200 dark:hover:bg-neutral-500/10'} md:p-4`}
+          href="/alhua"
+          onmouseover="hoverDetails('/pictures/p1.png', 'solution1')"
+        >
+          <div class="logo-container">
+            <img 
+              src="/pictures/Brand Logo/dahua.png"
+              alt="Western Digital" 
+              class="h-6 w-20 md:w-32 logo-light"
+            />
+            <img 
+              src="/pictures/Brand Logo/dahuanightmode.png"
+              alt="Western Digital" 
+              class="h-6 w-20 md:w-32 logo-dark"
+            />
+            <p class={`mt-1 inline-flex items-center gap-x-1 text-sm font-medium ${pathname === '/westerdigital' ? 'text-blue-600' : 'text-blue-600 decoration-2 hover:underline dark:text-teal-600'} md:mt-3`}>
+              Learn more
+              <Icon name="arrowRight" />
+            </p>
+          </div>
+        </a>
+
+        <!-- IMOU -->
+        <a
+          class={`group flex flex-col items-center gap-x-5 rounded-lg border border-blue-600 p-2 ${pathname === '/imou' ? 'bg-blue-50 text-blue-600 dark:bg-neutral-700' : 'hover:bg-neutral-100 dark:text-neutral-200 dark:hover:bg-neutral-500/10'} md:p-4`}
+          href="/imou"
+          onmouseover="hoverDetails('/pictures/UNV.png', 'solution2')"
+        >
+          <img
+            src="/pictures/Brand Logo/Imou.png"
+            alt="IMOU"
+            class="h-6 w-20 md:w-32"
+          />
+          <p class={`mt-1 inline-flex items-center gap-x-1 text-sm font-medium ${pathname === '/imou' ? 'text-blue-600' : 'text-blue-600 decoration-2 hover:underline dark:text-teal-600'} md:mt-3`}>
+            Learn more
+            <Icon name="arrowRight" />
+          </p>
+        </a>
+
+        <!-- HIKVISION -->
+        <a
+          class={`group flex flex-col items-center gap-x-5 rounded-lg border border-blue-600 p-2 ${pathname === '/hikvision' ? 'bg-blue-50 text-blue-600 dark:bg-neutral-700' : 'hover:bg-neutral-100 dark:text-neutral-200 dark:hover:bg-neutral-500/10'} md:p-4`}
+          href="/hikvision"
+          onmouseover="hoverDetails('/pictures/Brand Logo/hikvision.png', 'solution1')"
+        >
+          <img
+            src="/pictures/Brand Logo/logo.png"
+            alt="HIKVISION"
+            class="h-6 w-20 md:w-32"
+          />
+          <p class={`mt-1 inline-flex items-center gap-x-1 text-sm font-medium ${pathname === '/hikvision' ? 'text-blue-600' : 'text-blue-600 decoration-2 hover:underline dark:text-teal-600'} md:mt-3`}>
+            Learn more
+            <Icon name="arrowRight" />
+          </p>
+        </a>
+
+        <!-- WESTERN DIGITAL -->
+        <a
+          class={`group flex flex-col items-center gap-x-5 rounded-lg border border-blue-600 p-2 ${pathname === '/westerdigital' ? 'bg-blue-50 text-blue-600 dark:bg-neutral-700' : 'hover:bg-neutral-100 dark:text-neutral-200 dark:hover:bg-neutral-500/10'} md:p-4`}
+          href="/westerdigital"
+          onmouseover="hoverDetails('/pictures/p1.png', 'solution1')"
+        >
+          <div class="logo-container">
+            <img 
+              src="/pictures/Brand Logo/western dark.png"
+              alt="Western Digital" 
+              class="h-6 w-20 md:w-32 logo-light"
+            />
+            <img 
+              src="/pictures/Brand Logo/western light.png"
+              alt="Western Digital" 
+              class="h-6 w-20 md:w-32 logo-dark"
+            />
+            <p class={`mt-1 inline-flex items-center gap-x-1 text-sm font-medium ${pathname === '/westerdigital' ? 'text-blue-600' : 'text-blue-600 decoration-2 hover:underline dark:text-teal-600'} md:mt-3`}>
+              Learn more
+              <Icon name="arrowRight" />
+            </p>
+          </div>
+        </a>
+
+        <!-- TOSHIBA -->
+        <a
+          class={`group flex flex-col items-center gap-x-5 rounded-lg border border-blue-600 p-2 ${pathname === '/toshiba' ? 'bg-blue-50 text-blue-600 dark:bg-neutral-700' : 'hover:bg-neutral-100 dark:text-neutral-200 dark:hover:bg-neutral-500/10'} md:p-4`}
+          href="/toshiba"
+          onmouseover="hoverDetails('/pictures/logo.png', 'solution2')"
+        >
+          <img
+            src="/pictures/Brand Logo/toshiba1.png"
+            alt="TOSHIBA"
+            class="h-6 w-20 md:w-28"
+          />
+          <p class={`mt-1 inline-flex items-center gap-x-1 text-sm font-medium ${pathname === '/toshiba' ? 'text-blue-600' : 'text-blue-600 decoration-2 hover:underline dark:text-teal-600'} md:mt-3`}>
+            Learn more
+            <Icon name="arrowRight" />
+          </p>
+        </a>
+
+        <!-- SEAGATE -->
+        <a
+          class={`group flex flex-col items-center gap-x-5 rounded-lg border border-blue-600 p-2 ${pathname === '/seagate' ? 'bg-blue-50 text-blue-600 dark:bg-neutral-700' : 'hover:bg-neutral-100 dark:text-neutral-200 dark:hover:bg-neutral-500/10'} md:p-4`}
+          href="/seagate"
+          onmouseover="hoverDetails('/pictures/Brand Logo/seagate.png', 'solution1')"
+        >
+          <img
+            src="/pictures/Brand Logo/seagate.png"
+            alt="SEAGATE"
+            class="h-6 w-20 md:w-32"
+          />
+          <p class={`mt-1 inline-flex items-center gap-x-1 text-sm font-medium ${pathname === '/seagate' ? 'text-blue-600' : 'text-blue-600 decoration-2 hover:underline dark:text-teal-600'} md:mt-3`}>
+            Learn more
+            <Icon name="arrowRight" />
+          </p>
+        </a>
+
+        <!-- UNIARCH -->
+        <a
+          class={`group flex flex-col items-center gap-x-5 rounded-lg border border-blue-600 p-2 ${pathname === '/uniarch' ? 'bg-blue-50 text-blue-600 dark:bg-neutral-700' : 'hover:bg-neutral-100 dark:text-neutral-200 dark:hover:bg-neutral-500/10'} md:p-4`}
+          href="/uniarch"
+          onmouseover="hoverDetails('/pictures/Brand Logo/hikvision.png', 'solution1')"
+        >
+          <img
+            src="/pictures/Brand Logo/uniarch.png"
+            alt="UNIARCH"
+            class="h-6 w-20 md:w-32"
+          />
+          <p class={`mt-1 inline-flex items-center gap-x-1 text-sm font-medium ${pathname === '/uniarch' ? 'text-blue-600' : 'text-blue-600 decoration-2 hover:underline dark:text-teal-600'} md:mt-3`}>
+            Learn more
+            <Icon name="arrowRight" />
+          </p>
+        </a>
+
+        <!-- UNVDISPLAY -->
+        <a
+          class={`group flex flex-col items-center gap-x-5 rounded-lg border border-blue-600 p-2 ${pathname === '/unvdisplay' ? 'bg-blue-50 text-blue-600 dark:bg-neutral-700' : 'hover:bg-neutral-100 dark:text-neutral-200 dark:hover:bg-neutral-500/10'} md:p-4`}
+          href="/unvdisplay"
+          onmouseover="hoverDetails('/pictures/Brand Logo/unvdisplay.png', 'solution1')"
+        >
+          <img
+            src="/pictures/Brand Logo/unvdisplay.png"
+            alt="UNVDISPLAY"
+            class="h-full w-20 md:w-32"
+          />
+          <p class={`mt-1 inline-flex items-center gap-x-1 text-sm font-medium ${pathname === '/unvdisplay' ? 'text-blue-600' : 'text-blue-600 decoration-2 hover:underline dark:text-teal-600'} md:mt-3`}>
+            Learn more
+            <Icon name="arrowRight" />
+          </p>
+        </a>
+      </div>
+    </div>
+
+    <!-- Mobile Version (hidden on PC) -->
+    <div class="block md:hidden">
+      <div class="grid grid-cols-3 gap-3 p-2">
+        <!-- UNIVIEW -->
+        <a
+          class="flex flex-col items-center rounded-lg border border-blue-600 p-2 hover:bg-neutral-100 dark:hover:bg-neutral-500/10"
+          href="/uniview"
+        >
+        <img
+        src="/pictures/Brand Logo/UNV.png"
+        alt="HIKVISION"
+        class="h-7 w-full"
+      />
+      
+          <p class="mt-1 inline-flex items-center gap-x-1 text-sm font-medium text-blue-600 decoration-2 hover:underline dark:text-teal-600">
+            Learn more
+            <Icon name="arrowRight" />
+          </p>
+        </a>
+
+        <!-- DAHUA -->
+        <a
+        class="flex flex-col items-center rounded-lg border border-blue-600 p-2 hover:bg-neutral-100 dark:hover:bg-neutral-500/10"
+        href="/alhua"
+      >
+      <div class="logo-container">
+        <img 
+          src="/pictures/Brand Logo/dahua.png"
+          alt="Western Digital" 
+          class="h-6 w-full  logo-light"
+        />
+        <img 
+          src="/pictures/Brand Logo/dahuanightmode.png"
+          alt="Western Digital" 
+          class="h-7 w-full logo-dark"
+        />
+      
+      </div>
+        <p class="mt-1 inline-flex items-center gap-x-1 text-sm font-medium text-blue-600 decoration-2 hover:underline dark:text-teal-600">
+          Learn more
+          <Icon name="arrowRight" />
+        </p>
+      </a>
+
+        <!-- IMOU -->
+        <a
+        class="flex flex-col items-center rounded-lg border border-blue-600 p-2 hover:bg-neutral-100 dark:hover:bg-neutral-500/10"
+        href="/imou"
+      >
+        <img
+          src="/pictures/Brand Logo/Imou.png"
+          alt="Imou"
+          class="h-7 w-full"
+        />
+        <p class="mt-1 inline-flex items-center gap-x-1 text-sm font-medium text-blue-600 decoration-2 hover:underline dark:text-teal-600">
+          Learn more
+          <Icon name="arrowRight" />
+        </p>
+      </a>
+
+        <!-- HIKVISION -->
+        <a
+          class="flex flex-col items-center rounded-lg border border-blue-600 p-2 hover:bg-neutral-100 dark:hover:bg-neutral-500/10"
+          href="/hikvision"
+        >
+          <img
+            src="/pictures/Brand Logo/logo.png"
+            alt="HIKVISION"
+            class="h-7 w-full"
+          />
+          <p class="mt-1 inline-flex items-center gap-x-1 text-sm font-medium text-blue-600 decoration-2 hover:underline dark:text-teal-600">
+            Learn more
+            <Icon name="arrowRight" />
+          </p>
+        </a>
+
+        <!-- WESTERN DIGITAL -->
+        <a
+          class="flex flex-col items-center rounded-lg border border-blue-600 p-2 hover:bg-neutral-100 dark:hover:bg-neutral-500/10"
+          href="/westerdigital"
+        >
+        <div class="logo-container">
+          <img 
+            src="/pictures/Brand Logo/western dark.png"
+            alt="Western Digital" 
+            class="h-6 w-full  logo-light"
+          />
+          <img 
+            src="/pictures/Brand Logo/western light.png"
+            alt="Western Digital" 
+            class="h-6 w-full logo-dark"
+          />
+        
+        </div>
+          <p class="mt-1 inline-flex items-center gap-x-1 text-sm font-medium text-blue-600 decoration-2 hover:underline dark:text-teal-600">
+            Learn more
+            <Icon name="arrowRight" />
+          </p>
+        </a>
+
+        <!-- TOSHIBA -->
+        <a
+          class="flex flex-col items-center rounded-lg border border-blue-600 p-2 hover:bg-neutral-100 dark:hover:bg-neutral-500/10"
+          href="/toshiba"
+        >
+          <img
+            src="/pictures/Brand Logo/toshiba1.png"
+            alt="TOSHIBA"
+            class="h-7 w-full"
+          />
+          <p class="mt-1 inline-flex items-center gap-x-1 text-sm font-medium text-blue-600 decoration-2 hover:underline dark:text-teal-600">
+            Learn more
+            <Icon name="arrowRight" />
+          </p>
+        </a>
+
+        <!-- SEAGATE -->
+        <a
+          class="flex flex-col items-center rounded-lg border border-blue-600 p-2 hover:bg-neutral-100 dark:hover:bg-neutral-500/10"
+          href="/seagate"
+        >
+          <img
+            src="/pictures/Brand Logo/seagate.png"
+            alt="SEAGATE"
+            class="h-7 w-full"
+          />
+          <p class="mt-1 inline-flex items-center gap-x-1 text-sm font-medium text-blue-600 decoration-2 hover:underline dark:text-teal-600">
+            Learn more
+            <Icon name="arrowRight" />
+          </p>
+        </a>
+
+        <!-- UNIARCH -->
+        <a
+          class="flex flex-col items-center rounded-lg border border-blue-600 p-2 hover:bg-neutral-100 dark:hover:bg-neutral-500/10"
+          href="/uniarch"
+        >
+          <img
+            src="/pictures/Brand Logo/uniarch.png"
+            alt="UNIARCH"
+            class="h-7 w-full"
+          />
+          <p class="mt-1 inline-flex items-center gap-x-1 text-sm font-medium text-blue-600 decoration-2 hover:underline dark:text-teal-600">
+            Learn more
+            <Icon name="arrowRight" />
+          </p>
+        </a>
+
+        <!-- UNVDISPLAY -->
+        <a
+          class="flex flex-col items-center rounded-lg border border-blue-600 p-2 hover:bg-neutral-100 dark:hover:bg-neutral-500/10"
+          href="/unvdisplay"
+        >
+          <img
+            src="/pictures/Brand Logo/unvdisplay.png"
+            alt="UNVDISPLAY"
+            class="h-7 w-full"
+          />
+          <p class="mt-1 inline-flex items-center gap-x-1 text-sm font-medium text-blue-600 decoration-2 hover:underline dark:text-teal-600">
+            Learn more
+            <Icon name="arrowRight" />
+          </p>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  // Dark mode image handling
+  function toggleLogosBasedOnTheme() {
+    const isDarkMode = document.documentElement.classList.contains('dark');
+    const logoContainers = document.querySelectorAll('.logo-container');
+    
+    logoContainers.forEach(container => {
+      const lightLogo = container.querySelector('.logo-light');
+      const darkLogo = container.querySelector('.logo-dark');
+      
+      if (isDarkMode) {
+        darkLogo.style.display = 'block';
+        lightLogo.style.display = 'none';
+      } else {
+        lightLogo.style.display = 'block';
+        darkLogo.style.display = 'none';
+      }
+    });
+  }
+
+  // Initial theme setup
+  document.addEventListener('DOMContentLoaded', () => {
+    // Hover details function
+    window.hoverDetails = function(proSrc, proTitle) {
+      document.getElementById("products-img").src = proSrc;
+      document.getElementById("products-title").textContent = proTitle;
+    };
+
+    // Brand path detection
+    const currentPath = window.location.pathname;
+    const brandPaths = ['/uniview', '/alhua', '/imou', '/hikvision', '/westerdigital', '/toshiba', '/seagate', '/uniarch', '/unvdisplay','/unvdisplayproducts','/unvproducts','/westerndigitalproducts','/toshibaproducts','/seagateproducts','/dahuaproducts','/imouproducts','/hikvisionproducts','/uniarchproducts'];
+    
+    if (brandPaths.some(path => currentPath.includes(path))) {
+      const brandsButton = document.querySelector('.hs-dropdown button');
+      if (brandsButton) {
+        brandsButton.classList.add('text-blue-600');
+      }
+    }
+
+    // Set initial logos
+    toggleLogosBasedOnTheme();
+    
+    // Watch for theme changes
+    const observer = new MutationObserver(toggleLogosBasedOnTheme);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
+  });
+</script>

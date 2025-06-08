@@ -1,0 +1,21 @@
+---
+import StarlightHead from "@astrojs/starlight/components/Head.astro";
+import { default as VtbotStarlight } from "astro-vtbot/components/starlight/Base.astro";
+import Props from "astro-vtbot/components/starlight/Base.astro";
+Astro.props.viewTransitionsFallback = "animate";
+---
+
+<VtbotStarlight {...Astro.props}>
+  <StarlightHead {...Astro.props} />
+</VtbotStarlight>
+
+<style is:global>
+  ::view-transition-group(root) {
+    animation-duration: 250ms;
+  }
+
+  /* Do not slide over the sidebars */
+  ::view-transition-group(*) {
+    overflow: hidden;
+  }
+</style>

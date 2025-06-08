@@ -1,0 +1,1582 @@
+---
+import { getCollection } from "astro:content";
+import MainLayout from "@/layouts/MainLayout.astro";
+import Card from "@/components/sections/Card.astro";
+import PrimaryCTA from "@components/ui/buttons/PrimaryCTA.astro";
+
+
+export async function getStaticPaths() {
+  const contentEntries = await getCollection("uniview");
+  return contentEntries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const {
+  id,
+  title,
+  desc,
+  img,
+  images,
+  alt,
+  author,
+  reviewBody,
+  ratingValue,
+  features,
+  publishedTime,
+} = entry.data;
+const imageUrl = img.src;
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
+const structuredData = [
+  {
+    "@context": "https://schema.org/",
+    "@type": "Product",
+    "name": title,
+    "image": new URL(imageUrl, Astro.site).toString(),
+    "description": desc,
+    "productType": "Cameras",
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "AED",
+      "price": "0.00", // Update with actual price
+      "availability": "https://schema.org/InStock",
+      "itemCondition": "https://schema.org/NewCondition",
+      "areaServed": ["AE", "SA", "BH", "KW", "OM", "QA"],
+      "warranty": "3 year replacement warranty",
+      "seller": {
+        "@type": "Organization",
+        "name": "Lovosis Technology L.L.C",
+        "areaServed": "Middle East"
+      }
+    },
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Warranty",
+        "value": "3 Years Replacement Warranty"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Features",
+        "value": features?.join(", ") || "" // Handle undefined case
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Usage",
+        "value": "24/7 Surveillance Recording"
+      }
+    ],
+    ...(ratingValue ? {
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": ratingValue,
+        "reviewCount": "10" // Update with actual count
+      }
+    } : {}),
+    "review": {
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": author
+      },
+      "datePublished": publishedTime,
+      "reviewBody": reviewBody,
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": ratingValue,
+        "bestRating": "8"
+      }
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": new URL("/", Astro.site).toString()
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Uniview",
+        "item": new URL("/uniview", Astro.site).toString()
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": title,
+        "item": new URL(Astro.url.pathname, Astro.site).toString()
+      }
+    ]
+  }
+];
+const metaTags = [
+  { name: "title", content: `${title} | UNV Cameras UAE` },
+  {
+    name: "description",
+    content: `${desc} - 3 Year Warranty. Available in UAE, Saudi Arabia, Dubai, and across Middle East.`,
+  },
+  {
+  name: "keywords",
+  content: "UNV Security Cameras, 4K IP Surveillance UAE, AI-Powered CCTV Systems, UNV Thermal Cameras, Night Vision Security Dubai, NDAA-Compliant Surveillance, Professional CCTV Solutions, Middle East Video Recorders, UNV 3-Year Warranty"
+},
+{ name: "robots", content: "index, follow" },
+    { property: "og:title", content: title },
+    { property: "og:description", content: desc },
+    { property: "og:image", content: `${Astro.url.origin}/${imageUrl}` },
+    { property: "og:type", content: "product" },
+    { property: "og:locale", content: "en_AE" },
+    { property: "og:locale:alternate", content: "ar_AE" },
+    { name: "geo.region", content: "AE" },
+    { name: "geo.placename", content: "Dubai" },
+    { name: "geo.position", content: "25.276987;55.296249" },
+    { name: "ICBM", content: "25.276987, 55.296249" },
+  
+];
+
+---
+
+<MainLayout title={title} sd={structuredData} canonical={canonicalUrl}>
+  <main class="container mx-auto px-4 py-8">
+    <!-- Hero Section with Parallax Effect -->
+    <section class="hero-section relative mb-8 overflow-hidden">
+      <div class="parallax-bg"></div>
+      <div class="relative z-10 py-12 text-center text-white">
+        <h1
+          class="px-4 text-center text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl lg:text-5xl"
+        >
+          {title}
+        </h1>
+        <p
+          class="mx-auto mt-4 max-w-[90%] px-4 text-center text-base opacity-90 sm:max-w-2xl sm:text-lg"
+        >
+          {desc}
+        </p>
+      </div>
+    </section>
+
+    <!-- Navigation with animation -->
+    <div class="navigation-container mb-6">
+      <a href="/uniview" class="back-button bg-transparent dark:border-none dark:bg-neutral-900 dark:text-white dark:hover:bg-neutral-500 dark:hover:text-white"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="back-icon"
+        >
+          <path d="M19 12H5M12 19l-7-7 7-7"></path>
+        </svg>
+        <span>Back to Content Collection</span>
+      </a>
+    </div>
+
+    <!-- Main Product Card with enhanced animations -->
+    <div class="relative">
+      <article
+        class="product-card border border-gray-300 dark:border-0 dark:bg-neutral-900"
+      >
+        <div class="card-inner flex flex-col gap-8 md:flex-row">
+          <!-- Image Gallery Section - Medium Size -->
+          <div class="image-section w-full md:w-2/5">
+            {
+              img && (
+                <div class="image-gallery">
+                  <div class="main-image-container dark:border-0 dark:bg-neutral-500">
+                    <img
+                      src={img.src}
+                      alt={alt}
+                      width="400"
+                      height="300"
+                      class="main-image"
+                      id="main-image"
+                      loading="eager"
+                    />
+                    <div class="image-controls">
+                      {images && images.length > 0 && (
+                        <>
+                          <button
+                            class="nav-arrow prev-arrow h-6 w-6 border-none p-1 text-gray-700 hover:text-gray-900 dark:[color:var(--primary-color)] dark:hover:[color:var(--primary-color)]"
+                            aria-label="Previous image"
+                          >
+                            <svg
+                              class="h-4 w-4"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M15 19l-7-7 7-7"
+                              />
+                            </svg>
+                          </button>
+                          <button
+                            class="nav-arrow next-arrow h-6 w-6 border-none p-1 text-gray-700 hover:text-gray-900 dark:[color:var(--primary-color)] dark:hover:[color:var(--primary-color)]"
+                            aria-label="Next image"
+                          >
+                            <svg
+                              class="h-4 w-4"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M9 5l7 7-7 7"
+                              />
+                            </svg>
+                          </button>
+                        </>
+                      )}
+                    </div>
+                  </div>
+
+                  {images && images.length > 0 && (
+                    <div class="thumbnails-container mt-4">
+                      <div class="thumbnails-scroll">
+                        <div
+                          class="thumbnail active dark:bg-neutral-500"
+                          data-index="0"
+                        >
+                          <img
+                            src={images[0].src}
+                            alt={alt}
+                            loading="eager"
+                            class="h-full w-full object-cover"
+                          />
+                        </div>
+                        {images.slice(1).map((image, index) => (
+                          <div
+                            class="thumbnail dark:bg-neutral-500"
+                            data-index={index + 1}
+                          >
+                            <img
+                              src={image.src}
+                              alt={`${alt} ${index + 1}`}
+                              loading="lazy"
+                              class="h-full w-full object-cover"
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {images && images.length > 1 && (
+                    <div class="hidden-images hidden">
+                      {images.slice(1).map((image, index) => (
+                        <img
+                          src={image.src}
+                          alt={`${alt} ${index + 1}`}
+                          width={image.width}
+                          height={image.height}
+                          loading="lazy"
+                        />
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )
+            }
+          </div>
+
+          <!-- Product Content Section - Adjusted width -->
+          <div class="product-content w-full md:w-3/5">
+            <h2
+              class="product-title mb-4 text-2xl font-bold dark:text-white md:text-3xl"
+            >
+              {title}
+            </h2>
+
+            <p class="product-description mb-6 dark:text-white">{desc}</p>
+
+            {
+              features && features.length > 0 && (
+                <div class="features-section mt-6">
+                  <h3 class="mb-4 text-xl font-semibold dark:text-white">
+                    Key Features:
+                  </h3>
+                  <ul class="features-list">
+                    {features.map((feature) => (
+                      <li class="feature-item dark:text-white">{feature}</li>
+                    ))}
+                  </ul>
+                </div>
+              )
+            }
+
+            <div class="animate-fadeIn mt-8 grid w-full sm:inline-flex">
+              <PrimaryCTA title="Contact Us" url="/contact" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Share Section -->
+        <div
+          class="share-container mt-8 border-t border-gray-100 pt-6 dark:border-[var(--primary-color)]"
+        >
+          <p class="mb-3 text-sm font-medium text-gray-600">
+            Share This Camera:
+          </p>
+          <div class="share-buttons flex space-x-3">
+            <button
+              class="share-btn"
+              data-platform="whatsapp"
+              aria-label="Share on WhatsApp"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="#25D366"
+              >
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.57-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+                ></path>
+              </svg>
+            </button>
+            <button
+              class="share-btn"
+              data-platform="instagram"
+              aria-label="Share on Instagram"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="#E1306C"
+              >
+                <path
+                  d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"
+                ></path>
+              </svg>
+            </button>
+            <button
+              class="share-btn"
+              data-platform="x"
+              aria-label="Share on X (Twitter)"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="#1DA1F2"
+              >
+                <path
+                  d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723 10.1 10.1 0 01-3.127 1.195A4.92 4.92 0 0016.953 2a4.928 4.928 0 00-4.928 4.928c0 .391.044.766.127 1.125-4.092-.205-7.719-2.165-10.148-5.144a4.929 4.929 0 001.525 6.573A4.887 4.887 0 011.5 8.872v.071a4.926 4.926 0 003.95 4.827 4.917 4.917 0 01-2.224.084 4.93 4.93 0 004.6 3.42A9.88 9.88 0 010 19.54a14.88 14.88 0 007.548 2.212c9.057 0 14.01-7.503 14.01-14.01 0-.21-.006-.422-.018-.632A10.016 10.016 0 0024 4.59z"
+                ></path>
+              </svg>
+            </button>
+            <button
+              class="share-btn"
+              data-platform="facebook"
+              aria-label="Share on Facebook"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="#1877F2"
+              >
+                <path
+                  d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
+                ></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Related Products Section -->
+  </main>
+</MainLayout>
+
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Image gallery functionality with animations
+    const mainImage = document.getElementById("main-image");
+    const thumbnails = document.querySelectorAll(".thumbnail");
+    const prevArrow = document.querySelector(".prev-arrow");
+    const nextArrow = document.querySelector(".next-arrow");
+    const hiddenImages = document.querySelectorAll(".hidden-images img");
+
+    // Combine the main image and hidden images into one array
+    let allImages = [
+      {
+        src: mainImage ? mainImage.src : "",
+        alt: mainImage ? mainImage.alt : "",
+      },
+    ];
+
+    hiddenImages.forEach((img) => {
+      allImages.push({ src: img.src, alt: img.alt });
+    });
+
+    let currentIndex = 0;
+
+    // Function to update the main image with animation
+    function updateMainImage(index) {
+      if (mainImage && allImages[index]) {
+        // Add fade-out class
+        mainImage.classList.add("fade-out");
+
+        // After animation completes, update image and fade back in
+        setTimeout(() => {
+          mainImage.src = allImages[index].src;
+          mainImage.alt = allImages[index].alt;
+          mainImage.classList.remove("fade-out");
+          mainImage.classList.add("fade-in");
+
+          // Remove fade-in class after animation completes
+          setTimeout(() => {
+            mainImage.classList.remove("fade-in");
+          }, 500);
+        }, 300);
+
+        // Update active thumbnail
+        thumbnails.forEach((thumb, i) => {
+          if (i === index) {
+            thumb.classList.add("active");
+          } else {
+            thumb.classList.remove("active");
+          }
+        });
+      }
+    }
+
+    // Set up thumbnail click event
+    thumbnails.forEach((thumbnail, index) => {
+      thumbnail.addEventListener("click", () => {
+        currentIndex = index;
+        updateMainImage(currentIndex);
+      });
+    });
+
+    // Set up arrow navigation
+    if (prevArrow) {
+      prevArrow.addEventListener("click", (e) => {
+        e.preventDefault();
+        currentIndex = (currentIndex - 1 + allImages.length) % allImages.length;
+        updateMainImage(currentIndex);
+      });
+    }
+
+    if (nextArrow) {
+      nextArrow.addEventListener("click", (e) => {
+        e.preventDefault();
+        currentIndex = (currentIndex + 1) % allImages.length;
+        updateMainImage(currentIndex);
+      });
+    }
+
+    // Hide arrows if there are no additional images
+    if (allImages.length <= 1) {
+      if (prevArrow) prevArrow.style.display = "none";
+      if (nextArrow) nextArrow.style.display = "none";
+    }
+
+    // Add touch swipe support for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    const imageContainer = document.querySelector(".main-image-container");
+    if (imageContainer) {
+      imageContainer.addEventListener("touchstart", (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      });
+
+      imageContainer.addEventListener("touchend", (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+      });
+
+      function handleSwipe() {
+        if (touchEndX < touchStartX - 50) {
+          // Swipe left, show next image
+          currentIndex = (currentIndex + 1) % allImages.length;
+          updateMainImage(currentIndex);
+        } else if (touchEndX > touchStartX + 50) {
+          // Swipe right, show previous image
+          currentIndex =
+            (currentIndex - 1 + allImages.length) % allImages.length;
+          updateMainImage(currentIndex);
+        }
+      }
+    }
+
+    // Parallax effect for hero section
+    const parallaxBg = document.querySelector(".parallax-bg");
+    if (parallaxBg) {
+      window.addEventListener("scroll", () => {
+        const scrollPosition = window.scrollY;
+        parallaxBg.style.transform = `translateY(${scrollPosition * 0.4}px)`;
+      });
+    }
+
+    // Add animation to the card on page load
+    const productCard = document.querySelector(".product-card");
+    if (productCard) {
+      setTimeout(() => {
+        productCard.classList.add("card-loaded");
+      }, 100);
+    }
+
+    // Share buttons functionality
+    const shareButtons = document.querySelectorAll(".share-btn");
+    const pageUrl = encodeURIComponent(window.location.href);
+    const pageTitle = encodeURIComponent(document.title);
+
+    function shareContent(platform) {
+      let shareUrl = "";
+
+      switch (platform) {
+        case "whatsapp":
+          shareUrl = `https://wa.me/?text=${pageTitle}%20${pageUrl}`;
+          break;
+          case "instagram":
+          navigator.clipboard.writeText(
+            `${document.title} ${window.location.href}`
+          );
+          window.alert(
+            "Image link copied to clipboard! Open Instagram and paste in your story or message."
+          );
+          return;
+        case "x":
+          shareUrl = `https://twitter.com/intent/tweet?text=${pageTitle}&url=${pageUrl}`;
+          break;
+        case "facebook":
+          shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
+          break;
+        default:
+          return;
+      }
+
+      window.open(shareUrl, "_blank");
+    }
+
+    // Show notification function
+    function showNotification(message) {
+      // Create notification element
+      const notification = document.createElement("div");
+      notification.className = "notification";
+      notification.textContent = message;
+
+      // Add to DOM
+      document.body.appendChild(notification);
+
+      // Trigger animation
+      setTimeout(() => {
+        notification.classList.add("show");
+      }, 10);
+
+      // Remove after delay
+      setTimeout(() => {
+        notification.classList.remove("show");
+        setTimeout(() => {
+          document.body.removeChild(notification);
+        }, 500);
+      }, 3000);
+    }
+
+    shareButtons.forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        // Add click animation
+        btn.classList.add("click-effect");
+        setTimeout(() => {
+          btn.classList.remove("click-effect");
+        }, 300);
+
+        const platform = btn.dataset.platform;
+        if (platform) {
+          shareContent(platform);
+        }
+      });
+    });
+
+    // CTA Buttons animations and interactions
+    const ctaButtons = document.querySelectorAll(".cta-section button");
+    ctaButtons.forEach((button) => {
+      button.addEventListener("click", (e) => {
+        e.preventDefault();
+        button.classList.add("click-effect");
+        setTimeout(() => {
+          button.classList.remove("click-effect");
+          if (button.classList.contains("primary-button")) {
+            showNotification("Your quote request has been sent!");
+          } else {
+            showNotification("Technical specifications are being prepared.");
+          }
+        }, 300);
+      });
+    });
+
+    // Feature list animation
+    const featureItems = document.querySelectorAll(".feature-item");
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px",
+    };
+
+    const featureObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("feature-visible");
+          featureObserver.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    featureItems.forEach((item, index) => {
+      // Set delay based on index for staggered animation
+      item.style.transitionDelay = `${index * 100}ms`;
+      featureObserver.observe(item);
+    });
+  });
+  // Enhanced Image Gallery JavaScript
+  document.addEventListener("DOMContentLoaded", () => {
+    // Get elements
+    const mainImage = document.getElementById("main-image");
+    const thumbnails = document.querySelectorAll(".thumbnail");
+    const prevArrow = document.querySelector(".prev-arrow");
+    const nextArrow = document.querySelector(".next-arrow");
+    const hiddenImages = document.querySelectorAll(".hidden-images img");
+
+    // Combine the main image and hidden images into one array
+    let allImages = [
+      {
+        src: mainImage ? mainImage.src : "",
+        alt: mainImage ? mainImage.alt : "",
+      },
+    ];
+
+    hiddenImages.forEach((img) => {
+      allImages.push({ src: img.src, alt: img.alt });
+    });
+
+    let currentIndex = 0;
+
+    // Function to update the main image with smooth animation
+    function updateMainImage(index) {
+      if (mainImage && allImages[index]) {
+        // Add fade-out class
+        mainImage.classList.add("fade-out");
+
+        // After animation completes, update image and fade back in
+        setTimeout(() => {
+          mainImage.src = allImages[index].src;
+          mainImage.alt = allImages[index].alt;
+          mainImage.classList.remove("fade-out");
+          mainImage.classList.add("fade-in");
+
+          // Remove fade-in class after animation completes
+          setTimeout(() => {
+            mainImage.classList.remove("fade-in");
+          }, 500);
+        }, 300);
+
+        // Update active thumbnail
+        thumbnails.forEach((thumb, i) => {
+          if (i === index) {
+            thumb.classList.add("active");
+          } else {
+            thumb.classList.remove("active");
+          }
+        });
+
+        // Scroll active thumbnail into view
+        scrollActiveThumbnailIntoView();
+      }
+    }
+
+    // Function to center the active thumbnail in the scroll view
+    function scrollActiveThumbnailIntoView() {
+      const activeThumb = document.querySelector(".thumbnail.active");
+      if (activeThumb) {
+        const container = document.querySelector(".thumbnails-scroll");
+        const containerWidth = container.offsetWidth;
+        const thumbPosition = activeThumb.offsetLeft;
+        const thumbWidth = activeThumb.offsetWidth;
+
+        // Calculate scroll position to center the thumbnail
+        const scrollLeft = thumbPosition - containerWidth / 2 + thumbWidth / 2;
+        container.scrollTo({
+          left: scrollLeft,
+          behavior: "smooth",
+        });
+      }
+    }
+
+    // Set up thumbnail click event
+    thumbnails.forEach((thumbnail, index) => {
+      thumbnail.addEventListener("click", () => {
+        currentIndex = index;
+        updateMainImage(currentIndex);
+      });
+    });
+
+    // Set up arrow navigation with subtle animation
+    if (prevArrow) {
+      prevArrow.addEventListener("click", (e) => {
+        e.preventDefault();
+        prevArrow.classList.add("click-effect");
+        setTimeout(() => prevArrow.classList.remove("click-effect"), 300);
+
+        currentIndex = (currentIndex - 1 + allImages.length) % allImages.length;
+        updateMainImage(currentIndex);
+      });
+    }
+
+    if (nextArrow) {
+      nextArrow.addEventListener("click", (e) => {
+        e.preventDefault();
+        nextArrow.classList.add("click-effect");
+        setTimeout(() => nextArrow.classList.remove("click-effect"), 300);
+
+        currentIndex = (currentIndex + 1) % allImages.length;
+        updateMainImage(currentIndex);
+      });
+    }
+
+    // Hide arrows if there are no additional images
+    if (allImages.length <= 1) {
+      if (prevArrow) prevArrow.style.display = "none";
+      if (nextArrow) nextArrow.style.display = "none";
+    }
+
+    // Add keyboard navigation
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") {
+        currentIndex = (currentIndex - 1 + allImages.length) % allImages.length;
+        updateMainImage(currentIndex);
+      } else if (e.key === "ArrowRight") {
+        currentIndex = (currentIndex + 1) % allImages.length;
+        updateMainImage(currentIndex);
+      }
+    });
+
+    // Improve touch swipe support for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    const imageContainer = document.querySelector(".main-image-container");
+    if (imageContainer) {
+      imageContainer.addEventListener("touchstart", (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      });
+
+      imageContainer.addEventListener("touchend", (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+      });
+
+      function handleSwipe() {
+        const swipeThreshold = 50;
+        if (touchEndX < touchStartX - swipeThreshold) {
+          // Swipe left, show next image
+          currentIndex = (currentIndex + 1) % allImages.length;
+          updateMainImage(currentIndex);
+        } else if (touchEndX > touchStartX + swipeThreshold) {
+          // Swipe right, show previous image
+          currentIndex =
+            (currentIndex - 1 + allImages.length) % allImages.length;
+          updateMainImage(currentIndex);
+        }
+      }
+    }
+
+    // Initialize with the first image
+    updateMainImage(currentIndex);
+
+    // Make the image area more responsive
+    window.addEventListener("resize", () => {
+      scrollActiveThumbnailIntoView();
+    });
+  });
+</script>
+
+<style>
+  /* Base Styles */
+  :root {
+    --primary-color: #3b82f6;
+    --secondary-color: #1e40af;
+    --accent-color: #dbeafe;
+    --text-color: #1f2937;
+    --light-gray: #f3f4f6;
+    --medium-gray: #e5e7eb;
+    --dark-gray: #4b5563;
+    --transition-fast: 0.2s ease;
+    --transition-medium: 0.3s ease;
+    --transition-slow: 0.5s ease;
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+      0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+
+  /* Hero Section with Parallax */
+  .hero-section {
+    @apply relative bg-cover bg-center text-center text-white;
+    height: 280px;
+    overflow: hidden;
+  }
+
+  .parallax-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 150%;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)),
+      url("/pictures/unv/unvbanner1.png");
+    background-size: cover;
+    background-position: center;
+    transform: translateY(0);
+    z-index: 0;
+  }
+  @media (max-width: 768px) {
+  .parallax-bg {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)),
+      url("/pictures/mobileview/UNV Mobile View.jpg");
+  }
+}
+  > .hero-section::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background: linear-gradient(to top, white, transparent);
+    z-index: 1;
+  }
+
+  /* Navigation Styles with Hover Effect */
+  .navigation-container {
+    display: flex;
+    justify-content: flex-start;
+  }
+  .back-button {
+    display: inline-flex;
+    align-items: center;
+    background-color: var(--light-gray);
+    color: var(--dark-gray);
+    font-weight: 500;
+    padding: 0.625rem 1.25rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    border: 1px solid var(--medium-gray);
+    transition: all var(--transition-fast);
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
+}
+
+@media (prefers-color-scheme: dark) {
+  .back-button {
+    border: none;
+  }
+}
+
+  .back-button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: transform 0.5s ease;
+  }
+
+  .back-button:hover {
+    background-color: #e0e4ea;
+    color: #1f2937;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .back-button:hover::before {
+    transform: translateX(100%);
+  }
+
+  .back-icon {
+    margin-right: 0.5rem;
+    transition: transform var(--transition-fast);
+  }
+
+  .back-button:hover .back-icon {
+    transform: translateX(-3px);
+  }
+
+  /* Product Card Styles with Animation */
+  .product-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: var(--shadow-md);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border: 1px solid var(--light-gray);
+    transition: all var(--transition-medium);
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .product-card.card-loaded {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* Image Gallery Styles - Adjusted size */
+  .image-gallery {
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+  }
+
+  /* Update these styles in the CSS section */
+  .main-image-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4/3;
+    max-height: 300px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
+    transition: box-shadow 0.3s ease;
+  }
+
+  /* Enhanced bottom fade overlay */
+  .main-image-container::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 40%;
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.35) 0%,
+      rgba(0, 0, 0, 0.18) 50%,
+      rgba(0, 0, 0, 0) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .main-image-container:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .main-image-container:hover::after {
+    opacity: 1;
+  }
+
+  .main-image.fade-out {
+    opacity: 0;
+  }
+
+  .main-image.fade-in {
+    opacity: 1;
+  }
+
+  .image-controls {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+  }
+
+  .main-image-container:hover .image-controls {
+    opacity: 1;
+  }
+
+  /* Thumbnails styles */
+  .thumbnails-container {
+    width: 100%;
+    overflow: hidden;
+    margin-top: 1rem;
+  }
+
+  .thumbnails-scroll {
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    padding: 0.5rem 0;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) var(--light-gray);
+  }
+
+  .thumbnails-scroll::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .thumbnails-scroll::-webkit-scrollbar-track {
+    background: var(--light-gray);
+    border-radius: 10px;
+  }
+
+  .thumbnails-scroll::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color);
+    border-radius: 10px;
+  }
+
+  .thumbnail {
+    flex: 0 0 auto;
+    width: 80px;
+    height: 60px;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    opacity: 0.7;
+    border: 2px solid transparent;
+    transition: all var(--transition-fast);
+  }
+
+  .thumbnail:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+  }
+
+  .thumbnail.active {
+    opacity: 1;
+    border-color: var(--primary-color);
+  }
+
+  /* Product Content Styles */
+  .product-title {
+    color: var(--text-color);
+    position: relative;
+    padding-bottom: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .product-title::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 80px;
+    height: 4px;
+    background: var(--primary-color);
+    border-radius: 2px;
+  }
+
+  .product-badge {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 1rem;
+  }
+
+  .product-description {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--text-color);
+    margin-bottom: 2rem;
+  }
+
+  /* Features List Animation */
+  .features-section {
+    margin-top: 2rem;
+  }
+
+  .features-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .feature-item {
+    position: relative;
+    padding-left: 1.75rem;
+    margin-bottom: 1rem;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: all var(--transition-medium);
+  }
+
+  .feature-item.feature-visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .feature-item::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+  }
+
+  /* CTA Section */
+  .cta-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .primary-button,
+  .secondary-button {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .primary-button {
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: var(--shadow-sm);
+    border: none;
+  }
+
+  .secondary-button {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+  }
+
+  .primary-button:hover,
+  .secondary-button:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .primary-button:hover {
+    background-color: var(--secondary-color);
+  }
+
+  .secondary-button:hover {
+    background-color: rgba(59, 130, 246, 0.1);
+  }
+
+  .click-effect {
+    animation: buttonClick 0.3s forwards;
+  }
+
+  @keyframes buttonClick {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(0.95);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  /* Share Container Styles */
+  .share-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-top: 1px solid var(--light-gray);
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+  }
+
+  .share-buttons {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .share-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background: var(--light-gray);
+    border: 1px solid var(--medium-gray);
+    transition: all var(--transition-fast);
+    cursor: pointer;
+  }
+
+  .share-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .share-btn svg {
+    transition: transform var(--transition-fast);
+  }
+
+  .share-btn:hover svg {
+    transform: scale(1.2);
+  }
+
+  /* Notification Styles */
+  .notification {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background-color: #333;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    box-shadow: var(--shadow-lg);
+    z-index: 1000;
+    opacity: 0;
+    transition: all var(--transition-medium);
+  }
+
+  .notification.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+
+  /* Related Products Section */
+  .related-products {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--medium-gray);
+  }
+
+  /* Mobile Responsiveness */
+  @media (max-width: 768px) {
+    .hero-section {
+      height: 220px;
+    }
+
+    .product-card {
+      padding: 1.5rem;
+    }
+
+    .card-inner {
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    .image-section,
+    .product-content {
+      width: 100%;
+    }
+
+    .image-gallery {
+      max-width: 100%;
+    }
+
+    .main-image-container {
+      aspect-ratio: 4/3;
+    }
+
+    .thumbnail {
+      width: 60px;
+      height: 45px;
+    }
+
+    .product-title {
+      font-size: 1.75rem;
+    }
+
+    .cta-section {
+      flex-direction: column;
+    }
+
+    .primary-button,
+    .secondary-button {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-section {
+      height: 180px;
+    }
+
+    .product-title {
+      font-size: 1.5rem;
+    }
+
+    .product-description {
+      font-size: 1rem;
+    }
+
+    .nav-arrow {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+
+    .share-btn {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+  }
+
+  /* Animation Keyframes */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .main-image-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4/3;
+    background-color: #ffffff;
+    border-radius: 9px;
+    overflow: hidden;
+    box-shadow:
+      0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border: 1px solid #e5e7eb;
+    border-width: 1px 1px 0 1px; /* top, right, bottom, left */
+    margin: 1rem auto;
+    transition: transform 0.3s ease;
+    padding: 20px 30px;
+  }
+  /* Updated main-image styles */
+  .main-image {
+    width: 100%; /* Keep full width within the padded container */
+    height: 100%;
+    object-fit: contain; /* This ensures the image maintains its aspect ratio */
+    display: block;
+    transition: opacity 0.3s ease;
+    border-radius: 8px;
+  }
+
+  /* You might also want to adjust the container width for better proportions */
+  .image-section {
+    width: 100%;
+    max-width: 440px; /* Slightly increased from 400px */
+    margin: 0 auto;
+  }
+  .main-image-container:hover {
+    transform: scale(1.02);
+  }
+  .main-image.fade-out {
+    opacity: 0;
+  }
+
+  .main-image.fade-in {
+    opacity: 1;
+  }
+
+  /* Navigation Arrows */
+  .image-controls {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  .nav-arrow {
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+    pointer-events: auto;
+    opacity: 0.9;
+  }
+
+  .nav-arrow:hover {
+    background: transparent;
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    opacity: 1;
+  }
+
+  .prev-arrow {
+    left: -1rem;
+  }
+
+  .next-arrow {
+    right: -1rem;
+  }
+
+  /* Thumbnails Gallery */
+  .thumbnails-container {
+    width: 100%;
+    overflow: hidden;
+    margin-top: 1.5rem;
+    padding: 0.5rem 0;
+  }
+
+  .thumbnails-scroll {
+    display: flex;
+    gap: 0.75rem;
+    overflow-x: auto;
+    padding: 0.75rem 0;
+    justify-content: center;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: thin;
+    scroll-behavior: smooth;
+  }
+
+  .thumbnails-scroll::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .thumbnails-scroll::-webkit-scrollbar-track {
+    background: #f3f4f6;
+    border-radius: 10px;
+  }
+
+  .thumbnails-scroll::-webkit-scrollbar-thumb {
+    background-color: #3b82f6;
+    border-radius: 10px;
+  }
+
+  .thumbnail {
+    flex: 0 0 auto;
+    width: 90px;
+    height: 70px;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    opacity: 0.7;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .thumbnail:hover {
+    opacity: 0.9;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .thumbnail.active {
+    opacity: 1;
+    border-color: #3b82f6;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3);
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .main-image-container {
+      aspect-ratio: 1/1;
+    }
+
+    .nav-arrow {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+
+    .prev-arrow {
+      left: 0.5rem;
+    }
+
+    .next-arrow {
+      right: 0.5rem;
+    }
+
+    .thumbnail {
+      width: 70px;
+      height: 55px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .nav-arrow {
+      width: 2.25rem;
+      height: 2.25rem;
+    }
+
+    .thumbnail {
+      width: 60px;
+      height: 50px;
+    }
+  }
+  /* Add pulse animation on image hover */
+</style>

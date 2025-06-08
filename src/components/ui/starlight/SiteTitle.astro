@@ -1,0 +1,83 @@
+---
+import mainLogo from "@images/starlight/logolovosis.svg?raw";
+import type { Props } from "@astrojs/starlight/props";
+
+const main = "/";
+const locale = Astro.props.locale ? Astro.props.locale + "/" : "";
+const docs = "/" + locale + "welcome-to-docs/";
+---
+
+<span class="site-title flex">
+  <a class="main-logo" href={main} aria-label="Lovosis" set:html={mainLogo} />
+</span>
+
+<style is:global>
+  .site-title {
+    gap: 1rem;
+    margin-right: 1rem;
+    display: flex;
+    align-items: center;
+    height: auto;
+  }
+  
+  .site-title a {
+    display: flex;
+    align-items: center;
+  }
+  
+  .flex {
+    display: flex;
+    align-items: center;
+  }
+  
+  .site-title a:focus-visible {
+    outline: 0;
+  }
+  
+  .site-title a:focus-visible > svg {
+    transform: translateY(-0.1rem);
+    transition: transform 250ms cubic-bezier(0.33, 1, 0.68, 1);
+  }
+  
+  /* Significantly larger logo size */
+  .site-title svg {
+    width: auto;
+    height: 4.5rem;
+    max-width: none;
+    min-width: 140px;
+    transition: transform 250ms cubic-bezier(0.33, 1, 0.68, 1);
+  }
+  
+  /* Ensure the SVG inside main-logo also gets the same treatment */
+  .main-logo svg {
+    height: 4.5rem;
+    width: auto;
+    min-width: 140px;
+  }
+  
+  /* Additional specificity in case other styles are overriding */
+  :global(.site-title .main-logo svg) {
+    height: 4.5rem !important;
+    width: auto !important;
+    min-width: 140px !important;
+  }
+  
+  /* Ensure the logo container has enough space */
+  .main-logo {
+    display: flex;
+    align-items: center;
+    height: auto;
+    min-height: 60px;
+  }
+  
+  .site-title a:hover svg {
+    transform: translateY(-0.1rem);
+  }
+  
+  /* If there's a parent container restricting size, make sure it has enough space */
+  :global(.site-title-container),
+  :global(.sl-nav-container),
+  :global(header) {
+    min-height: 70px;
+  }
+</style>

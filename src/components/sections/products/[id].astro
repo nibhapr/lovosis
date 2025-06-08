@@ -1,0 +1,492 @@
+---
+// Importing necessary components
+import MainLayout from "@/layouts/MainLayout.astro";
+import FeaturesStatsAlt from "@components/sections/features/FeaturesStatsAlt.astro";
+import { SITE } from "@data/constants";
+import About from "@components/sections/landing/About.astro"
+import productsData from './new.json'; 
+
+
+const pageTitle: string = ` | ${SITE.Title}`;
+
+// Define the Product type
+type Product = {
+  id: number;
+  title: string;
+  shortdes: string;
+  desc: string;
+  img: string;
+  cat1: string;
+  cat2: string;
+  cat3: string;
+  category: string;
+};
+
+// This function generates the paths for your dynamic routes
+export async function getStaticPaths() {
+  const products: Product[] = productsData.products;
+  return products.map((product) => ({
+    params: { id: product.id.toString() },
+  }));
+}
+
+const { id } = Astro.params;
+let product;
+
+if (id) {
+  const productId = parseInt(id);
+  const products: Product[] = productsData.products;
+  product = products.find((p) => p.id === productId);
+}
+const structuredData={
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://lovosis.com/about",
+    "url": "https://lovosis.com/about",
+    "name": "About | Lovosis",
+    "description": "Discover Lovosis, Dubai's authorized supplier of top-quality Surveillance & IT Solution. Learn about our commitment to excellence in the UAE construction industry.",
+    "isPartOf": {
+      "@type": "WebSite",
+      "url": "https://lovosis.com",
+      "name": "Lovosis",
+      "description": "Custom Fabrication & Surveillance Solution Provider In Dubai, United Arab Emirates."
+    },
+    "inLanguage": "en-US"
+  }
+
+---
+
+<style>
+  .autoRotate{
+    animation: autoRotateAnimation;
+    animation-timeline: view();
+  }
+  @keyframes autoRotateAnimation{
+      from{
+          transform: rotate(0deg);
+      }
+      to{
+          transform: rotate(360deg);
+      }
+  }  
+
+  .autoShow{
+    animation: autoShowAnimation both;
+    animation-timeline: view(70% 5%);
+
+    }
+
+    @keyframes autoShowAnimation{
+    from{
+        opacity: 0;
+        transform: translateY(200px) scale(0.3);
+    }to{
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    }
+
+    .fadeInRight {
+    animation: fadeInRightAnimation;
+    animation-timeline: view();
+    }
+
+    @keyframes fadeInRightAnimation {
+        from {
+            opacity: 0;
+            transform: translateX(100px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+
+
+    .card-wrapper{
+    max-width: 1100px;
+    margin-top: 5rem;
+    }
+    img{
+        width: 100%;
+        display: block;
+    }
+    .img-display{
+        overflow: hidden;
+    }
+    .img-showcase{
+        display: flex;
+        width: 100%;
+        transition: all 0.5s ease;
+    }
+    .img-showcase img{
+        min-width: 100%;
+        height: 50%;
+    }
+    .img-select{
+        display: flex;
+    }
+    .img-item{
+        margin: 0.3rem;
+    }
+    .img-item:nth-child(1),
+    .img-item:nth-child(2),
+    .img-item:nth-child(3){
+        margin-right: 0;
+    }
+    .img-item:hover{
+        opacity: 0.8;
+    }
+    .product-content{
+        padding: 2rem 1rem;
+    }
+    .product-title{
+        font-size: 3rem;
+        text-transform: capitalize;
+        font-weight: 700;
+        position: relative;
+        color: #12263a;
+    }
+
+    .product-detail h2{
+        text-transform: capitalize;
+        color: #12263a;
+        padding-bottom: 0.6rem;
+    }
+    .product-detail p{
+        font-size: 0.9rem;
+        padding: 0.3rem;
+        opacity: 0.8;
+    }
+    .product-detail ul{
+        margin: 1rem 0;
+        font-size: 0.9rem;
+    }
+    .product-detail ul li{
+        margin: 0;
+        list-style: none;
+        background: url(/pictures/checked.png) left center no-repeat;
+        background-size: 18px;
+        padding-left: 1.7rem;
+        margin: 0.4rem 0;
+        font-weight: 600;
+        opacity: 0.9;
+    }
+    .product-detail ul li span{
+        font-weight: 400;
+    }
+
+
+    @media screen and (min-width: 992px){
+        .card{
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 1.5rem;
+        }
+        .card-wrapper{
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .product-imgs{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .product-content{
+            padding-top: 0;
+        }
+    }
+
+
+</style>
+
+
+<MainLayout
+  title={pageTitle} sd = {structuredData}
+ 
+>
+
+
+
+<section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
+  {product ? (
+    <nav class="flex mb-5" aria-label="Breadcrumb">
+        <ol class="inline-flex items-center space-x-1 md:space-x-2">
+            <li class="inline-flex items-center">
+                <a href="#" class="text-gray-700 dark:text-teal-600 hover:text-gray-900 inline-flex items-center">
+                    <svg class="w-5 h-5 mr-2.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z">
+                        </path>
+                    </svg>
+                    Home
+                </a>
+            </li>
+            <li>
+                <div class="flex items-center">
+                    <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                    <a href="#" class="text-gray-700 dark:text-teal-600 hover:text-gray-900 ml-1 md:ml-2 text-sm font-medium">Users</a>
+                </div>
+            </li>
+            <li>
+                <div class="flex items-center">
+                    <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="text-gray-400 ml-1 md:ml-2 text-sm font-medium" aria-current="page">List</span>
+                </div>
+            </li>
+        </ol>
+    </nav>
+
+
+
+    <div class="card-wrapper">
+        <div class="card">
+          <!-- card left -->
+          <div class="product-imgs">
+            <div class="img-display border dark:border-teal-600 border-blue-600 rounded-xl">
+              <div class="img-showcase ">
+                <img src={product.img} alt="shoe image" />
+                <img src={product.img} alt="shoe image" />
+                <img src={product.img} alt="shoe image" />
+                <img src={product.img} alt="shoe image" />
+                <img src={product.img} alt="shoe image" />
+              </div>
+            </div>
+            <div class="img-select">
+              <div class="img-item border dark:border-teal-600 border-blue-600 p-4 rounded-xl">
+                <a href="#" data-id="1">
+                    <img src={product.img} alt="shoe image" />
+                </a>
+              </div>
+              <div class="img-item border dark:border-teal-600 border-blue-600 p-4 rounded-xl">
+                <a href="#" data-id="2">
+                  <img src={product.img} alt="shoe image" />
+                </a>
+              </div>
+              <div class="img-item border dark:border-teal-600 border-blue-600 p-4 rounded-xl">
+                <a href="#" data-id="3">
+                  <img src={product.img} alt="shoe image" />
+                </a>
+              </div>
+              <div class="img-item border dark:border-teal-600 border-blue-600 p-4 rounded-xl">
+                <a href="#" data-id="4">
+                  <img src={product.img} alt="shoe image" />
+                </a>
+              </div>
+              <div class="img-item border dark:border-teal-600 border-blue-600 p-4 rounded-xl">
+                <a href="#" data-id="5">
+                  <img src={product.img} alt="shoe image" />
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- card right -->
+          <div class="product-content">
+            <h2 class="product-title dark:text-teal-600">{product.title}</h2>
+            <div class="product-detail dark:text-neutral-300">
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+              </p>
+              <ul>
+                <li>Color: <span>Black</span></li>
+                <li>Available: <span>in stock</span></li>
+                <li>Category: <span>Shoes</span></li>
+                <li>Shipping Area: <span>All over the world</span></li>
+                <li>Shipping Fee: <span>Free</span></li>
+              </ul>
+            </div>
+      
+            <a href="/contact">
+                <button class=" 2xl:text-base bg-blue-600 dark:bg-teal-600 text-white py-2 px-5 mt-10 hover:underline rounded-lg">Shop Now</button>
+            </a>
+          </div>
+        </div>
+    </div>
+
+
+    <div class="w-full max-w-full mx-auto mt-36">
+        <div class="flex items-center gap-x-5 justify-center border-gray-300">
+            <button
+                class="w-36 py-4 text-center font-medium text-gray-700 bg-gray-100 rounded-2xl focus:outline-none"
+                onclick="openTab(event, 'tab1')">Description</button>
+            <button class="w-36 py-4 text-center font-medium text-gray-700 bg-gray-100 rounded-2xl focus:outline-none"
+                onclick="openTab(event, 'tab2')">Specification</button>
+        </div>
+        <div id="tab1" class="tabcontent p-4">
+          <div class="flex flex-col-2 dark:text-neutral-300 md:flex-col-2 flex-wrap items-center justify-center gap-y-2 gap-x-3 sm:flex-row sm:gap-x-12 sm:gap-y-12 lg:gap-x-5">
+            
+            What is Lorem Ipsum?
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+            It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
+            It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+ 
+          </div>
+        </div>
+
+        <div id="tab2" class="tabcontent p-4 hidden">
+          
+          <div class="flex flex-col-2 dark:text-neutral-300 md:flex-col-2 flex-wrap items-center justify-center gap-y-2 gap-x-3 sm:flex-row sm:gap-x-12 sm:gap-y-12 lg:gap-x-5">
+            
+            What is Lorem Ipsum?
+            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+            It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
+            It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+ 
+      
+          </div>
+          
+        </div>
+      </div>
+
+     
+     <div id="modelConfirm" class="fixed hidden z-50 inset-0 bg-gray-900 bg-opacity-60 overflow-y-auto h-full w-full px-4 ">
+         <div class="relative top-20 mx-auto shadow-xl rounded-md bg-neutral-200 dark:bg-neutral-700 max-w-md">
+     
+             <div class="flex justify-end p-2">
+                 <button onclick="closeModal('modelConfirm')" type="button"
+                     class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center">
+                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                         <path fill-rule="evenodd"
+                             d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                             clip-rule="evenodd"></path>
+                     </svg>
+                 </button>
+             </div>
+     
+             <div class="p-6 pt-0 text-center">
+                <form id='contact-form' action="send-email.php" method="POST">
+                    <div class="grid gap-4 fadeInUp">
+                      
+                      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                        <div class="relative">
+                          <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500 dark:text-gray-400" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"><circle cx="24" cy="11" r="7"/><path d="M4 41c0-8.837 8.059-16 18-16m9 17l10-10l-4-4l-10 10v4z"/></g></svg>
+                          </div>
+                          <input type="text" name="name" id="name" placeholder="First Name " required class="block w-full ps-10 p-2.5 rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 placeholder:text-neutral-500 focus:border-neutral-200 focus:outline-none focus:ring focus:ring-neutral-400 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-600 dark:bg-neutral-700/30 dark:text-neutral-300 dark:placeholder:text-neutral-400 dark:focus:ring-1" />
+                          </div>
+                          <div class="relative">
+                              <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                  <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500 dark:text-gray-400" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"><circle cx="24" cy="11" r="7"/><path d="M4 41c0-8.837 8.059-16 18-16m9 17l10-10l-4-4l-10 10v4z"/></g></svg>
+                              </div>
+                          <input type="text" name="name" id="name" placeholder="Last Name " required class="block w-full ps-10 p-2.5 rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 placeholder:text-neutral-500 focus:border-neutral-200 focus:outline-none focus:ring focus:ring-neutral-400 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-600 dark:bg-neutral-700/30 dark:text-neutral-300 dark:placeholder:text-neutral-400 dark:focus:ring-1" />
+                        </div>
+                      </div>
+                      
+                      <div class="relative">
+                          <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500 dark:text-gray-400" viewBox="0 0 20 20"><path fill="currentColor" d="m15.81 1.548l-4.83 4.83a2.2 2.2 0 0 0-.578 1.02l-.375 1.498a.89.89 0 0 0 1.079 1.078l1.498-.374a2.2 2.2 0 0 0 1.02-.578l4.83-4.83a1.87 1.87 0 0 0-2.645-2.644M12.942 3l.84-.84A2 2 0 0 0 13 2H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9.06l-.668.67a3 3 0 0 1-.332.288V16a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zM9 14a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1z"/></svg>
+                          </div>
+                        <input type="tel" name="phone" id="phone" placeholder="Phone Number " pattern="[0-9, +]*" oninput="this.value = this.value.replace(/[^0-9, +]/g, '')" required class="block w-full rounded-lg border ps-10 p-2.5 border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 placeholder:text-neutral-500 focus:border-neutral-200 focus:outline-none focus:ring focus:ring-neutral-400 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-600 dark:bg-neutral-700/30 dark:text-neutral-300 dark:placeholder:text-neutral-400 dark:focus:ring-1" />
+                      </div>
+                      
+                      <div class="relative">
+                          <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500 dark:text-gray-400" viewBox="0 0 24 24"><path fill="currentColor" d="M19.07 13.88L13 19.94V22h2.06l6.06-6.07m1.58-2.35l-1.28-1.28a.52.52 0 0 0-.38-.17c-.15.01-.29.06-.39.17l-1 1l2.05 2l1-1c.19-.2.19-.52 0-.72M11 18H4V8l8 5l8-5v2h2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h7zm9-12l-8 5l-8-5z"/></svg>
+                          </div>
+                        <input type="email" name="email" id="email" placeholder="Email " required class="block w-full rounded-lg border ps-10 p-2.5 border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 placeholder:text-neutral-500 focus:border-neutral-200 focus:outline-none focus:ring focus:ring-neutral-400 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-600 dark:bg-neutral-700/30 dark:text-neutral-300 dark:placeholder:text-neutral-400 dark:focus:ring-1" />
+                      </div>
+                      
+                      <div class="relative">
+                          <div class="absolute inset-y-0 start-0 flex items-start pt-6 ps-3.5 pointer-events-none">
+                              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500 dark:text-gray-400" viewBox="0 0 24 24"><path fill="currentColor" d="M20 2H4c-1.103 0-2 .897-2 2v12c0 1.103.897 2 2 2h3v3.767L13.277 18H20c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2m0 14h-7.277L9 18.233V16H4V4h16z"/><path fill="currentColor" d="m13.803 9.189l-1.399-1.398l-3.869 3.864v1.399h1.399zm.327-3.123l1.398 1.399l-1.066 1.066l-1.399-1.398z"/></svg>
+                          </div>
+                        <textarea name="message" id="message" placeholder="Message " required class="block w-full rounded-lg border ps-10 p-2.5 border-neutral-200 bg-neutral-50 px-4 py-5 items-start text-sm text-neutral-700 placeholder:text-neutral-500 focus:border-neutral-200 focus:outline-none focus:ring focus:ring-neutral-400 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-600 dark:bg-neutral-700/30 dark:text-neutral-300 dark:placeholder:text-neutral-400 dark:focus:ring-1"></textarea>
+                      </div>
+                      
+                      <div>
+                        <button type="submit" class="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                          Send Message
+                        </button>
+                      </div>
+                    </div>         
+                  </form>
+                 
+             </div>
+     
+         </div>
+     </div>
+      ) : (
+    <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
+      <p class="text-center text-gray-500 dark:text-neutral-300">Product not found.</p>
+    </section>
+  )}
+
+    <script is:inline>
+        const imgs = document.querySelectorAll('.img-select a');
+        const imgBtns = [...imgs];
+        let imgId = 1;
+
+        imgBtns.forEach((imgItem) => {
+            imgItem.addEventListener('click', (event) => {
+                event.preventDefault();
+                imgId = imgItem.dataset.id;
+                slideImage();
+            });
+        });
+
+        function slideImage(){
+            const displayWidth = document.querySelector('.img-showcase img:first-child').clientWidth;
+
+            document.querySelector('.img-showcase').style.transform = `translateX(${- (imgId - 1) * displayWidth}px)`;
+        }
+
+        window.addEventListener('resize', slideImage);
+
+
+        function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].classList.add("hidden");
+        }
+        tablinks = document.getElementsByTagName("button");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].classList.remove("active:bg-gray-200");
+        }
+        document.getElementById(tabName).classList.remove("hidden");
+        evt.currentTarget.classList.add("active:bg-gray-200");
+    }
+
+    window.openModal = function(modalId) {
+        document.getElementById(modalId).style.display = 'block'
+        document.getElementsByTagName('body')[0].classList.add('overflow-y-hidden')
+    }
+
+    window.closeModal = function(modalId) {
+        document.getElementById(modalId).style.display = 'none'
+        document.getElementsByTagName('body')[0].classList.remove('overflow-y-hidden')
+    }
+
+    // Close all modals when press ESC
+    document.onkeydown = function(event) {
+        event = event || window.event;
+        if (event.key === "Escape") {
+            document.getElementsByTagName('body')[0].classList.remove('overflow-y-hidden')
+            let modals = document.getElementsByClassName('modal');
+            Array.prototype.slice.call(modals).forEach(i => {
+                i.style.display = 'none'
+            })
+        }
+    };
+    </script>
+    
+
+</section>
+  
+  
+  
+</MainLayout>

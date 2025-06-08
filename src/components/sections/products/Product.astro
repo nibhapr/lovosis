@@ -1,0 +1,385 @@
+---
+import productsData from '@/components/sections/products/new.json';  // Adjust the path as necessary
+
+// Define the Product type
+type Product = {
+  id: number;
+  title: string;
+  shortdes: string;
+  desc: string;
+  img: string;
+  cat1: string;
+  cat2: string;
+  cat3: string;
+  category: string;
+};
+
+// Extract the products array from the imported data
+const products: Product[] = productsData.products;
+---
+
+<style>
+    .card {
+      overflow: visible;
+      width: 190px;
+      height: 254px;
+    }
+  
+    .content {
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 300ms;
+      box-shadow: 0px 0px 10px 1px #000000ee;
+      border-radius: 5px;
+    }
+  
+    .front, .back {
+      background-color: #151515;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+  
+    .back {
+      width: 100%;
+      height: 100%;
+      justify-content: center;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+  
+    .back::before {
+      position: absolute;
+      content: ' ';
+      display: block;
+      width: 160px;
+      height: 160%;
+      background: linear-gradient(90deg, transparent, #ff9966, #ff9966, #ff9966, #ff9966, transparent);
+      animation: rotation_481 5000ms infinite linear;
+    }
+  
+    .back-content {
+      position: absolute;
+      width: 99%;
+      height: 99%;
+      background-color: #151515;
+      border-radius: 5px;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+    }
+  
+    .card:hover .content {
+      transform: rotateY(180deg);
+    }
+  
+    @keyframes rotation_481 {
+      0% {
+        transform: rotateZ(0deg);
+      }
+  
+      0% {
+        transform: rotateZ(360deg);
+      }
+    }
+  
+    .front {
+      transform: rotateY(180deg);
+      color: white;
+    }
+  
+    .front .front-content {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  
+    .front-content .badge {
+      background-color: #00000055;
+      padding: 2px 10px;
+      border-radius: 10px;
+      backdrop-filter: blur(2px);
+      width: fit-content;
+    }
+  
+    .description {
+      box-shadow: 0px 0px 10px 5px #00000088;
+      width: 100%;
+      padding: 10px;
+      background-color: #00000099;
+      backdrop-filter: blur(5px);
+      border-radius: 5px;
+    }
+  
+    .title {
+      font-size: 11px;
+      max-width: 100%;
+      display: flex;
+      justify-content: space-between;
+    }
+  
+    .title p {
+      width: 50%;
+    }
+  
+    .card-footer {
+      color: #ffffff88;
+      margin-top: 5px;
+      font-size: 8px;
+    }
+  
+    .front .img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+  
+    .circle {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background-color: #ffbb66;
+      position: relative;
+      filter: blur(15px);
+      animation: floating 2600ms infinite linear;
+    }
+  
+    #bottom {
+      background-color: #ff8866;
+      left: 50px;
+      top: 0px;
+      width: 150px;
+      height: 150px;
+      animation-delay: -800ms;
+    }
+  
+    #right {
+      background-color: #ff2233;
+      left: 160px;
+      top: -80px;
+      width: 30px;
+      height: 30px;
+      animation-delay: -1800ms;
+    }
+  
+    @keyframes floating {
+      0% {
+        transform: translateY(0px);
+      }
+  
+      50% {
+        transform: translateY(10px);
+      }
+  
+      100% {
+        transform: translateY(0px);
+      }
+    }
+  
+    .scroll-container {
+      display: flex;
+      overflow-x: auto;
+      white-space: nowrap;
+      scroll-behavior: smooth;
+    }
+  
+    .scroll-container::-webkit-scrollbar {
+      display: none;
+    }
+
+
+    .autoBLur{
+  animation: autoBLurAnimation linear both;
+  animation-timeline: view();
+  }
+  @keyframes autoBLurAnimation{
+      0%{
+          filter: blur(40px);
+      }
+      45%, 55%{
+          filter: blur(0px);
+      }
+      100%{
+          filter: blur(40px);
+      }
+  }
+
+
+  .autoShow{
+  animation: autoShowAnimation both;
+  animation-timeline: view(70% 5%);
+
+  }
+
+  @keyframes autoShowAnimation{
+  from{
+      opacity: 0;
+      transform: translateY(200px) scale(0.3);
+  }to{
+      opacity: 1;
+      transform: translateY(0) scale(1);
+  }
+  }
+
+  .autoRotate{
+    animation: autoRotateAnimation;
+    animation-timeline: view();
+  }
+  @keyframes autoRotateAnimation{
+      from{
+          transform: rotate(0deg);
+      }
+      to{
+          transform: rotate(360deg);
+      }
+  }
+</style>
+
+
+  <section>
+
+    <div class="relative mx-auto mb-12 w-full space-y-4 mt-24 md:mt-32 text-center sm:w-1/2 lg:w-1/3">
+      <img
+        src="pictures/favicon.png"
+        alt="product-img"
+        class="absolute inset-20 mx-auto autoRotate opacity-100"
+        style="z-index: -1;"
+      />
+      <h2
+        class="text-balance md:text-8xl text-5xl autoBLur font-bold leading-tight text-neutral-800 dark:text-neutral-200 sm:text-3xl fade-in-up"
+      >
+        Our
+      </h2>
+      <h2
+        class="text-balance md:text-8xl text-5xl autoBLur font-bold leading-tight text-neutral-800 dark:text-neutral-200 sm:text-3xl fade-in-up"
+      >
+        2024
+      </h2>
+      <h2
+        class="text-balance text-4xl font-bold leading-tight text-neutral-800 dark:text-neutral-200 sm:text-3xl fade-in-up"
+      >
+        Products
+      </h2>
+    </div>
+
+    
+
+    <div class="scroll-container mx-auto max-w-[85rem] px-4 py-4 sm:px-6 lg:px-8 lg:py-6 2xl:max-w-full">
+      <div class="flex flex-col-2 md:flex-col-2 items-center justify-center gap-y-2 gap-x-3 sm:flex-row sm:gap-x-12 sm:gap-y-0 lg:gap-x-5">
+        
+        {products.map((product: Product) => (
+        <a href={`${product.id}`}>
+          <div class="product-card w-[250px] rounded-md shadow-xl overflow-hidden relative cursor-pointer snap-start shrink-0 py-8 px-6 bg-white dark:bg-white/[.075] flex flex-col items-center justify-center gap-3 transition-all duration-300 group">
+              
+              <div class="para uppercase text-center leading-none z-40">
+                <p
+                  style="-webkit-text-stroke: 1px rgb(207, 205, 205);
+                            -webkit-text-fill-color: transparent;"
+                  class="z-10 font-bold text-lg -mb-5 tracking-wider text-gray-600"
+                >
+                  New Product
+                </p>
+                <p class="font-bold text-xl tracking-wider text-[#1E7DB6] dark:text-white/[.075] z-30">
+                  New Product
+                </p>
+              </div>
+              <div class="w-[180px] aspect-square relative z-20 after:absolute after:h-1 after:w-full after:opacity-0 after:bg-[#3D958E] after:top-8 after:left-0 after:group-hover:opacity-100 after:translate-x-1/2 after:translate-y-1/2 after:-z-20 after:group-hover:w-full after:transition-all after:duration-300 after:group-hover:origin-right after:group-hover:-translate-x-1/2 group-hover:translate-x-1/2 transition-all duration-300">
+            
+                
+                <img src={product.img} alt={product.title}class=" justify-center mt-5 items-center">
+        
+              <div class="tooltips absolute top-0 left-10 -translate-x-[150%] p-0 flex flex-col items-start gap-10 transition-all duration-300 group-hover:-translate-x-full">
+                <p
+                  class="text-[#3D958E] font-semibold text-sm uppercase group-hover:delay-1000 transition-all opacity-0 group-hover:opacity-100 group-hover:transition-all group-hover:duration-500"
+                >
+                  {product.title}
+                </p>
+                <ul class="flex flex-col items-start gap-2">
+                  
+                  <li
+                    class="inline-flex mt-20 gap-2 items-center justify-center group-hover:delay-200 transition-all opacity-0 group-hover:opacity-100 group-hover:transition-all group-hover:duration-500"
+                  >
+                    <svg
+                      stroke-linejoin="round"
+                      stroke-linecap="round"
+                      stroke-width="3"
+                      class="stroke-[#1E7DB6]"
+                      stroke="#000000"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      height="10"
+                      width="10"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                      <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                    </svg>
+                    <p class="text-xs font-semibold text-[#3D958E]">{product.title}</p>
+            
+                  </li>
+                  
+                </ul>
+                
+              </div>
+              </div>
+
+              <div class="p-0 group-hover:-translate-y-5 transition-all duration-300">
+                
+                  <button class="relative group cursor-pointer text-sky-50  overflow-hidden h-10 w-28 rounded-md bg-white dark:bg-white/[.075] p-2 flex justify-center items-center text-xs font-semibold border border-teal-600 dark:text-white">
+
+                    <div class="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-40 h-40 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-blue-600"></div>
+                    <div class="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-32 h-32 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-[#3D958E]"></div>
+                    <div class="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-24 h-24 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-white/[.075]"></div>
+                    <div class="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-14 h-14 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-sky-600"></div>
+                    <p class="z-10">Shop Now</p>
+                  </button>
+                
+              </div>
+            </div> 
+        </a>
+        ))}
+
+        
+          
+
+      </div>
+    </div>
+  
+  
+  
+  </section>
+  
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        let prevScrollY = window.scrollY;
+      
+        window.addEventListener("scroll", function () {
+          const scrollContainer = document.querySelector(".scroll-container");
+          if (scrollContainer) {
+            const scrollYDiff = window.scrollY - prevScrollY;
+            scrollContainer.scrollLeft += scrollYDiff;
+            prevScrollY = window.scrollY;
+          }
+        });
+      });
+      </script>
+  
+  
+  
+  
+  

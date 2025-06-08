@@ -1,0 +1,671 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+import { unvdisplaydata } from "../data/camera";
+import { getCollection } from "astro:content";
+import PrimaryCTA from "@/components/ui/buttons/PrimaryCTA.astro";
+const pageTitle: string = "UNV Smart Interactive Display";
+interface Props {
+  title: string;
+  subTitle?: string;
+  benefits?: Array<string>;
+}
+
+interface Card {
+  id: number;
+  title: string;
+  desc: string;
+  img: string;
+  alt: string;
+  author: string;
+  reviewBody: string;
+  ratingValue: number;
+  slug: string;
+  features: any;
+  publishedTime: string;
+}
+
+const content = await getCollection("unvdisplay");
+const cards: Card[] = content.map((item) => ({
+  id: item.data.id,
+  title: item.data.title,
+  desc: item.data.desc,
+  img: item.data.img.src,
+  alt: item.data.alt,
+  author: item.data.author,
+  reviewBody: item.data.reviewBody,
+  ratingValue: item.data.ratingValue,
+  slug: item.slug,
+  features: item.data.features,
+  publishedTime: item.data.publishedTime,
+}));
+const description =
+  "Find the best touch screen board for teaching price! Lovosis Technology LLC, Dubai, offers UNV Smart Interactive Panels & LCD video walls. Transform your classroom today!";
+const abtitle: string = "UNV Smart Interactive Display";
+const absubTitle: string =
+  "Experience the future of interactive learning with our UNV smart interactive display models";
+const canonicalUrl = new URL("/unidisplay", Astro.site).toString();
+const metaTags = [
+  // Basic SEO
+  { name: "title", content: pageTitle },
+  { name: "description", content: description },
+  {
+    name: "keywords",
+    content:
+      "Uniarch Dubai Price, Bulk CCTV UAE, Commercial Security Dubai, AI Surveillance UAE, Night Vision Cameras Dubai, Access Control Systems, Wholesale Security Middle East",
+  },
+  { name: "robots", content: "index, follow" },
+
+  // Open Graph/Facebook
+
+  // Geo Tags
+  { name: "geo.region", content: "AE-DU" },
+  { name: "geo.placename", content: "Dubai" },
+  { name: "geo.position", content: "25.276987;55.296249" },
+  { name: "ICBM", content: "25.276987, 55.296249" },
+
+  // Canonical
+  { name: "canonical", content: `${Astro.url.origin}/unvdisplay` },
+
+  // Contact Information
+  { name: "contact", content: "sales@lovosis.com" },
+  { name: "telephone", content: "+971509162488" },
+
+  // Publisher Information
+  { name: "author", content: "Lovosis Technology L.L.C" },
+  { name: "publisher", content: "Lovosis Technology L.L.C" },
+];
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      name: "Lovosis Technology L.L.C",
+      url: "https://lovosis.com",
+      logo: "https://lovosis.come.com/pictures/logo.png",
+      description: description,
+      sameAs: [
+        "https://www.facebook.com/p/LOVOSIS-TECHNOLOGY-100083060600975/",
+        "https://www.instagram.com/_lovosis_group_of_companies_/reels/",
+      ],
+      email: "sales@lovosis.com",
+      telephone: "+971509162488",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress:
+          "Satellite Market Naif Deira,Baghlaf Building Showroom No.5",
+        addressLocality: "Dubai",
+        addressCountry: "AE",
+        addressRegion: "Dubai,United Arab Emirates",
+        postalCode: "123421",
+      },
+    },
+    {
+      "@type": "WebPage",
+      name: "Unv Interactive panel | Lovosis Technology",
+      url: "https://lovosis.com/unvdisplay",
+      description: description,
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://lovosis.com/#breadcrumb",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          item: {
+            "@id": "https://lovosis.com",
+            name: "Home",
+          },
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          item: {
+            "@id": "https://lovosis.com/unvdisplay",
+            name: "Unv Display",
+          },
+        },
+      ],
+    },
+    // First Product List (UNV Displays)
+
+    // Second Product List (Another Category)
+   
+  ],
+};
+---
+
+<style>
+  .autoRotate {
+    animation: autoRotateAnimation;
+    animation-timeline: view();
+  }
+  @keyframes autoRotateAnimation {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .autoShow {
+    animation: autoShowAnimation both;
+    animation-timeline: view(70% 5%);
+  }
+
+  @keyframes autoShowAnimation {
+    from {
+      opacity: 0;
+      transform: translateY(200px) scale(0.3);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  .fadeInRight {
+    animation: fadeInRightAnimation;
+    animation-timeline: view();
+  }
+
+  @keyframes fadeInRightAnimation {
+    from {
+      opacity: 0;
+      transform: translateX(100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+</style>
+
+<MainLayout
+  title={pageTitle}
+  sd={structuredData}
+  metaTags={metaTags}
+  description={description}
+  canonical={canonicalUrl}
+>
+  <section
+    class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full"
+  >
+    <div
+      class="mb-20 rounded-2xl bg-gray-100 p-5 text-center dark:bg-neutral-500 md:p-12"
+    >
+      <h1
+        class="animate-fade-in-left text-balance text-3xl font-bold tracking-tight text-neutral-800 dark:text-neutral-100 md:text-6xl md:leading-tight"
+      >
+        {abtitle}
+      </h1>
+      <p class="mt-1 text-pretty text-neutral-600 dark:text-neutral-200">
+        {absubTitle}
+      </p>
+    </div>
+    <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
+      <div class="bg-white shadow-xl dark:bg-neutral-500">
+        <img
+          src="/pictures/Unvdisplay/Unvdisplay.png"
+          ,
+          alt="interactive display"
+          class="h-full w-full object-contain"
+        />
+        <p class="mt-4 text-center text-2xl font-bold dark:text-white">
+          MW3565-U-E2
+        </p>
+      </div>
+      <div class="bg-white shadow-xl dark:bg-neutral-500">
+        <img
+          src="/pictures/Unvdisplay/MW2.png"
+          ,
+          alt="interactive panel"
+          class="h-full w-full object-contain"
+        />
+        <p
+          class="mt-4 text-center text-2xl font-bold text-black dark:text-white"
+        >
+          MW7815-FI-EB
+        </p>
+      </div>
+      <div class="bg-white shadow-xl dark:bg-neutral-500">
+        <img
+          src="/pictures/Unvdisplay/MW1.png"
+          ,
+          alt="Lcd walls"
+          class="h-full w-full object-contain"
+        />
+        <p class="mt-4 text-center text-2xl font-bold dark:text-white">
+          MW7809-FI-CF
+        </p>
+      </div>
+      <div class="bg-white shadow-xl dark:bg-neutral-500">
+        <img
+          src="/pictures/Unvdisplay/Unvdisplay8.png"
+          ,
+          alt="Led display"
+          class="h-full w-full object-contain"
+        />
+        <p class="mt-4 text-center text-2xl font-bold dark:text-white">
+          MW-A46-B1-E
+        </p>
+      </div>
+    </div>
+    <div class="mb-5 mt-32 rounded-2xl text-center">
+      <h2
+        class="animate-fade-in text-2xl font-semibold text-gray-900 dark:text-gray-200"
+      >
+        Lovosis Technology LLC, Dubai, is the authorized distributor of UNV
+        Smart Interactive Panels
+      </h2>
+    </div>
+    <div class="mx-auto max-w-7xl text-gray-500 dark:text-gray-200">
+      <p class="animate-slide-in-left delay-100">
+        <strong>UNV Smart Interactive Panels</strong> are designed to transform the
+        way you teach, learn, and collaborate. With advanced features like ultra-responsive
+        touch screen technology, crystal-clear interactive display, and seamless
+        integration with modern teaching tools, <strong>UNV panels</strong> are the
+        ultimate solution for educators and professionals alike.
+      </p>
+    </div>
+
+    <div class="mb-5 mt-16 rounded-2xl text-center">
+      <h2
+        class="animate-fade-in text-2xl font-semibold text-gray-900 dark:text-gray-200"
+      >
+        Why Choose UNV Smart Interactive Panels?
+      </h2>
+    </div>
+    <div class="mx-auto max-w-7xl text-gray-500 dark:text-gray-200">
+      <p class="animate-slide-in-left delay-100">
+        <strong>1: High-Resolution Interactive Display:</strong>
+      </p>
+      <li class="animate-slide-in-left delay-200">
+        Enjoy stunning visuals with 4K UHD resolution, perfect for engaging
+        students or presenting detailed data
+      </li>
+      <p class="animate-slide-in-left delay-300">
+        <strong>2: Multi-Touch Capability</strong>
+      </p>
+      <li class="animate-slide-in-left delay-400">
+        Up to 20-point touch support for seamless collaboration and interaction.
+      </li>
+      <p class="animate-slide-in-left delay-500">
+        <strong>3: Built-In Android and Windows Compatibility</strong>
+      </p>
+      <li class="animate-slide-in-left delay-600">
+        Easily switch between platforms for maximum flexibility.
+      </li>
+      <p class="animate-slide-in-left delay-700">
+        <strong>4: Long-Lasting Durability</strong>
+      </p>
+      <li class="animate-slide-in-left delay-800">
+        Designed for heavy daily use, ensuring reliability for years to come
+      </li>
+      <p class="animate-slide-in-left delay-900">
+        <strong>5: Easy-to-Use Interface</strong>
+      </p>
+      <li class="animate-slide-in-left mb-8 delay-1000">
+        Intuitive controls make it simple for teachers and presenters to get
+        started.
+      </li>
+      <PrimaryCTA title="Explore Our Products" url="/unvdisplayproducts" />
+    </div>
+
+    <style>
+      /* Animation classes */
+      .animate-fade-in {
+        opacity: 0;
+        transition: opacity 0.6s ease-out;
+      }
+
+      .animate-slide-in-left {
+        opacity: 0;
+        transform: translateX(-20px);
+        transition:
+          opacity 0.6s ease-out,
+          transform 0.6s ease-out;
+      }
+
+      /* Delay classes */
+      .delay-100 {
+        transition-delay: 100ms;
+      }
+      .delay-200 {
+        transition-delay: 200ms;
+      }
+      .delay-300 {
+        transition-delay: 300ms;
+      }
+      .delay-400 {
+        transition-delay: 400ms;
+      }
+      .delay-500 {
+        transition-delay: 500ms;
+      }
+      .delay-600 {
+        transition-delay: 600ms;
+      }
+      .delay-700 {
+        transition-delay: 700ms;
+      }
+      .delay-800 {
+        transition-delay: 800ms;
+      }
+      .delay-900 {
+        transition-delay: 900ms;
+      }
+      .delay-1000 {
+        transition-delay: 1000ms;
+      }
+
+      /* When element is in view */
+      .in-view {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    </style>
+
+    <script>
+      // Intersection Observer setup
+      document.addEventListener("DOMContentLoaded", function () {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("in-view");
+                // Optional: Unobserve after animation
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          {
+            threshold: 0.1,
+          }
+        );
+
+        // Observe all animated elements
+        document
+          .querySelectorAll(".animate-fade-in, .animate-slide-in-left")
+          .forEach((el) => {
+            observer.observe(el);
+          });
+      });
+    </script>
+    <div class="mx-auto mt-20 max-w-7xl px-4 sm:px-6 lg:px-8 lg:py-1">
+      <h2 class="text-2xl font-semibold text-gray-900 dark:text-gray-200">
+        <div class="mb-5 mt-16 rounded-2xl text-center">
+          Latest Products from Lovosis Technology
+        </div>
+      </h2>
+      <ul id="cards" class="grid list-none grid-cols-1 grid-rows-4 gap-4">
+        {
+          unvdisplaydata.map((item) => (
+            <li class="card sticky top-32 cursor-pointer rounded-lg bg-white pt-4 shadow-xl transition-all duration-300 dark:bg-neutral-600">
+              <div class="card__content relative grid grid-cols-1 gap-1 rounded-lg p-5 text-left md:grid-cols-2">
+                <div>
+                  <h2 class="text-4xl font-light dark:text-neutral-200">
+                    {item.title}
+                  </h2>
+                  <p class="mt-3 text-base font-light leading-normal text-gray-500 dark:text-neutral-300">
+                    {item.description}
+                  </p>
+                </div>
+                <div class="self-end">
+                  <figure class="h-64 overflow-hidden">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      class="h-full w-full object-contain"
+                    />
+                  </figure>
+                </div>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <div class="mb-5 mt-16 rounded-2xl text-center">
+      <h2 class="text-2xl font-semibold text-gray-900 dark:text-gray-200">
+        Why Lovosis Technology LLC?
+      </h2>
+    </div>
+    <div class="mx-auto max-w-7xl text-gray-500 dark:text-gray-200">
+      As the <strong
+        >authorized distributor of UNV Smart Interactive Panels in Dubai</strong
+      >, we pride ourselves on delivering top-quality products and exceptional
+      customer service. Our team of experts is here to help you choose the right
+      solution for your needs and provide ongoing support to ensure your
+      satisfaction
+    </div>
+    <div class="mb-5 mt-16 rounded-2xl text-center">
+      <h2 class="text-2xl font-semibold text-gray-900 dark:text-gray-200">
+        Get Started Today!
+      </h2>
+    </div>
+    <div class="mx-auto max-w-7xl text-gray-500 dark:text-gray-200">
+      <p>
+        Ready to take your teaching or presentations to the next level? Explore
+        our range of interactive panels, smart boards, and LCD video walls
+        today. Contact Lovosis Technology LLC for more information or to request
+        a demo.
+      </p>
+      
+
+      <style>
+        /* Improved smooth transitions */
+        .scroll-animate {
+          transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .grid > div {
+          transition:
+            opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+            transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+            box-shadow 0.3s ease;
+          transform: translateY(20px);
+        }
+
+        /* Hover effects */
+        .grid > div:hover {
+          transform: translateY(-5px) !important;
+          box-shadow:
+            0 10px 25px -5px rgba(0, 0, 0, 0.1),
+            0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        /* Dark mode adjustments */
+        .dark .grid > div:hover {
+          box-shadow:
+            0 10px 25px -5px rgba(0, 0, 0, 0.3),
+            0 10px 10px -5px rgba(0, 0, 0, 0.1);
+        }
+      </style>
+
+      <style>
+        .hero-section {
+          @apply bg-cover bg-center py-16 text-center text-white;
+          background-image: url("");
+        }
+        .hero-content {
+          @apply bg-black bg-opacity-50 px-4 py-16;
+        }
+        /* Read More Button Styles */
+        .read-more-btn {
+          @apply relative transform overflow-hidden rounded-lg border-2 border-transparent bg-blue-600 px-6 py-3 font-bold text-white transition-all duration-300;
+        }
+        .read-more-btn:hover {
+          @apply -translate-y-1 border-blue-600 bg-white text-blue-600 shadow-xl;
+        }
+        .read-more-btn:active {
+          @apply scale-95;
+        }
+        .read-more-btn::before {
+          @apply absolute left-0 top-0 -z-10 h-full w-full origin-left scale-x-0 bg-white transition-transform duration-300;
+          content: "";
+        }
+        .read-more-btn:hover::before {
+          @apply scale-x-100;
+        }
+      </style>
+      <script>
+        // Client-side search functionality
+        const searchInput = document.getElementById("search");
+        const cards = document.querySelectorAll(".grid > div");
+        const noResults = document.getElementById("no-results");
+        searchInput?.addEventListener("input", (e) => {
+          const searchTerm = (e.target as HTMLInputElement).value.toLowerCase();
+          let hasVisibleCards = false;
+          cards.forEach((card) => {
+            const title =
+              card.querySelector("h3")?.textContent?.toLowerCase() || "";
+            const desc =
+              card.querySelector("p")?.textContent?.toLowerCase() || "";
+            if (title.includes(searchTerm) || desc.includes(searchTerm)) {
+              card.classList.remove("hidden");
+              hasVisibleCards = true;
+            } else {
+              card.classList.add("hidden");
+            }
+          });
+          // Toggle no results message
+          if (noResults) {
+            noResults.classList.toggle("hidden", hasVisibleCards);
+          }
+        });
+      </script>
+    </div>
+  </section>
+    
+  <div class="fadeInUps mb-5 mt-32 rounded-2xl text-center">
+    <h2
+      class="animate-fade-in-left text-balance text-2xl font-bold tracking-tight text-neutral-800 dark:text-neutral-100 md:text-4xl md:leading-tight"
+    >
+      Contact for More Details
+    </h2>
+  </div>
+
+  <div
+    class="mb-20 rounded-2xl bg-gray-100 p-4 text-center dark:bg-neutral-500 sm:p-6 md:p-12"
+  >
+    <div class="bg-gray-100 py-4 dark:bg-neutral-500 sm:py-5">
+      <div class="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <p
+            class="mx-auto max-w-2xl text-lg text-gray-500 dark:text-white sm:text-xl"
+          >
+            Get in touch with us for any inquiries, collaborations, or support.
+            We're here to assist and answer your questions!
+          </p>
+        </div>
+
+        <div class="mt-8 sm:mt-10">
+          <div
+            class="space-y-6 sm:space-y-8 md:grid md:grid-cols-2 md:gap-8 md:space-y-0 lg:grid-cols-3 lg:gap-10"
+          >
+            <!-- Address with Google Maps link -->
+            <a
+              href="https://maps.app.goo.gl/jzjpPCi9GFnigkd59"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex flex-col items-center hover:text-indigo-600 dark:hover:text-indigo-300 sm:flex-row sm:items-start"
+            >
+              <div class="mb-3 flex-shrink-0 sm:mb-0">
+                <div
+                  class="flex h-12 w-12 items-center justify-center rounded-md bg-indigo-500 text-white hover:bg-indigo-600"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="h-6 w-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="text-center sm:ml-4 sm:text-left">
+                <p class="text-base text-gray-500 dark:text-white">
+                  Baghlaf Building Showroom No.5 Satellite Market Naif Deira -
+                  Dubai United Arab Emirates
+                </p>
+              </div>
+            </a>
+
+            <!-- Phone number with tel: link -->
+            <a
+              href="tel:+971552929644"
+              class="flex flex-col items-center hover:text-indigo-600 dark:hover:text-indigo-300 sm:flex-row sm:items-start"
+            >
+              <div class="mb-3 flex-shrink-0 sm:mb-0">
+                <div
+                  class="flex h-12 w-12 items-center justify-center rounded-md bg-indigo-500 text-white hover:bg-indigo-600"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="h-6 w-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="text-center sm:ml-4 sm:text-left">
+                <p class="text-base text-gray-500 dark:text-white">
+                  +971 55 292 9644
+                </p>
+              </div>
+            </a>
+
+            <!-- Email with mailto: link -->
+            <a
+              href="mailto:sales@lovosis.com"
+              class="flex flex-col items-center hover:text-indigo-600 dark:hover:text-indigo-300 sm:flex-row sm:items-start"
+            >
+              <div class="mb-3 flex-shrink-0 sm:mb-0">
+                <div
+                  class="flex h-12 w-12 items-center justify-center rounded-md bg-indigo-500 text-white hover:bg-indigo-600"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="h-6 w-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="text-center sm:ml-4 sm:text-left">
+                <p class="text-base text-gray-500 dark:text-white">
+                  sales@lovosis.com
+                </p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</MainLayout>

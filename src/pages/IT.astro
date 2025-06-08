@@ -1,0 +1,250 @@
+---
+
+import MainLayout from "@/layouts/MainLayout.astro";
+import { SITE } from "@data/constants";
+const pageTitle: string = `IT Solution In Dubai | ${SITE.Title + " - " + "Custom Fabrication & Surveillance Solution Provider In Dubai, United Arab Emirates"}`;
+interface Props {
+  title: string;
+  subTitle?: string;
+  benefits?: Array<string>;
+}
+const canonicalUrl = new URL("/IT", Astro.site).toString();
+const abtitle: string = "IT Solution In Dubai";
+const absubTitle: string ="Discover Lovosis, Dubai's authorized supplier of top-quality Surveillance & IT Solution."
+// Enhanced Structured Data
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": ["LocalBusiness", "ITService"],
+  "@id": "https://lovosis.com/IT",
+  "url": canonicalUrl,
+  "name": "Lovosis IT Solutions Dubai",
+  "description": "Dubai's premier provider of enterprise IT solutions & managed services. Expert network security, cloud solutions & IT infrastructure support in UAE.",
+  "logo": "https://lovosis.com/pictures/logo.png",
+  "telephone": "+971-50-916-2488",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Satellite Market Naif Deira, Baghlaf Building Showroom No.5",
+    "addressLocality": "Dubai",
+    "addressRegion": "Dubai",
+    "postalCode": "123421",
+    "addressCountry": "AE"
+  },
+  "priceRange": "$$-$$$",
+  "areaServed": ["Dubai", "UAE"],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "IT Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Cloud Solutions",
+          "description": "Secure cloud migration & management services"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Network Security",
+          "description": "Enterprise-grade cybersecurity solutions"
+        }
+      }
+    ]
+  }
+};
+
+// Updated Meta Tags
+const metaTags = [
+  { 
+    name: "title", 
+    content: pageTitle 
+  },
+  { 
+    name: "description", 
+    content: "Dubai's leading IT service provider offering custom solutions, cloud services & 24/7 support. Enhance your business technology with certified experts." 
+  },
+  { 
+    name: "keywords", 
+    content: "IT Solutions Dubai, Managed IT Services, Cloud Solutions UAE, Network Security Dubai, Tech Support Dubai, IT Infrastructure, Cybersecurity UAE" 
+  },
+  { name: "robots", content: "index, follow" },
+  { name: "geo.region", content: "AE-DU" },
+  { name: "geo.placename", content: "Dubai" },
+  { name: "ICBM", content: "25.276987, 55.296249" },
+  { name: "contact", content: "sales@lovosis.com" },
+  { name: "telephone", content: "+971509162488" },
+  { name: "author", content: "Lovosis Technology L.L.C" }
+];
+---
+
+<style>
+  .autoRotate{
+    animation: autoRotateAnimation;
+    animation-timeline: view();
+  }
+  @keyframes autoRotateAnimation{
+      from{
+          transform: rotate(0deg);
+      }
+      to{
+          transform: rotate(360deg);
+      }
+  }  
+
+  .autoShow{
+    animation: autoShowAnimation both;
+    animation-timeline: view(70% 5%);
+
+    }
+
+    @keyframes autoShowAnimation{
+    from{
+        opacity: 0;
+        transform: translateY(200px) scale(0.3);
+    }to{
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    }
+
+    .fadeInRight {
+    animation: fadeInRightAnimation;
+    animation-timeline: view();
+    }
+
+    @keyframes fadeInRightAnimation {
+        from {
+            opacity: 0;
+            transform: translateX(100px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+</style>
+
+
+<MainLayout
+  title={pageTitle} sd={structuredData}
+  meta={metaTags} canonical={canonicalUrl}
+>
+
+
+
+<section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
+
+  <div class="text-center bg-gray-100 dark:bg-neutral-500 p-5 md:p-12 rounded-2xl mb-20">
+    <h1
+      class="text-balance animate-fade-in-left text-3xl md:text-6xl md:leading-tight font-bold tracking-tight text-neutral-800 dark:text-neutral-100"
+    >
+      {abtitle}
+    </h1>
+    <p class="mt-1 text-pretty text-neutral-600 dark:text-neutral-200">
+      {absubTitle}
+    </p>
+  </div>
+ 
+    <div class="grid lg:grid-cols-2 justify-items-center gap-5">
+    <div class="flex flex-col justify-center">
+        <img src="/pictures/it.webp" alt="billboard image" />
+      
+    </div>
+    <div class="order-1 lg:order-2">
+        <h2 class="text-3xl font-semibold text-gray-900 dark:text-gray-200">Empowering Businesses with Lovosis</h2>
+        <p class="text-md mt-4 dark:text-gray-300">In today's rapidly evolving digital landscape, businesses need robust IT solutions to stay competitive and drive growth. Lovosis, a leading IT service provider in Dubai, offers comprehensive IT solutions tailored to meet the unique needs of businesses across various industries. Our expertise in cutting-edge technologies, combined with a deep understanding of the local market, positions us as the go-to partner for companies looking to leverage IT for success.</p>
+    </div>
+  </div>
+ 
+
+
+  <div class="text-center mt-32 rounded-2xl mb-20">
+    <h1 class="text-balance animate-fade-in-left text-2xl md:text-4xl md:leading-tight font-bold tracking-tight text-neutral-800 dark:text-neutral-100">
+    Applications of Lovosis Surveillance Solutions
+    </h1>
+    
+  </div>
+
+  <div class="mx-auto max-w-7xl px-4 mt-20 sm:px-6 lg:px-8 lg:py-1">
+    <ul id="cards" class="list-none grid grid-cols-1 grid-rows-4 gap-4">
+      <li class="card sticky top-32 pt-4 bg-white dark:bg-neutral-600 rounded-lg shadow-xl cursor-pointer transition-all duration-300" id="card_1">
+        <div class="card__content grid grid-cols-1 md:grid-cols-2 gap-1 p-5 rounded-lg text-left relative">
+          <div>
+            <h2 class="text-4xl font-light dark:text-neutral-200">Tailored IT Solutions for Your Business Needs</h2>
+            <p class="text-base font-light leading-normal dark:text-neutral-300 mt-10">
+              At Lovosis, we understand that every business is unique. Our bespoke IT solutions are designed to align with your specific goals, ensuring seamless operations, enhanced productivity, and maximum ROI. From system integration to custom software development, we deliver solutions that empower your business.
+            </p>
+          </div>
+          <figure class="overflow-hidden">
+            <img src="/pictures/logo.jpg" alt="Image description" class="w-full h-full object-contain" />
+          </figure>
+        </div>
+      </li>
+      <li class="card sticky top-32 pt-4 bg-white dark:bg-neutral-600 rounded-lg shadow-xl cursor-pointer transition-all duration-300" id="card_1">
+        <div class="card__content grid grid-cols-1 md:grid-cols-2 gap-1 p-5 rounded-lg text-left relative">
+          <div>
+            <h2 class="text-4xl font-light dark:text-neutral-200">Secure and Scalable IT Infrastructure</h2>
+            <p class="text-base font-light leading-normal dark:text-neutral-300 mt-10">
+              Lovosis specializes in building IT infrastructures that grow with your business. Our solutions provide secure, scalable, and high-performance networks that ensure uninterrupted operations, robust data protection, and future-ready technology.
+            </p>
+          </div>
+          <figure class="overflow-hidden">
+            <img src="/pictures/logo1.jpg" alt="Image description" class="w-full h-full object-contain" />
+          </figure>
+        </div>
+      </li>
+      <li class="card sticky top-32 pt-4 bg-white dark:bg-neutral-600 rounded-lg shadow-xl cursor-pointer transition-all duration-300" id="card_1">
+        <div class="card__content grid grid-cols-1 md:grid-cols-2 p-5 rounded-lg text-left relative">
+          <div>
+            <h2 class="text-4xl font-light dark:text-neutral-200">Cloud Computing Solutions for Modern Enterprises</h2>
+            <p class="text-base font-light leading-normal dark:text-neutral-300 mt-10">
+              Transform the way you work with Lovosis' cloud computing services. We offer efficient cloud migration, data storage, and management solutions that ensure your business remains agile, collaborative, and accessible anytime, anywhere.
+            </p>
+          </div>
+          <figure class="overflow-hidden">
+            <img src="/pictures/logo2.jpg" alt="Image description" class="w-full h-full object-contain" />
+          </figure>
+        </div>
+      </li>
+      <li class="card sticky top-32 pt-4 bg-white dark:bg-neutral-600 rounded-lg shadow-xl cursor-pointer transition-all duration-300" id="card_1">
+        <div class="card__content grid grid-cols-1 md:grid-cols-2 p-5 rounded-lg text-left relative">
+          <div>
+            <h2 class="text-4xl font-light dark:text-neutral-200">Advanced Data Analytics for Smarter Decision-Making</h2>
+            <p class="text-base font-light leading-normal dark:text-neutral-300 mt-10">
+              Unlock the power of data with Lovosis. Our advanced analytics solutions help you harness actionable insights, optimize operations, and make informed decisions that drive growth and innovation in your business.
+            </p>
+          </div>
+          <figure class="overflow-hidden">
+            <img src="/pictures/logo3.jpg" alt="Image description" class="w-full h-full object-contain" />
+          </figure>
+        </div>
+      </li>
+      <li class="card sticky top-32 pt-4 bg-white dark:bg-neutral-600 rounded-lg shadow-xl cursor-pointer transition-all duration-300" id="card_1">
+        <div class="card__content grid grid-cols-1 md:grid-cols-2 p-5 rounded-lg text-left relative">
+          <div>
+            <h2 class="text-4xl font-light dark:text-neutral-200">Comprehensive IT Support and Maintenance Services</h2>
+            <p class="text-base font-light leading-normal dark:text-neutral-300 mt-10">
+              With Lovosis, you're never alone in your digital journey. Our dedicated IT support team ensures smooth operations through proactive maintenance, quick issue resolution, and continuous system monitoring, giving you peace of mind.
+            </p>
+          </div>
+          <figure class="overflow-hidden">
+            <img src="/pictures/logo4.jpg" alt="Image description" class="w-full h-full object-contain" />
+          </figure>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+
+
+
+
+</section>
+
+  
+  
+  
+</MainLayout>

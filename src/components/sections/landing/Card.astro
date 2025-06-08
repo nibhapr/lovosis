@@ -1,0 +1,15 @@
+---
+const { title, description, link } = Astro.props;
+---
+
+<div class="card">
+  <div class="card-header">
+    {title}
+  </div>
+  <div class="card-content">
+    {description}
+  </div>
+  <div class="card-footer mt-4">
+    <a href={link} class="text-blue-500 hover:underline">Buy Now</a>
+  </div>
+</div>

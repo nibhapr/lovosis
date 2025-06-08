@@ -1,0 +1,444 @@
+---
+import { getCollection } from "astro:content";
+import MainLayout from "@/layouts/MainLayout.astro";
+import PrimaryCTA from "@/components/ui/buttons/PrimaryCTA.astro";
+import { alhuanewData } from "@/data/camera";
+interface Card {
+  id: number;
+  title: string;
+  desc: string;
+  img: string;
+  alt: string;
+  author: string;
+  reviewBody: string;
+  ratingValue: number;
+  slug: string;
+  features?: string[];
+  publishedTime: string;
+}
+
+const content = await getCollection("alhua");
+const cards: Card[] = content.map((item) => ({
+  id: item.data.id,
+  title: item.data.title,
+  desc: item.data.desc,
+  img: item.data.img.src,
+  alt: item.data.alt,
+  author: item.data.author,
+  reviewBody: item.data.reviewBody,
+  ratingValue: item.data.ratingValue,
+  slug: item.slug,
+  features: item.data.features,
+  publishedTime: item.data.publishedTime,
+}));
+
+const canonicalUrl = new URL("/alhua", Astro.site).toString();
+const pageTitle: string =
+  "Dahua distributor in Dubai | Lovosis Technology L.L.C";
+const description =
+  "Buy top-quality Dahua security cameras, DVRs, NVRs & IP Cameras from Dubai's leading dealer. Expert installation, advanced tech & professional support for homes & businesses. Secure your property today";
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      name: pageTitle,
+      url: "https://lovosis.com",
+      logo: "https://lovosis.com/pictures/logo.png",
+      description: description,
+      sameAs: [
+        "https://www.facebook.com/p/LOVOSIS-TECHNOLOGY-100083060600975/",
+        "https://www.instagram.com/_lovosis_group_of_companies_/reels/",
+      ],
+      email: "sales@lovosis.com",
+      telephone: "+971552929644",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress:
+          "Satellite Market Naif Deira,Baghlaf Building Showroom No.5",
+        addressLocality: "Dubai",
+        addressCountry: "AE",
+        addressRegion: "Dubai,United Arab Emirates",
+        postalCode: "123421",
+      },
+    },
+    {
+      "@type": "WebPage",
+      name: "Alhua | Lovosis Technology",
+      url: "https://lovosis.com/ahua",
+      description: description,
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: "https://lovosis.com",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Dahua",
+          item: "https://lovosis.com/alhua",
+        },
+      ],
+    },
+  ],
+};
+const metaTags = [
+  { name: "pageTitle", content: `${pageTitle} | Dahua distributor in Dubai` },
+  {
+    name: "description",
+    content: `${description} | Official Dahua distributor in Dubai with professional installation and support`,
+  },
+  {
+    name: "keywords",
+    content: `Dahua security cameras, Dahua DVR, Dahua NVR, IP cameras Dubai, CCTV installation Dubai, security systems UAE, professional surveillance, business security solutions`,
+  },
+  { name: "robots", content: "index, follow" },
+  { property: "og:title", content: pageTitle },
+  { property: "og:description", content: description },
+  {
+    property: "og:image",
+    content: `${Astro.url.origin}/pictures/Brand Profile/1.jpg`,
+  },
+  { property: "og:type", content: "website" },
+  { property: "og:locale", content: "en_AE" },
+  { property: "og:locale:alternate", content: "ar_AE" },
+  { name: "twitter:card", content: "summary_large_image" },
+  { name: "twitter:title", content: pageTitle },
+  { name: "twitter:description", content: description },
+  {
+    name: "twitter:image",
+    content: `${Astro.url.origin}/pictures/Brand Profile/1.jpg`,
+  },
+  { name: "geo.region", content: "AE" },
+  { name: "geo.placename", content: "Dubai" },
+  { name: "geo.position", content: "25.276987;55.296249" },
+  { name: "ICBM", content: "25.276987, 55.296249" },
+];
+---
+
+<MainLayout
+  title={pageTitle}
+  description={description}
+  sd={structuredData}
+  metaTags={metaTags}
+  canonical={canonicalUrl}
+  ><div>
+    <section
+      class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full"
+    >
+      <div class="grid justify-items-center gap-5 lg:grid-cols-2">
+        <!-- Left Column (Image) -->
+        <div class="animate-fadeIn mr-12 flex flex-col justify-center">
+          <img
+            src="/pictures/dahuabanner.jpg"
+            alt="Dahua products"
+            class="rounded-lg"
+          />
+        </div>
+
+        <!-- Right Column (Text Content) -->
+        <div class="animate-fadeInRight order-1 lg:order-2">
+          <h2 class="text-3xl font-semibold text-gray-900 dark:text-gray-200">
+            Dahua Wholesale Distributor in Dubai | Lovosis Technology L.L.C
+          </h2>
+          <p
+            class="text-md animate-fadeIn mt-4 text-gray-500 dark:text-gray-300"
+          >
+            Dahua Technology stands out as a top global provider of video
+            surveillance solutions. Their cameras are recognized for delivering
+            high-quality images, cutting-edge technologies, and strong security
+            features. Dahua continues to push boundaries in video surveillance
+            technology, offering innovative solutions for both residential and
+            commercial applications.
+          </p>
+          <div class="animate-fadeIn mt-4 grid w-full sm:inline-flex">
+            <PrimaryCTA title="Explore Our Product" url="/dahuaproducts" />
+          </div>
+        </div>
+      </div>
+
+      <style>
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes fadeInRight {
+          from {
+            opacity: 0;
+            transform: translateX(50px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+
+        .animate-fadeIn {
+          animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        .animate-fadeInRight {
+          animation: fadeInRight 0.8s ease-out forwards;
+        }
+
+        /* Smooth hover transitions for interactive elements */
+        a {
+          transition: all 0.3s ease;
+        }
+      </style>
+    </section>
+    <h2
+      class="animate-fadeIn m-12 text-center text-3xl font-bold dark:text-gray-200"
+    >
+      Why Choose Dahua CCTV Camera
+    </h2>
+    <div
+      class="scroll-animate grid h-auto grid-cols-1 gap-4 py-10 lg:grid-cols-4 lg:gap-8 lg:py-14"
+    >
+      {
+        alhuanewData.map((item, index) => (
+          <article
+            class="animate-card overflow-hidden rounded-lg shadow-sm transition-all duration-300 hover:shadow-lg dark:shadow-gray-700/25"
+            style={`--delay: ${index * 0.1}s`}
+          >
+            <img
+              alt={item.title}
+              src={item.image}
+              class="-56 w-full object-contain transition-transform duration-500 hover:scale-105"
+            />
+
+            <div class="bg-white p-4 dark:bg-gray-900 sm:p-6">
+              <a href="#">
+                <h3 class="dark:hover:text-blue-400 mt-0.5 text-lg text-gray-900 transition-colors hover:text-blue-600 dark:text-white">
+                  {item.title}
+                </h3>
+              </a>
+
+              <p class="mt-2 line-clamp-3 text-base/relaxed text-gray-500 dark:text-gray-400">
+                {item.description}
+              </p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+
+    <style>
+      /* Animation Styles */
+      .animate-fadeIn {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeIn 0.8s ease-out forwards;
+      }
+
+      .animate-card {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.6s ease-out;
+        transition-delay: var(--delay);
+      }
+
+      .scroll-animate.in-view .animate-card {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Hover Effects */
+      article:hover {
+        transform: translateY(-5px);
+      }
+
+      article:hover img {
+        transform: scale(1.05);
+      }
+    </style>
+
+    <script>
+      // Intersection Observer for scroll animations
+      document.addEventListener("DOMContentLoaded", function () {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("in-view");
+              }
+            });
+          },
+          { threshold: 0.1 }
+        );
+
+        document.querySelectorAll(".scroll-animate").forEach((section) => {
+          observer.observe(section);
+        });
+      });
+    </script>
+
+  
+
+  <style>
+    /* Optional: Add some smooth transitions */
+    .scroll-animate {
+      transition: all 0.3s ease;
+    }
+    
+    .grid > div {
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+  </style>
+    <div class="fadeInUps mb-5 mt-32 rounded-2xl text-center">
+      <h2 class="animate-fade-in-left text-balance text-2xl font-bold tracking-tight text-neutral-800 dark:text-neutral-100 md:text-4xl md:leading-tight">
+        Contact for More Details
+      </h2>
+    </div>
+    
+    <div class="mb-20 rounded-2xl bg-gray-100 p-4 text-center dark:bg-neutral-500 sm:p-6 md:p-12">
+      <div class="bg-gray-100 py-4 dark:bg-neutral-500 sm:py-5">
+        <div class="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8">
+          <div class="text-center">
+            <p class="max-w-2xl text-lg sm:text-xl text-gray-500 dark:text-white mx-auto">
+              Get in touch with us for any inquiries, collaborations, or
+              support. We're here to assist and answer your questions!
+            </p>
+          </div>
+    
+          <div class="mt-8 sm:mt-10">
+            <div class="space-y-6 sm:space-y-8 md:space-y-0 md:grid md:grid-cols-2 md:gap-8 lg:grid-cols-3 lg:gap-10">
+              <!-- Address with Google Maps link -->
+              <a href="https://maps.app.goo.gl/jzjpPCi9GFnigkd59" 
+                 target="_blank" 
+                 rel="noopener noreferrer" 
+                 class="flex flex-col items-center sm:flex-row sm:items-start hover:text-indigo-600 dark:hover:text-indigo-300">
+                <div class="flex-shrink-0 mb-3 sm:mb-0">
+                  <div class="flex h-12 w-12 items-center justify-center rounded-md bg-indigo-500 text-white hover:bg-indigo-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"></path>
+                    </svg>
+                  </div>
+                </div>
+                <div class="sm:ml-4 text-center sm:text-left">
+                  <p class="text-base text-gray-500 dark:text-white">
+                    Baghlaf Building Showroom No.5 Satellite Market Naif Deira - Dubai
+                    United Arab Emirates
+                  </p>
+                </div>
+              </a>
+    
+              <!-- Phone number with tel: link -->
+              <a href="tel:+971552929644" 
+                 class="flex flex-col items-center sm:flex-row sm:items-start hover:text-indigo-600 dark:hover:text-indigo-300">
+                <div class="flex-shrink-0 mb-3 sm:mb-0">
+                  <div class="flex h-12 w-12 items-center justify-center rounded-md bg-indigo-500 text-white hover:bg-indigo-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"></path>
+                    </svg>
+                  </div>
+                </div>
+                <div class="sm:ml-4 text-center sm:text-left">
+                  <p class="text-base text-gray-500 dark:text-white">
+                    +971 55 292 9644
+                  </p>
+                </div>
+              </a>
+    
+              <!-- Email with mailto: link -->
+              <a href="mailto:sales@lovosis.com" 
+                 class="flex flex-col items-center sm:flex-row sm:items-start hover:text-indigo-600 dark:hover:text-indigo-300">
+                <div class="flex-shrink-0 mb-3 sm:mb-0">
+                  <div class="flex h-12 w-12 items-center justify-center rounded-md bg-indigo-500 text-white hover:bg-indigo-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"></path>
+                    </svg>
+                  </div>
+                </div>
+                <div class="sm:ml-4 text-center sm:text-left">
+                  <p class="text-base text-gray-500 dark:text-white">
+                    sales@lovosis.com
+                  </p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+   .hero-section {
+      @apply bg-cover bg-center py-16 text-center text-white;
+      background-image: url("");
+    }
+    .hero-content {
+      @apply bg-black bg-opacity-50 px-4 py-16;
+    }
+    /* Read More Button Styles */
+    .read-more-btn {
+      @apply relative transform overflow-hidden rounded-lg border-2 border-transparent bg-blue-600 px-6 py-3 font-bold text-white transition-all duration-300;
+    }
+    .read-more-btn:hover {
+      @apply -translate-y-1 border-blue-600 bg-white text-blue-600 shadow-xl;
+    }
+    .read-more-btn:active {
+      @apply scale-95;
+    }
+    .read-more-btn::before {
+      @apply absolute left-0 top-0 -z-10 h-full w-full origin-left scale-x-0 bg-white transition-transform duration-300;
+      content: "";
+    }
+    .read-more-btn:hover::before {
+      @apply scale-x-100;
+    }
+  </style>
+  <script>
+    // Client-side search functionality
+    const searchInput = document.getElementById("search");
+    const cards = document.querySelectorAll(".grid > div");
+    const noResults = document.getElementById("no-results");
+    searchInput?.addEventListener("input", (e) => {
+      const searchTerm = (e.target as HTMLInputElement).value.toLowerCase();
+      let hasVisibleCards = false;
+      cards.forEach((card) => {
+        const title =
+          card.querySelector("h3")?.textContent?.toLowerCase() || "";
+        const desc = card.querySelector("p")?.textContent?.toLowerCase() || "";
+        if (title.includes(searchTerm) || desc.includes(searchTerm)) {
+          card.classList.remove("hidden");
+          hasVisibleCards = true;
+        } else {
+          card.classList.add("hidden");
+        }
+      });
+      // Toggle no results message
+      if (noResults) {
+        noResults.classList.toggle("hidden", hasVisibleCards);
+      }
+    });
+  </script>
+     
+  </section>
+</MainLayout>
